@@ -1,11 +1,11 @@
 package com.mycompany.studentmanagementapp.constant;
 
-import lombok.Getter;
+//import lombok.Getter;
 
-@Getter
+//@Getter
 public enum Gender{
         MALE,
-        FEMALE;
-        private String value;
+        FEMALE
+       // private String value;
 
 }

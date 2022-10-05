@@ -38,7 +38,6 @@ public class ServiceIMPL implements StudentService {
     public boolean login(StudentModal userModal) throws BusinessException {
         logger.debug("Entering method login");
 
-        //list check of email and password
         List<ErrorModal> errorModelList = studentValidator.validateRequest(userModal);
         if (!CollectionUtils.isEmpty(errorModelList)) {
             throw new BusinessException(errorModelList);
@@ -67,14 +66,12 @@ public class ServiceIMPL implements StudentService {
 
     public Long register(StudentModal userModal) throws BusinessException {
 
-        //list check of email and password
         List<ErrorModal> errorModelList = studentValidator.validateRequest(userModal);
 
         if (!CollectionUtils.isEmpty(errorModelList)) {
             throw new BusinessException(errorModelList);
         }
         StudentEntity userEntity = studentConveter1.convert(userModal,StudentEntity.class);
-        //check if user already exist
         StudentEntity ue = studentRepository.findByEmail(userModal.getEmail());
         if (null != ue) {
             List<ErrorModal> errorList = new ArrayList<>();
@@ -87,11 +84,6 @@ public class ServiceIMPL implements StudentService {
             throw new BusinessException(errorList);
 
         }
-     //   UserAddress userAddress = new UserAddress();
-        //userEntity.setUserAddress(userAddress);
-       // userAddress.setHouseno(1);
-       // addressRepo.save(userAddress);
-       // userEntity.setUserAddress(userAddress);
         StudentEntity userEntity1 = studentRepository.save(userEntity);
         return userEntity1.getId();
     }

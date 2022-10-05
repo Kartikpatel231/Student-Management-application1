@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @JsonIgnoreProperties(ignoreUnknown = true)   //it autommatically ignore null value
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class StudentModal {
+
     private String fullName;
     private String  mobileNumber;
     private String email;

@@ -19,4 +19,7 @@ public class StudentEntity {
     private String email;
     private String password;
     private Gender gender;
+    @JoinColumn(name = "student_profile_id")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private StudentProfileEntity studentProfileEntity;
 }
