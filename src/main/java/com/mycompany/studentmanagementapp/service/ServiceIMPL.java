@@ -125,8 +125,8 @@ public class ServiceIMPL implements StudentService {
 
     @Override
     public StudentProfileModel create(StudentProfileModel studentProfileModel) throws BusinessException {
-        Optional<StudentEntity> studentEntity = studentRepository.findById(studentProfileModel.getStudentId());
-        if (null != studentEntity) {
+       Optional<StudentEntity> studentEntity1 = studentRepository.findById(studentProfileModel.getId());
+        if (null == studentEntity1) {
             List<ErrorModal> errorList = new ArrayList<>();
 
             ErrorModal errorModal = new ErrorModal();
@@ -138,6 +138,7 @@ public class ServiceIMPL implements StudentService {
 
         }
         StudentProfileEntity studentProfileEntity=studentConveter1.convert(studentProfileModel,StudentProfileEntity.class);
+
         studentProfileRepository.save(studentProfileEntity);
         return studentProfileModel;
     }
@@ -157,7 +158,9 @@ public class ServiceIMPL implements StudentService {
             throw new BusinessException(errorList);
 
         }
-         StudentProfileModel studentProfileModel=studentConveter1.convert(studentProfileEntity,StudentProfileModel.class);
+
+        StudentProfileModel studentProfileModel=studentConveter1.convert(studentProfileEntity,StudentProfileModel.class);
+
          return studentProfileModel;
 
     }
