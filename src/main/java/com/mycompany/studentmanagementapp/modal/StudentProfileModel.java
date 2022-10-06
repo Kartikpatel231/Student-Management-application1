@@ -15,15 +15,19 @@ public class StudentProfileModel {
 
     private Long id;
 
-    private String firstName;
+    private String studentName;
 
     private String fatherName;
 
     private String motherName;
 
-    private String emailAddress;
+    private String mobileNumber;
 
     private String bloodGroup;
+
+    private String dateOfBirth;
+
+    private String category;
 
     private String address1;
 

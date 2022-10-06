@@ -17,17 +17,19 @@ public class StudentProfileEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long profileId;
 
-    private String firstName;
+    private String studentName;
 
     private String fatherName;
 
     private String motherName;
 
-    private String emailAddress;
+    private String mobileNumber;
+
+    private String category;
+
+    private String dateOfBirth;
 
     private String address1;
-
-    private String address2;
 
     private String bloodGroup;
 

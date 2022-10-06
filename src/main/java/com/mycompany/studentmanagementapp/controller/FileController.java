@@ -15,9 +15,9 @@ public class FileController {
     @Autowired
     FileService fileService;
 
-    @PostMapping(value = "/upload/{userId}")
-    public Response uploadFile(@RequestParam("userId") Long studentId, @RequestParam("file") MultipartFile file,RedirectAttributes redirectAttributes) throws BusinessException {
-        return Response.ok().setPayload(fileService.uploadFile(studentId, file,redirectAttributes));
+    @PostMapping(value = "/upload/{id}")
+    public Response uploadFile(@RequestParam("id") Long id, @RequestParam("file") MultipartFile file,RedirectAttributes redirectAttributes) throws BusinessException {
+        return Response.ok().setPayload(fileService.uploadFile(id, file,redirectAttributes));
     }
 
 

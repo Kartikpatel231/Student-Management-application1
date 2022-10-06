@@ -25,11 +25,11 @@ public class FileService {
 
     private static final String DOCUMENT_BASE_LOCATION = "user-docs";
 
-    public String uploadFile(Long studentId, MultipartFile file, RedirectAttributes redirectAttributes) throws BusinessException {
+    public String uploadFile(Long id, MultipartFile file, RedirectAttributes redirectAttributes) throws BusinessException {
         if (file == null && file.isEmpty()) {
             throw new RuntimeException("File can't be empty.");
         }
-        Optional<StudentEntity> studentEntity = studentRepository.findById(studentId);
+        Optional<StudentEntity> studentEntity = studentRepository.findById(id);
         if (null != studentEntity) {
             List<ErrorModal> errorList = new ArrayList<>();
 

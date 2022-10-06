@@ -34,6 +34,10 @@ public class StudentController {
         ResponseEntity<Boolean> responseEntity = new ResponseEntity<>(result, HttpStatus.OK);
         logger.debug("Exiting method login");
         return responseEntity;
+         //     RedirectView redirectView=new RedirectView();
+         // redirectView.setUrl("http://localhost:63342/student-management-app/static/home.html?_ijt=pqtjk2v4kj71b204f73g82sds8");
+         //   redirectView.setUrl("http://localhost:9000/Student-Management-App");
+         // return redirectView;
     }
     @CrossOrigin
     @PostMapping("/users/register")
@@ -58,6 +62,7 @@ public class StudentController {
         return studentService.getDeleted(id);
 
     }
+    @CrossOrigin
     @PostMapping("/create/profile")
     public ResponseEntity<Long> create(@RequestBody StudentProfileModel studentProfileModel)throws BusinessException {
 

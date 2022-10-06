@@ -1,4 +1,4 @@
-/*package com.mycompany.studentmanagementapp.util;
+package com.mycompany.studentmanagementapp.util;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,4 +28,3 @@ public class FileUtil {
         }
     }
 }
-*/
