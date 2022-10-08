@@ -5,7 +5,7 @@ package com.mycompany.studentmanagementapp.constant;
 //@Getter
 public enum Gender{
         MALE,
-        FEMALE
+        FEMALE;
        // private String value;
 
 }
