@@ -4,6 +4,8 @@ import com.mycompany.studentmanagementapp.excaption.BusinessException;
 import com.mycompany.studentmanagementapp.modal.StudentModal;
 import com.mycompany.studentmanagementapp.modal.StudentProfileModel;
 
+import java.util.List;
+
 public interface StudentService {
      boolean login(StudentModal studentModal) throws BusinessException; //throws BusinessException;
       Long register(StudentModal studentModal) throws BusinessException; //throws BusinessException;

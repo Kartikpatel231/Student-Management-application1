@@ -13,11 +13,12 @@ public class StudentEntity {
     @Column(name = "Student_Id")
     @Id                             //denotes to primary key
     @GeneratedValue(strategy = GenerationType.AUTO)        //value automatic increment by jpa
-    private long id;
+    private long studentId;
     private String fullName;
     private String  mobileNumber;
     private String email;
     private String password;
+    @Enumerated(EnumType.STRING)
     private Gender gender;
     @JoinColumn(name = "student_profile_id")
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)

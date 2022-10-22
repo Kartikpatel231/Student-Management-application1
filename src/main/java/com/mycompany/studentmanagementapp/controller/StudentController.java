@@ -2,6 +2,7 @@ package com.mycompany.studentmanagementapp.controller;
 
 
 import com.mycompany.studentmanagementapp.excaption.BusinessException;
+import com.mycompany.studentmanagementapp.modal.Response;
 import com.mycompany.studentmanagementapp.modal.StudentModal;
 import com.mycompany.studentmanagementapp.modal.StudentProfileModel;
 import com.mycompany.studentmanagementapp.service.StudentService;
@@ -13,6 +14,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
 @Api
 @Controller
 @RequestMapping("/api/v1")
@@ -57,24 +59,34 @@ public class StudentController {
     }
 
 
-    @RequestMapping(method = RequestMethod.DELETE,value = "/users/register/delete/{id}")
+    @RequestMapping(method = RequestMethod.DELETE,value = "/users/register/delete/{studentId}")
     public String getDeleted(@PathVariable Long id)throws BusinessException{
         return studentService.getDeleted(id);
 
     }
     @CrossOrigin
     @PostMapping("/create/profile")
-    public ResponseEntity<Long> create(@RequestBody StudentProfileModel studentProfileModel)throws BusinessException {
+    public Response create(@RequestBody StudentProfileModel studentProfileModel)throws BusinessException {
 
         studentService.create(studentProfileModel);
-        ResponseEntity<Long> responseEntity = new ResponseEntity<>(HttpStatus.CREATED);
-        return responseEntity;
+        return Response.ok("successfully created",HttpStatus.CREATED);
+
     }
     @GetMapping("/get/profile/{studentId}")
-    public  ResponseEntity<Long> getProfile(@PathVariable Long studentId)throws  BusinessException{
-         studentService.getProfile(studentId);
-         ResponseEntity<Long> responseEntity=new ResponseEntity<>(HttpStatus.ACCEPTED);
-      return  responseEntity;
-     }
+  //  public String  getProfile(@PathVariable Long studentId)throws  BusinessException{
+    //    studentService.getProfile(studentId);
+         //return Response.ok("StudentProfile",HttpStatus.CREATED);
+     //return "successful";
+    public ResponseEntity<Boolean> getStudent(@PathVariable Long studentId) throws BusinessException {
 
-}
+        //logger.debug("Entering method login");
+        StudentProfileModel result1 = studentService.getProfile(studentId);
+        ResponseEntity<Boolean> responseEntity = new ResponseEntity(result1, HttpStatus.OK);
+        logger.debug("Exiting method login");
+        return responseEntity;
+        //     RedirectView redirectView=new RedirectView();
+        // redirectView.setUrl("http://localhost:63342/student-management-app/static/home.html?_ijt=pqtjk2v4kj71b204f73g82sds8");
+        //   redirectView.setUrl("http://localhost:9000/Student-Management-App");
+        // return redirectView;
+    }
+     }

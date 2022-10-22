@@ -22,7 +22,7 @@ public class Response<T> {
     private T payload;
     private Object errors;
 
-    public static <T> Response<T> ok(){
+    public static <T> Response<T> ok(String ds, HttpStatus created){
         Response<T> response = new Response<>();
         response.setStatusCode(HttpStatus.OK.value());
         response.setStatus(HttpStatus.OK.name());
