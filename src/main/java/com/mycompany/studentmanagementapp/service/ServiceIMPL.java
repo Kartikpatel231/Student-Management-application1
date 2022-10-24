@@ -2,10 +2,12 @@ package com.mycompany.studentmanagementapp.service;
 
 import com.mycompany.studentmanagementapp.constant.ErrorType;
 import com.mycompany.studentmanagementapp.converter.StudentConveter1;
+import com.mycompany.studentmanagementapp.entity.FeedbackEntity;
 import com.mycompany.studentmanagementapp.entity.StudentEntity;
 import com.mycompany.studentmanagementapp.entity.StudentProfileEntity;
 import com.mycompany.studentmanagementapp.excaption.BusinessException;
 import com.mycompany.studentmanagementapp.excaption.ErrorModal;
+import com.mycompany.studentmanagementapp.modal.FeebackModel;
 import com.mycompany.studentmanagementapp.modal.StudentModal;
 import com.mycompany.studentmanagementapp.modal.StudentProfileModel;
 import com.mycompany.studentmanagementapp.userEntityRepository.StudentProfileRepository;
@@ -166,5 +168,24 @@ public class ServiceIMPL implements StudentService {
            return student;
 
 
+    }
+    public FeebackModel createFeedback(FeebackModel feebackModel) throws BusinessException {
+
+        StudentEntity studentEntity = studentRepository.findByStudentId(feebackModel.getId());
+        if (null == studentEntity) {
+            List<ErrorModal> errorList = new ArrayList<>();
+
+            ErrorModal errorModal = new ErrorModal();
+            errorModal.setCode(ErrorType.NOT_EXIT.toString());
+            errorModal.setMessage("Student Is no present with this Student Id,Please check student Id");
+
+            errorList.add(errorModal);
+            throw new BusinessException(errorList);
+
+        }
+        FeedbackEntity feedbackEntity=studentConveter1.convert(feebackModel,FeedbackEntity.class);
+        studentEntity.setFeedbackEntity(feedbackEntity);
+        studentRepository.save(studentEntity);
+        return feebackModel;
     }
 }

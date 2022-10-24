@@ -23,4 +23,7 @@ public class StudentEntity {
     @JoinColumn(name = "student_profile_id")
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private StudentProfileEntity studentProfileEntity;
+    @JoinColumn(name = "STUDENT_FEEDBACKS")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private FeedbackEntity feedbackEntity;
 }

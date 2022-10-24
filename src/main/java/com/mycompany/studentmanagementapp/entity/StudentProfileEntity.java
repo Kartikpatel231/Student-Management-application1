@@ -33,8 +33,8 @@ public class StudentProfileEntity {
 
     private String bloodGroup;
 
-    @Column(name = "aadhaar_Card")
-    private String aadhaarFilePath;
+    @Column(name = "EnrollementNumber")
+    private String enrollementNumber;
 
     private String zipcode;
 }
