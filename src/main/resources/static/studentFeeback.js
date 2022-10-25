@@ -20,6 +20,19 @@ try{
       body: JSON.stringify(payload),
     }
   );
+  console.log('check2');
+    console.log(response)
+//    let rsp=response.url
+  //  if(response.redirected){
+    //  window.location = rsp;
+    //}
+    //else{
+    alert("FeedBack Submited Successfully")
+    //}
+   // const content = await response.json();
+    //const data = await content;
+  console.log('check3');
+
   const content = await response.json();
   const data = await content;
 

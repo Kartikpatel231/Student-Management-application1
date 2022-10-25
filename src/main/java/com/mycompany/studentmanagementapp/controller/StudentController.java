@@ -49,8 +49,8 @@ public class StudentController {
 
         Long result = studentService.register(studentModal);
         ResponseEntity<Long> responseEntity = new ResponseEntity<>(result, HttpStatus.CREATED);
-        RedirectView redirectView=new RedirectView();
-        redirectView.setUrl("http://localhost:63342/student-management-app/static/home.html?_ijt=mlersrgefbau196ts3h0320k4");
+       // RedirectView redirectView=new RedirectView();
+        //redirectView.setUrl("http://localhost:63342/student-management-app/static/home.html?_ijt=mlersrgefbau196ts3h0320k4");
 
         return responseEntity;
     }
