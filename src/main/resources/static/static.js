@@ -1,4 +1,4 @@
-const name=document.getElementById("fullName");
+/*const name=document.getElementById("fullName");
 const email=document.getElementById("email");
 const mobile=document.getElementById("mobileNumber");
 const password=document.getElementById("password");
@@ -43,9 +43,56 @@ console.log(response)
     throw new Error(data.message);
     return;
   }
+-->
 
 
+}
+catch(e){}
+}
+)*/
+const name=document.getElementById("fullName");
+const email=document.getElementById("email");
+const mobile=document.getElementById("mobileNumber");
+const password=document.getElementById("password");
+const Kartik=document.getElementById("myform");
 
+Kartik.addEventListener("submit", async e => {
+e.preventDefault();
+const gender=document.querySelector('input[name="gender"]:checked');
+let payload = { fullName: name.value, email:email.value, mobileNumber:mobile.value,password:password.value,gender:gender.value}
+console.log(payload);
+try{
+console.log('check1');
+
+ const response = await fetch(
+    'http://localhost:8080/api/v1/users/register',
+
+    {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    }
+  );
+  console.log('check2');
+  console.log(response)
+  let rspp=response.url
+  if(response.redirected){
+    window.location = rspp;
+  }
+  else{
+  alert("Bad Credits")
+  }
+ // const content = await response.json();
+  //const data = await content;
+console.log('check3');
+
+  if (!response.ok) {
+    throw new Error(data.message);
+    return;
+  }
 }
 catch(e){}
 }

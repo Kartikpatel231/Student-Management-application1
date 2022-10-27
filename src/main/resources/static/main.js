@@ -1,3 +1,4 @@
+
 function getUserData(){
 	//fetch('http://localhost:63342/api/v1/current-user-principal')           //api for the get request
 	fetch('http://localhost:8080/display')
@@ -7,4 +8,5 @@ function getUserData(){
    //document.getElementById("fullname").innerHTML=data.name;
     //document.getElementById("email").src=data.email;
   );
+
 }

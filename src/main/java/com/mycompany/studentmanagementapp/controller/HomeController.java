@@ -21,4 +21,11 @@ public class HomeController {
         redirectView.setUrl("http://localhost:8080/home.html");
         return redirectView;
 }
+    /*@CrossOrigin
+    @GetMapping("/displays")
+    public RedirectView displays(){
+        RedirectView redirectView=new RedirectView();
+        redirectView.setUrl("http://localhost:8080/home.html");
+         return redirectView;
+    }*/
 }

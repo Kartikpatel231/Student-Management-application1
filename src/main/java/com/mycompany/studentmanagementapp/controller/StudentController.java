@@ -45,14 +45,15 @@ public class StudentController {
     }
     @CrossOrigin
     @PostMapping("/users/register")
-    public ResponseEntity<Long> register(@RequestBody StudentModal studentModal)throws BusinessException {
+    public RedirectView register(@RequestBody StudentModal studentModal)throws BusinessException {
 
         Long result = studentService.register(studentModal);
         ResponseEntity<Long> responseEntity = new ResponseEntity<>(result, HttpStatus.CREATED);
-       // RedirectView redirectView=new RedirectView();
+        System.out.println(responseEntity);
+        RedirectView redirectView=new RedirectView();
         //redirectView.setUrl("http://localhost:63342/student-management-app/static/home.html?_ijt=mlersrgefbau196ts3h0320k4");
-
-        return responseEntity;
+         redirectView.setUrl("/display");
+        return redirectView;
     }
 
     @RequestMapping(method = RequestMethod.PUT,value = "/users/register/updates")
