@@ -9,4 +9,17 @@ function getUserData(){
     //document.getElementById("email").src=data.email;
   );
 
+ // window.onload = () => {
+   // setTimeout(() => {
+     // document.querySelector("body").classList.add("display");
+    //}, 4000);
+  //};
+
+}
+function getRegisterData(){
+fetch('http://localhost:8080/api/v1/users/register')
+.then(response=>response.json())
+.then(data=>console.log(data));
+document.getElementById("studentId").innerHTML=data.studentId;
+document.getElementById("url").innerHTML=data.url;
 }

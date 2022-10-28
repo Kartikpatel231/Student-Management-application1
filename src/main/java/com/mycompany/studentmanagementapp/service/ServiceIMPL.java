@@ -65,7 +65,7 @@ public class ServiceIMPL implements StudentService {
         return result;
     }
 
-    public Long register(StudentModal userModal) throws BusinessException {
+    public StudentModal register(StudentModal userModal) throws BusinessException {
 
         List<ErrorModal> errorModelList = studentValidator.validateRequest(userModal);
 
@@ -86,7 +86,10 @@ public class ServiceIMPL implements StudentService {
 
         }
         StudentEntity userEntity1 = studentRepository.save(userEntity);
-        return userEntity1.getStudentId();
+        StudentModal studentModal1=new StudentModal();
+        studentModal1.setStudentId(userEntity1.getStudentId());
+        studentModal1.setUrl("http://localhost:8080/home.html");
+        return studentModal1;
     }
 
     @Override

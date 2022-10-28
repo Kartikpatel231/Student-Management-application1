@@ -15,4 +15,5 @@ StudentEntity findByStudentId(Long studentId);
  //Optional<StudentEntity> findById(Long studentId);
  //StudentEntity findById(Long studentId);
  StudentEntity getOne(Long id);
+
 }
