@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+<input type="file" name="" id="input-file">
+<script>
+  const fileInput = document.getElementById("input-file");
+  fileInput.addEventListener("change", () => {
+     var formdata = new FormData()
+     formdata.append("file", fileInput.files[0])
+     fetch("http://localhost:8080/file/upload/10", {
+        method: 'post',
+        body: formdata,
+     })
+  })
+</script>
+</body>
+
+</html>

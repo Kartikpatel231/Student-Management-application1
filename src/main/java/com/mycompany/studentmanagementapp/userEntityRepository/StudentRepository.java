@@ -10,9 +10,9 @@ import java.util.Optional;
 public interface StudentRepository extends CrudRepository<StudentEntity, Long> {
  StudentEntity findByEmailAndPassword(String email, String password);
  StudentEntity findByEmail(String email);
-
- @Override
- Optional<StudentEntity> findById(Long id);
-
+StudentEntity findByStudentId(Long studentId);
+ //@Override
+ //Optional<StudentEntity> findById(Long studentId);
+ //StudentEntity findById(Long studentId);
  StudentEntity getOne(Long id);
 }

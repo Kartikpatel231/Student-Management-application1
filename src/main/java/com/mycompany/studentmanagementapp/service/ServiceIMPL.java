@@ -2,10 +2,12 @@ package com.mycompany.studentmanagementapp.service;
 
 import com.mycompany.studentmanagementapp.constant.ErrorType;
 import com.mycompany.studentmanagementapp.converter.StudentConveter1;
+import com.mycompany.studentmanagementapp.entity.FeedbackEntity;
 import com.mycompany.studentmanagementapp.entity.StudentEntity;
 import com.mycompany.studentmanagementapp.entity.StudentProfileEntity;
 import com.mycompany.studentmanagementapp.excaption.BusinessException;
 import com.mycompany.studentmanagementapp.excaption.ErrorModal;
+import com.mycompany.studentmanagementapp.modal.FeebackModel;
 import com.mycompany.studentmanagementapp.modal.StudentModal;
 import com.mycompany.studentmanagementapp.modal.StudentProfileModel;
 import com.mycompany.studentmanagementapp.userEntityRepository.StudentProfileRepository;
@@ -14,7 +16,6 @@ import com.mycompany.studentmanagementapp.validation.StudentValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.config.ConfigDataResourceNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -85,7 +86,7 @@ public class ServiceIMPL implements StudentService {
 
         }
         StudentEntity userEntity1 = studentRepository.save(userEntity);
-        return userEntity1.getId();
+        return userEntity1.getStudentId();
     }
 
     @Override
@@ -113,7 +114,7 @@ public class ServiceIMPL implements StudentService {
         }
 
         StudentEntity userEntity1 = studentRepository.save(userEntity);
-        return userEntity1.getId();
+        return userEntity1.getStudentId();
 
     }
 
@@ -125,8 +126,9 @@ public class ServiceIMPL implements StudentService {
 
     @Override
     public StudentProfileModel create(StudentProfileModel studentProfileModel) throws BusinessException {
-       Optional<StudentEntity> studentEntity1 = studentRepository.findById(studentProfileModel.getId());
-        if (null == studentEntity1) {
+        //StudentEntity studentEntity=new StudentEntity();
+       StudentEntity studentEntity = studentRepository.findByStudentId(studentProfileModel.getId());
+        if (null == studentEntity) {
             List<ErrorModal> errorList = new ArrayList<>();
 
             ErrorModal errorModal = new ErrorModal();
@@ -138,16 +140,19 @@ public class ServiceIMPL implements StudentService {
 
         }
         StudentProfileEntity studentProfileEntity=studentConveter1.convert(studentProfileModel,StudentProfileEntity.class);
-
-        studentProfileRepository.save(studentProfileEntity);
+         studentEntity.setStudentProfileEntity(studentProfileEntity);
+         studentRepository.save(studentEntity);
+       //  studentProfileRepository.save(studentProfileEntity);
         return studentProfileModel;
     }
 
     @Override
     public StudentProfileModel getProfile(Long studentId) throws BusinessException {
-        StudentProfileEntity studentProfileEntity=new StudentProfileEntity();
-        Optional<StudentEntity> studentEntity = studentRepository.findById(studentId);
-        if (null != studentEntity) {
+
+       // StudentProfileEntity studentProfileEntity = studentProfileRepository.findByProfileId(profileId);
+        StudentEntity studentEntity = studentRepository.findByStudentId(studentId);
+
+        if (null == studentEntity) {
             List<ErrorModal> errorList = new ArrayList<>();
 
             ErrorModal errorModal = new ErrorModal();
@@ -159,10 +164,28 @@ public class ServiceIMPL implements StudentService {
 
         }
 
-        StudentProfileModel studentProfileModel=studentConveter1.convert(studentProfileEntity,StudentProfileModel.class);
+         StudentProfileModel student= studentConveter1.convert(studentEntity.getStudentProfileEntity(),StudentProfileModel.class);
+           return student;
 
-         return studentProfileModel;
 
     }
+    public FeebackModel createFeedback(FeebackModel feebackModel) throws BusinessException {
 
+        StudentEntity studentEntity = studentRepository.findByStudentId(feebackModel.getId());
+        if (null == studentEntity) {
+            List<ErrorModal> errorList = new ArrayList<>();
+
+            ErrorModal errorModal = new ErrorModal();
+            errorModal.setCode(ErrorType.NOT_EXIT.toString());
+            errorModal.setMessage("Student Is no present with this Student Id,Please check student Id");
+
+            errorList.add(errorModal);
+            throw new BusinessException(errorList);
+
+        }
+        FeedbackEntity feedbackEntity=studentConveter1.convert(feebackModel,FeedbackEntity.class);
+        studentEntity.setFeedbackEntity(feedbackEntity);
+        studentRepository.save(studentEntity);
+        return feebackModel;
+    }
 }

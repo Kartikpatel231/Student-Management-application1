@@ -7,6 +7,7 @@ e.preventDefault();
 let payload = { fullName: fullNames.value, email:emails.value, password:passwords.value}
 console.log(payload);
 try{
+console.log('check1');
 
  const response = await fetch(
     'http://localhost:8080/api/v1/users',
@@ -19,8 +20,18 @@ try{
       body: JSON.stringify(payload),
     }
   );
-  const content = await response.json();
-  const data = await content;
+  console.log('check2');
+  console.log(response)
+  let rsp=response.url
+  if(response.redirected){
+    window.location = rsp;
+  }
+  else{
+  alert("Bad Credits")
+  }
+ // const content = await response.json();
+  //const data = await content;
+console.log('check3');
 
   if (!response.ok) {
     throw new Error(data.message);

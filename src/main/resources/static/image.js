@@ -8,7 +8,7 @@ $('#myFormSubmit').click(function (e) {
         method : 'POST',
         processData : false,
         contentType : false,
-        url : '/imageupload',
+        url : '/imageUpload',
         data : formdata,
         success : function(o){
             //callback here on success
