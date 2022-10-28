@@ -7,12 +7,12 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity(name="Student_Table")
-@Data                             //getter and setter,equal and hastable,to string
-@NoArgsConstructor                //no constructor with arguments
+@Data
+@NoArgsConstructor
 public class StudentEntity {
     @Column(name = "Student_Id")
-    @Id                             //denotes to primary key
-    @GeneratedValue(strategy = GenerationType.AUTO)        //value automatic increment by jpa
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long studentId;
     private String fullName;
     private String  mobileNumber;
