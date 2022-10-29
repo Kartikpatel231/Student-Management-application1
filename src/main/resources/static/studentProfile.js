@@ -16,8 +16,8 @@ e.preventDefault();
 let payload = { id: id.value, studentName:studentName.value,fatherName:fatherName.value,motherName:motherName.value,mobileNumber:mobileNumber.value,
 bloodGroup:bloodGroup.value,dateOfBirth:dateOfBirth.value,category:category.value,enrollementNumber:enrollementNumber.value,zipcode:zipcode.value,address1:address1.value}
 console.log(payload);
-try{
- const response = await fetch(
+console.log("one")
+fetch(
     'http://localhost:8080/api/v1/create/profile',
     {
       method: "POST",
@@ -27,27 +27,21 @@ try{
       },
       body: JSON.stringify(payload),
     }
-  );
-  console.log('check2');
-    console.log(response)
-
+  ).then(resp => resp.json())
+   .then((data) => {
+ // console.log('check2');
+    //console.log(response)
     alert("ProfileCreated Successfully")
+
     //}
    // const content = await response.json();
     //const data = await content;
-  console.log('check3');
-
-  const content = await response.json();
-  const data = await content;
-
-  if (!response.ok) {
-    throw new Error(data.message);
-    return;
-  }
-
-
-
-}
-catch(e){}
+ console.log(data);
+})
+.catch(e => {
+console.log("error is :", e)
+});
 }
 )
+
+
