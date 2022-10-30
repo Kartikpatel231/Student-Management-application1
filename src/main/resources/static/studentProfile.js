@@ -37,7 +37,9 @@ fetch(
    // const content = await response.json();
     //const data = await content;
  console.log(data);
+
 })
+
 .catch(e => {
 console.log("error is :", e)
 });

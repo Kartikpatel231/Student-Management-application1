@@ -13,16 +13,18 @@
       rel="stylesheet"
     />
 <div class="box">
+   <div class="img-wrapper">
  <style>
-
 body {
 
-  background-image: url('bg.jpg');
+  background-image: url('bgs.gif');
   background-repeat: repeat-x;
   background-attachment: fixed;
   background-size: 100% 100%;
 }
+
 </style>
+</div>
 </div>
 	<!-- <style> 
 body { background-image: url(bg.jpg);
@@ -40,18 +42,53 @@ p    {color: red;}
 </head>
 <body onload="getUserData()" >
 <body onload="getRegisterData()">
+<body onload="getStudentData()">
 
-   <div id="Home">
- <a class="btn btn-primary" href="home.html" role="button" target="abc">Home</a>
-    <a class="btn btn-primary" href="studentprofile.html" role="button" target="abc">Profile</a>
-    <a class="btn btn-primary" href="svvv.html" role="button" target="abc">AboutUs</a>
-    <a class="btn btn-primary" href="mybolg.html" role="button" target="abc">Blogs</a>
-    <a class="btn btn-primary" href="studentFeedback.html" role="button"target="abc">Feedback</a>
-    <a class="btn btn-primary" href="studentlogin.html" role="button" target="abc" text-algin="right">Logout</a>
+   <div id = "Home">
+    <div class="container">
+      <div class="hamburger-menu">
+        <div class="line line-1"></div>
+        <div class="line line-2"></div>
+        <div class="line line-3"></div>
+        <span>Close</span>
+      </div>
+ <nav>
+ 	<label class="logo">SVVV Indore</label>
+ 	<ul>
+     <li><a class="btn btn-primary" class="active" href="home.html" role="button" target="abc">Home</a></li>
+    <li><a class="btn btn-primary" href="studentprofile.html" role="button" target="abc">Profile</a></li>
+    <li><a class="btn btn-primary" href="svvv.html" role="button" target="abc">AboutUs</a></li>
+    <li><a class="btn btn-primary" href="mybolg.html" role="button" target="abc">Blogs</a></li>
+    <li><a class="btn btn-primary" href="studentFeedback.html" role="button"target="abc">Feedback</a></li>
+    <li><a class="btn btn-primary" href="studentlogin.html" role="button" target="abc" text-algin="right">Logout</a></li>
+</ul>
+ <section class="sidebar">
+        <ul class="menu">
+            <li class="menu-item">
+                <h2>Profile</h2>
+                <div class="row"> </div>
+                  <div class="col-12"></div>
+
+                  <h3 id="studentName1"></h3>
+                <a href="#Testimonals" class="menu-link" data-content="Testimonals"> <h3 id="studentNames"></h3></a>
+            </li>
+            <li class="menu-item">
+                <a href="#Home" class="menu-link" data-content="Home"><h3 id="mobileNumber1"></h3></a>
+            </li>
+            <li class="menu-item">
+
+                <a href="#About Me" class="menu-link" data-content="About Me"><h3 id="address2"></h3></a>
+
+                <h3>Contact Us</h3>
+                <h4>svvv@gmail.com</h4>
+            </li>
+
+        </ul>
+</nav>
 <div class="container mt-3 text-center border border-primary">
 	<div class="row">
 		<div class="col-md-13 col-sm-13">
-	<h2>Welcome To Student Management App</h2>
+	<font color="white"><h2>Welcome To Student Management App</h2></font>
 
 		</div>
 </div>
@@ -65,17 +102,22 @@ p    {color: red;}
 		 direction="up"
 		 width="350"
 		 height="320"
-		 style="border:solid">
-	 <div><h3>Welcome To Svvv</h3> <br>
+		 style="border:transparent;"
+
+		 >
+
+	 	<img src="download.png" width="225" height="225">
+	 <font color="white"><div><h3>Welcome To Svvv</h3> <br>
 	 <h4>Software Engineering Project Management</h4><br>
 	 <h4>Student Should Fill All Details Carefully</h4><br>
 		 <h4>Student Must Give FeedBack</h4><br></div>
+ </font>
  <div>
 </div></marquee>
 
 <div class="spinner-container">
-	 </head>
-  <body>
+
+
     <div class="spinner-container">
       <div class="circles">
         <div></div>
@@ -88,6 +130,8 @@ p    {color: red;}
         <div></div>
       </div>
     </div>
+</div>
+</body>
 </body>
 </body>
 <script src="./main.js"></script>
