@@ -1,48 +1,79 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-	<title>imageUplode</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      .image-preview{
+        width: 300px;
+        min-height: 100px;
+        border: 2px solid #dddddd;
+        margin-top: 15px;
+        /*Default text*/
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        color: #cccccc;
+      }
+      .image-preview__image{
+        display: none;
+        width: 100%;
+      }
+    </style>
 </head>
+
 <body>
-	    <div class="container">
-              <div class="row">
-                  <div class="col-md-12">
-                      <div class="uploadPhotoGallery">
-                          <button type="button" data-toggle="modal" data-target="#myModal" id="uploadButton">Upload Image</button>
-                      </div>                     
-                  </div>
-              </div>
-         </div>
-<div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Please Upload Image</h4>
-            </div>
-            <div class="modal-body">
-               <div class="form-group">
-                <label for="">studentId</label>
-                <input type="number" name="studentId" id="id" required="studentId" ><br>
-               </div>
-                <div class="form-group">
-                    <input type="text" class="form-control" id="imagetitle" placeholder="Image Title">
-                </div>
-                 <div class="form-group">
-                     <input type="file" class="form-control" id="input-image" name="input-image" accept="image/*">
-                </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancle</button>
-                <button type="submit" class="btn btn-default" id="myFormSubmit">Save</button>
-            </div>
-        </div>
-    </div>
-</div>
-        <script src="getcookies.js"></script>
+<input type="file" name="" id="input-file">
+<div class="image-preview" id="imagePreview">
+  <img src="" alt="Image Preview" class="image-preview__image">
+  <span class="image-preview__default-text">Image Preview</span>
+<script>
+  const fileInput = document.getElementById("input-file");
+  id = getCookie("id");
 
-        <script src="javascript/image.js"></script>
-
+function getCookie(cname) {
+let name = cname + "=";
+let decodedCookie = decodeURIComponent(document.cookie);
+let ca = decodedCookie.split(';');
+for (let i = 0; i < ca.length; i++) {
+let c = ca[i];
+while (c.charAt(0) == ' ') {
+c = c.substring(1);
+}
+if (c.indexOf(name) == 0) {
+return c.substring(name.length, c.length);
+}
+}
+return "";
+}
+  fileInput.addEventListener("change", () => {
+     var formdata = new FormData()
+     formdata.append("file", fileInput.files[0])
+     fetch("http://localhost:8080/file/upload/" + id
+, {
+        method: 'post',
+        body: formdata,
+     })
+     const inputFile=document.getElementById("input-file");
+     const previewContainer=document.getElementById("imagePreview");
+     const previewImage=previewContainer.querySelector(".image-preview__image");
+     const previewDefaultText=previewContainer.querySelector(".image-preview__default-text");
+     
+      const reader=new FileReader();
+      previewDefaultText.style.display="none";
+      previewImage.style.display="block";
+      reader.addEventListener("load",function(){
+        const result=reader.result;
+          previewImage.setAttribute("src",this.result);
+      });
+      reader.readAsDataURL(formdata);
+     
+  })
+</script>
 </body>
+
 </html>

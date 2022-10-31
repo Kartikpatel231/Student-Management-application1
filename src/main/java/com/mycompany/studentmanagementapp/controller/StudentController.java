@@ -3,7 +3,6 @@ package com.mycompany.studentmanagementapp.controller;
 
 import com.mycompany.studentmanagementapp.excaption.BusinessException;
 import com.mycompany.studentmanagementapp.modal.FeebackModel;
-import com.mycompany.studentmanagementapp.modal.Response;
 import com.mycompany.studentmanagementapp.modal.StudentModal;
 import com.mycompany.studentmanagementapp.modal.StudentProfileModel;
 import com.mycompany.studentmanagementapp.service.StudentService;
@@ -68,10 +67,10 @@ public class StudentController {
 
     @CrossOrigin
     @PostMapping("/create/profile")
-    public Response create(@RequestBody StudentProfileModel studentProfileModel) throws BusinessException {
-        studentService.create(studentProfileModel);
-        return Response.ok("successfully created", HttpStatus.CREATED);
-
+    public ResponseEntity<StudentProfileModel> create(@RequestBody StudentProfileModel studentProfileModel) throws BusinessException {
+       StudentProfileModel studentProfileModel1= studentService.create(studentProfileModel);
+        ResponseEntity<StudentProfileModel> responseEntity = new ResponseEntity<>(studentProfileModel1, HttpStatus.CREATED);
+        return responseEntity;
     }
 
     @GetMapping("/get/profile/{studentId}")
