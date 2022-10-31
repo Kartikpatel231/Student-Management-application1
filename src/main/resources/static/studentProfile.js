@@ -15,35 +15,33 @@ kartik.addEventListener("submit", async e => {
 e.preventDefault();
 let payload = { id: id.value, studentName:studentName.value,fatherName:fatherName.value,motherName:motherName.value,mobileNumber:mobileNumber.value,
 bloodGroup:bloodGroup.value,dateOfBirth:dateOfBirth.value,category:category.value,enrollementNumber:enrollementNumber.value,zipcode:zipcode.value,address1:address1.value}
-console.log(payload);
 console.log("one")
 fetch(
     'http://localhost:8080/api/v1/create/profile',
-    {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    }
-  ).then(resp => resp.json())
-   .then((data) => {
- // console.log('check2');
-    //console.log(response)
+ {
+  method: "POST",
+  headers: {
+    Accept: "application/json",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify(payload),
+}
+
+).then(resp => resp.json())
+.then((data) => {
+
     alert("ProfileCreated Successfully")
 
-    //}
-   // const content = await response.json();
-    //const data = await content;
- console.log(data);
-
-})
-
-.catch(e => {
-console.log("error is :", e)
-});
-}
-)
-
+    console.log("our data", data);
+    document.getElementById("studentName1").textContent=data.studentName;
+    document.getElementById("mobileNumber1").innerHTML=data.mobileNumber;
+    document.getElementById("address2").innerHTML=data.address1;
+    document.getElementById("studentName2").textContent=data.motherName;
+    document.getElementById("mobileNumber2").innerHTML=data.category;
+    })
+    .catch(e => {
+    console.log("error is :", e)
+    });
+    }
+    )
 
