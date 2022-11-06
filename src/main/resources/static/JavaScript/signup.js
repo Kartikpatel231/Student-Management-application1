@@ -9,10 +9,8 @@ e.preventDefault();
 const gender = document.querySelector('input[name="gender"]:checked');
 let payload = { fullName: userName.value, email: email.value, mobileNumber: mobile.value, password: password.value, gender: gender.value }
 console.log('voooon');
-
 fetch(
 'http://localhost:8080/api/v1/users/register',
-
 {
   method: "POST",
   headers: {
