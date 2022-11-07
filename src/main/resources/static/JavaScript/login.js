@@ -4,7 +4,7 @@ const passwords=document.getElementById("passwords");
 const kartik=document.getElementById("myForms");
 kartik.addEventListener("submit", async e => {
 e.preventDefault();
-let payload = { fullName: fullNames.value, email:emails.value, password:passwords.value}
+let payload = { fullNames: fullNames.value, email:emails.value, password:passwords.value}
 console.log(payload);
 try{
 console.log('check1');

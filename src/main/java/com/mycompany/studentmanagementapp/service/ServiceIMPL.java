@@ -87,6 +87,7 @@ public class ServiceIMPL implements StudentService {
         }
         StudentEntity userEntity1 = studentRepository.save(userEntity);
         StudentModal studentModal1=new StudentModal();
+        studentModal1.setFullName(userEntity1.getFullName());
         studentModal1.setStudentId(userEntity1.getStudentId());
         studentModal1.setUrl("http://localhost:8080/home.html");
         return studentModal1;

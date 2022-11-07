@@ -1,19 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-   
-</head>
-
-<body>
-<input type="file" name="" id="input-file"  value="setImage">
-  <img src="" width="100" height="100" alt="set image"> 
-<script>
-  const fileInput = document.getElementById("input-file");
+ const fileInput = document.getElementById("input-file");
     fileInput.style.width = '100px';
     fileInput.style.height = 'auto';
   id = getCookie("id");
@@ -51,7 +36,3 @@ return "";
   }
   reader.readAsDataURL(fileInput.files[0]);
 },false)
-</script>
-</body>
-
-</html>
