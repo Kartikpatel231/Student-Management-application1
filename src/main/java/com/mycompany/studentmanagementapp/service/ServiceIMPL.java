@@ -192,4 +192,8 @@ public class ServiceIMPL implements StudentService {
         studentRepository.save(studentEntity);
         return feebackModel;
     }
+
+    public StudentProfileEntity getStudentProfileByStudentId(Long studentId) {
+        return studentProfileRepository.findByStudentEntityStudentId(studentId);
+    }
 }

@@ -33,6 +33,8 @@ public class StudentProfileModel {
 
     private String enrollementNumber;
 
+    private String imagePath;
+
     private String zipcode;
 
 }

@@ -10,4 +10,6 @@ import java.util.Optional;
 
 @Repository
 public interface StudentProfileRepository extends CrudRepository<StudentProfileEntity ,Long> {
+    StudentProfileEntity findByStudentEntityStudentId(Long studentId);
+    StudentProfileEntity findByProfileId(Long studentId);
 }

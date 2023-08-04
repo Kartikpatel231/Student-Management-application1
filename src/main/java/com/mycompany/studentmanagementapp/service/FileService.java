@@ -1,9 +1,13 @@
 package com.mycompany.studentmanagementapp.service;
 
 import com.mycompany.studentmanagementapp.constant.ErrorType;
+import com.mycompany.studentmanagementapp.converter.StudentConveter1;
 import com.mycompany.studentmanagementapp.entity.StudentEntity;
+import com.mycompany.studentmanagementapp.entity.StudentProfileEntity;
 import com.mycompany.studentmanagementapp.excaption.BusinessException;
 import com.mycompany.studentmanagementapp.excaption.ErrorModal;
+import com.mycompany.studentmanagementapp.modal.StudentProfileModel;
+import com.mycompany.studentmanagementapp.userEntityRepository.StudentProfileRepository;
 import com.mycompany.studentmanagementapp.userEntityRepository.StudentRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +26,13 @@ public class FileService {
 
     @Autowired
     StudentRepository studentRepository;
-
-    private static final String DOCUMENT_BASE_LOCATION = "user-docs";
+    @Autowired
+    private  ServiceIMPL serviceIMPL;
+    @Autowired
+    StudentProfileRepository studentProfileRepository;
+    @Autowired
+    private StudentConveter1 studentConveter1;
+    private static final String DOCUMENT_BASE_LOCATION = "src/user-docs/";
 
     public String uploadFile(Long studentId, MultipartFile file, RedirectAttributes redirectAttributes) throws BusinessException {
         if (file == null && file.isEmpty()) {
@@ -45,6 +54,8 @@ public class FileService {
             redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
             return "redirect:uploadStatus";
         }
+        StudentProfileModel profileEntity = serviceIMPL.getProfile(studentId);
+        StudentProfileEntity studentProfileEntity=studentProfileRepository.findByProfileId(profileEntity.getId());
 
         try {
 
@@ -52,7 +63,10 @@ public class FileService {
             byte[] bytes = file.getBytes();
             Path path = Paths.get( DOCUMENT_BASE_LOCATION + file.getOriginalFilename());
             Files.write(path, bytes);
-
+            if(profileEntity!=null){
+                studentProfileEntity.setImagePath(path.toString());
+                studentProfileRepository.save(studentProfileEntity);
+            }
             redirectAttributes.addFlashAttribute("message",
                     "You successfully uploaded '" + file.getOriginalFilename() + "'");
 

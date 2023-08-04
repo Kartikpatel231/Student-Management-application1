@@ -45,7 +45,7 @@ public class StudentController {
         StudentModal result = studentService.register(studentModal);
         RedirectView redirectView = new RedirectView();
         ResponseEntity<StudentModal> responseEntity = new ResponseEntity<>(result, HttpStatus.CREATED);
-        redirectView.setUrl("http://localhost:8080/home.html");
+        redirectView.setUrl("http://localhost:8080/home2.html");
 
         return responseEntity;
     }
