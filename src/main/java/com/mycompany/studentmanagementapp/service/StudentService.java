@@ -1,9 +1,8 @@
 package com.mycompany.studentmanagementapp.service;
 
+import com.mycompany.studentmanagementapp.entity.StudentEntity;
 import com.mycompany.studentmanagementapp.excaption.BusinessException;
-import com.mycompany.studentmanagementapp.modal.FeebackModel;
-import com.mycompany.studentmanagementapp.modal.StudentModal;
-import com.mycompany.studentmanagementapp.modal.StudentProfileModel;
+import com.mycompany.studentmanagementapp.modal.*;
 
 import java.util.List;
 
@@ -16,4 +15,7 @@ public interface StudentService {
 
        StudentProfileModel getProfile(Long studentId) throws BusinessException;
        FeebackModel createFeedback(FeebackModel feebackModel)throws  BusinessException;
+       String applyToCompany(Long id, CompanyModal companyModal);
+       List<DTO> getAll();
+       List<StudentEntity> getAllStudents();
 }

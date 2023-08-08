@@ -2,14 +2,14 @@ package com.mycompany.studentmanagementapp.service;
 
 import com.mycompany.studentmanagementapp.constant.ErrorType;
 import com.mycompany.studentmanagementapp.converter.StudentConveter1;
+import com.mycompany.studentmanagementapp.entity.CompanyEntity;
 import com.mycompany.studentmanagementapp.entity.FeedbackEntity;
 import com.mycompany.studentmanagementapp.entity.StudentEntity;
 import com.mycompany.studentmanagementapp.entity.StudentProfileEntity;
 import com.mycompany.studentmanagementapp.excaption.BusinessException;
 import com.mycompany.studentmanagementapp.excaption.ErrorModal;
-import com.mycompany.studentmanagementapp.modal.FeebackModel;
-import com.mycompany.studentmanagementapp.modal.StudentModal;
-import com.mycompany.studentmanagementapp.modal.StudentProfileModel;
+import com.mycompany.studentmanagementapp.modal.*;
+import com.mycompany.studentmanagementapp.userEntityRepository.CompanyRepository;
 import com.mycompany.studentmanagementapp.userEntityRepository.StudentProfileRepository;
 import com.mycompany.studentmanagementapp.userEntityRepository.StudentRepository;
 import com.mycompany.studentmanagementapp.validation.StudentValidator;
@@ -20,8 +20,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class ServiceIMPL implements StudentService {
@@ -35,6 +37,8 @@ public class ServiceIMPL implements StudentService {
     private StudentValidator studentValidator;
      @Autowired
      private StudentProfileRepository studentProfileRepository;
+     @Autowired
+    private CompanyRepository companyRepository;
     @Override
     public boolean login(StudentModal userModal) throws BusinessException {
         logger.debug("Entering method login");
@@ -192,6 +196,60 @@ public class ServiceIMPL implements StudentService {
         studentRepository.save(studentEntity);
         return feebackModel;
     }
+    @Override
+    public String applyToCompany(Long id, CompanyModal companyModal) {
+        if (id == null || companyModal.getCompanyId() == null) {
+            return "id is not found";
+        }
+
+
+        StudentEntity studentEntity=studentRepository.findByStudentId(id);
+        // Example code to create a company and associate it with a student
+
+        CompanyEntity companyEntity=studentConveter1.convert(companyModal,CompanyEntity.class);
+        if(studentEntity.getCompanyEntities()==null) {
+            Set<CompanyEntity> companyEntities = new HashSet<>();
+            companyEntities.add(companyEntity);
+            studentEntity.setCompanyEntities(companyEntities);
+        }
+        else {
+            studentEntity.addCompany(companyEntity);
+        }
+        //for (CompanyEntity companyEntity1:studentEntity.getCompanyEntities()){
+          //     companyEntity1
+        // Save the updated student with the associated company
+        studentRepository.save(studentEntity);
+
+        return "Applied successfully";
+    }
+
+
+    @Override
+    public List<DTO> getAll() {
+        List<StudentEntity> studentEntities = studentRepository.findAll();
+        List<DTO> obj1 = new ArrayList<>();
+        for (StudentEntity studentEntities1:studentEntities){
+            DTO obj=new DTO();
+
+            obj.setCompanyEntities(studentEntities1.getCompanyEntities());
+             obj.setFeedbackEntity(studentEntities1.getFeedbackEntity());
+             obj.setStudentProfileEntity(studentEntities1.getStudentProfileEntity());
+             obj.setStudentId(studentEntities1.getStudentId());
+             obj.setFullName(studentEntities1.getFullName());
+             obj.setGender(studentEntities1.getGender());
+             obj1.add(obj);
+         }
+         return obj1;
+
+    }
+
+    @Override
+    public List<StudentEntity> getAllStudents() {
+        return  studentRepository.findAll();
+    }
+
+
+
 
     public StudentProfileEntity getStudentProfileByStudentId(Long studentId) {
         return studentProfileRepository.findByStudentEntityStudentId(studentId);

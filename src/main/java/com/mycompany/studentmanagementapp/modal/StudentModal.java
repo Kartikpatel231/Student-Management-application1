@@ -18,4 +18,5 @@ public class StudentModal {
     private String password;
     private Gender gender;
     private String url;
+
 }

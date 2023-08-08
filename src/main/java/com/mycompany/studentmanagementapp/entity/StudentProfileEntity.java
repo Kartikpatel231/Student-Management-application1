@@ -37,7 +37,6 @@ public class StudentProfileEntity {
     private String enrollementNumber;
 
     private String zipcode;
-
     private String imagePath;
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private StudentEntity studentEntity;

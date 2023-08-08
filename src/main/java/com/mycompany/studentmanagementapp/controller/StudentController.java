@@ -1,10 +1,9 @@
 package com.mycompany.studentmanagementapp.controller;
 
 
+import com.mycompany.studentmanagementapp.entity.StudentEntity;
 import com.mycompany.studentmanagementapp.excaption.BusinessException;
-import com.mycompany.studentmanagementapp.modal.FeebackModel;
-import com.mycompany.studentmanagementapp.modal.StudentModal;
-import com.mycompany.studentmanagementapp.modal.StudentProfileModel;
+import com.mycompany.studentmanagementapp.modal.*;
 import com.mycompany.studentmanagementapp.service.StudentService;
 import io.swagger.annotations.Api;
 import org.slf4j.Logger;
@@ -15,6 +14,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.view.RedirectView;
+
+import java.util.List;
 
 @Api
 @Controller
@@ -86,5 +87,29 @@ public class StudentController {
         ResponseEntity<Boolean> responseEntity = new ResponseEntity(feebackModel1, HttpStatus.OK);
         return responseEntity;
 
+    }
+    @CrossOrigin
+    @PostMapping("/applied/{id}")
+    public ResponseEntity<String> applied(@PathVariable Long id, @RequestBody CompanyModal companyModal){
+        String result=studentService.applyToCompany(id,companyModal);
+        ResponseEntity<String> responseEntity=new ResponseEntity<>(result,HttpStatus.OK);
+        return responseEntity;
+    }
+    @CrossOrigin
+    @GetMapping("/getAll/student")
+    public ResponseEntity<List<DTO>> getAllStudent(){
+        List<DTO> studentEntities=studentService.getAll();
+        ResponseEntity<List<DTO>> listResponseEntity=new ResponseEntity<>(studentEntities,HttpStatus.OK);
+        return listResponseEntity;
+    }
+
+    @GetMapping("get/all")
+    public ResponseEntity<List<StudentEntity>> getAllStudents() {
+        List<StudentEntity> students = studentService.getAllStudents();
+        if (!students.isEmpty()) {
+            return ResponseEntity.ok(students);
+        } else {
+            return ResponseEntity.noContent().build();
+        }
     }
 }
