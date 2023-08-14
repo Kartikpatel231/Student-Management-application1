@@ -1,5 +1,6 @@
 package com.mycompany.studentmanagementapp.service;
 
+import com.mycompany.studentmanagementapp.constant.Status;
 import com.mycompany.studentmanagementapp.entity.StudentEntity;
 import com.mycompany.studentmanagementapp.excaption.BusinessException;
 import com.mycompany.studentmanagementapp.modal.*;
@@ -17,5 +18,7 @@ public interface StudentService {
        FeebackModel createFeedback(FeebackModel feebackModel)throws  BusinessException;
        String applyToCompany(Long id, CompanyModal companyModal);
        List<DTO> getAll();
-       List<StudentEntity> getAllStudents();
+       List<StudentEntity> getAllStudentsByCompany(String name);
+
+       String updateStatus(Long id,Status status);
 }

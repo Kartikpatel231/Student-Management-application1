@@ -1,6 +1,7 @@
 package com.mycompany.studentmanagementapp.controller;
 
 
+import com.mycompany.studentmanagementapp.constant.Status;
 import com.mycompany.studentmanagementapp.entity.StudentEntity;
 import com.mycompany.studentmanagementapp.excaption.BusinessException;
 import com.mycompany.studentmanagementapp.modal.*;
@@ -103,13 +104,19 @@ public class StudentController {
         return listResponseEntity;
     }
 
-    @GetMapping("get/all")
-    public ResponseEntity<List<StudentEntity>> getAllStudents() {
-        List<StudentEntity> students = studentService.getAllStudents();
+    @GetMapping("get/all/bycompany/{name}")
+    public ResponseEntity<List<StudentEntity>> getAllStudents(@PathVariable String name) {
+        List<StudentEntity> students = studentService.getAllStudentsByCompany(name);
         if (!students.isEmpty()) {
             return ResponseEntity.ok(students);
         } else {
             return ResponseEntity.noContent().build();
         }
+    }
+    @PutMapping("/status/{Student_id}")
+    public ResponseEntity<String> updateStatus(@PathVariable Long Student_id){
+        String result=studentService.updateStatus(Student_id,Status.APPROVED);
+        ResponseEntity<String> responseEntity=new ResponseEntity<>(result,HttpStatus.OK);
+        return responseEntity;
     }
 }

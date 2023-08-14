@@ -3,6 +3,7 @@ package com.mycompany.studentmanagementapp.modal;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.mycompany.studentmanagementapp.constant.Gender;
+import com.mycompany.studentmanagementapp.constant.Status;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,6 +18,7 @@ public class StudentModal {
     private String email;
     private String password;
     private Gender gender;
+    private Status status;
     private String url;
 
 }

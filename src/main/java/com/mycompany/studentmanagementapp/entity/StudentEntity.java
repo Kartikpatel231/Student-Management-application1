@@ -2,6 +2,7 @@ package com.mycompany.studentmanagementapp.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mycompany.studentmanagementapp.constant.Gender;
+import com.mycompany.studentmanagementapp.constant.Status;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -23,12 +24,18 @@ public class StudentEntity {
     private String password;
     @Enumerated(EnumType.STRING)
     private Gender gender;
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
     @JoinColumn(name = "student_profile_id")
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private StudentProfileEntity studentProfileEntity;
     @JoinColumn(name = "STUDENT_FEEDBACKS")
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private FeedbackEntity feedbackEntity;
+    @JoinColumn(name = "Resume")
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private ResumeEntity resumeEntity;
 
         @OneToMany(cascade = CascadeType.ALL,targetEntity = CompanyEntity.class)
     @JoinColumn(name = "student_company",referencedColumnName = "student_id")
@@ -47,4 +54,5 @@ public class StudentEntity {
 
 //        }
    }
+
 }

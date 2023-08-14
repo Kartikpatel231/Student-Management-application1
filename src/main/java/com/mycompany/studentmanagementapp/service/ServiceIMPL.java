@@ -1,6 +1,7 @@
 package com.mycompany.studentmanagementapp.service;
 
 import com.mycompany.studentmanagementapp.constant.ErrorType;
+import com.mycompany.studentmanagementapp.constant.Status;
 import com.mycompany.studentmanagementapp.converter.StudentConveter1;
 import com.mycompany.studentmanagementapp.entity.CompanyEntity;
 import com.mycompany.studentmanagementapp.entity.FeedbackEntity;
@@ -206,7 +207,9 @@ public class ServiceIMPL implements StudentService {
         StudentEntity studentEntity=studentRepository.findByStudentId(id);
         // Example code to create a company and associate it with a student
 
-        CompanyEntity companyEntity=studentConveter1.convert(companyModal,CompanyEntity.class);
+//        CompanyEntity companyEntity=studentConveter1.convert(companyModal,CompanyEntity.class);
+        CompanyEntity companyEntity = companyRepository.findByCompanyId(companyModal.getCompanyId());
+
         if(studentEntity.getCompanyEntities()==null) {
             Set<CompanyEntity> companyEntities = new HashSet<>();
             companyEntities.add(companyEntity);
@@ -233,22 +236,39 @@ public class ServiceIMPL implements StudentService {
 
             obj.setCompanyEntities(studentEntities1.getCompanyEntities());
              obj.setFeedbackEntity(studentEntities1.getFeedbackEntity());
+
+             //String filePath = studentEntities1.getResumeEntity().getResumeUrl();
+             //String convertedPath = convertSlashes(filePath);
+             //studentEntities1.getResumeEntity().setResumeUrl(convertedPath);
+             obj.setResumeEntity(studentEntities1.getResumeEntity());
+
              obj.setStudentProfileEntity(studentEntities1.getStudentProfileEntity());
              obj.setStudentId(studentEntities1.getStudentId());
              obj.setFullName(studentEntities1.getFullName());
              obj.setGender(studentEntities1.getGender());
+             obj.setStatus(studentEntities1.getStatus());
              obj1.add(obj);
          }
          return obj1;
 
     }
-
+   // public static String convertSlashes(String path) {
+     //   return path.replace("\\", "/");
+   // }
     @Override
-    public List<StudentEntity> getAllStudents() {
-        return  studentRepository.findAll();
+    public List<StudentEntity> getAllStudentsByCompany(String name) {
+        CompanyEntity companyEntity=companyRepository.findByName(name);
+        List<StudentEntity> studentEntities=studentRepository.findByCompanyEntitiesContains(companyEntity);
+        return  studentEntities;
     }
 
-
+    @Override
+    public String updateStatus(Long id,Status status) {
+        StudentEntity studentEntity=studentRepository.findByStudentId(id);
+        studentEntity.setStatus(status);
+        studentRepository.save(studentEntity);
+        return "updated";
+    }
 
 
     public StudentProfileEntity getStudentProfileByStudentId(Long studentId) {
