@@ -1,0 +1,52 @@
+/* Add this CSS to your stylesheet or <style> tag */
+
+/* Style for the company list */
+.company-list {
+  list-style: none;
+  padding: 0;
+}
+
+.company-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.company-details {
+  flex: 1;
+}
+
+/* Style for the action buttons */
+.company-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.company-actions button {
+  padding: 6px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.company-actions button:hover {
+  background-color: #0056b3;
+}
+/* Add this CSS to your stylesheet or <style> tag */
+.apply-button {
+  padding: 6px 10px;
+  background-color: #28a745; /* Green color */
+  color: white;
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.apply-button:hover {
+  background-color: #218838; /* Darker green on hover */
+}

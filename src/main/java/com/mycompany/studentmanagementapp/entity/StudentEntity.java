@@ -37,10 +37,16 @@ public class StudentEntity {
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private ResumeEntity resumeEntity;
 
-        @OneToMany(cascade = CascadeType.ALL,targetEntity = CompanyEntity.class)
-    @JoinColumn(name = "student_company",referencedColumnName = "student_id")
-    @JsonIgnore
-    private Set<CompanyEntity> companyEntities = new HashSet<>();
+//        @OneToMany(cascade = CascadeType.ALL,targetEntity = CompanyEntity.class)
+//    @JoinColumn(name = "student_company",referencedColumnName = "student_id")
+//    @JsonIgnore
+@ManyToMany
+@JoinTable(
+        name = "Student_Company",
+        joinColumns = @JoinColumn(name = "student_id"),
+        inverseJoinColumns = @JoinColumn(name = "company_id")
+)
+     private Set<CompanyEntity> companyEntities = new HashSet<>();
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "studentEntity", fetch = FetchType.LAZY)
 //    @JsonIgnore
 //    private Set<CompanyEntity> companyEntities = new HashSet<>();

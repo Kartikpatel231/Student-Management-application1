@@ -178,6 +178,27 @@ public class ServiceIMPL implements StudentService {
 
 
     }
+
+    @Override
+    public StudentProfileModel getProfileByEnrol(String studentEnrollment) throws BusinessException {
+        StudentProfileEntity studentProfileEntity=studentProfileRepository.findByEnrollementNumber(studentEnrollment);
+        if (null == studentProfileEntity) {
+            List<ErrorModal> errorList = new ArrayList<>();
+
+            ErrorModal errorModal = new ErrorModal();
+            errorModal.setCode(ErrorType.NOT_EXIT.toString());
+            errorModal.setMessage("Student Is no present with this Student Id,Please check student Id");
+
+            errorList.add(errorModal);
+            throw new BusinessException(errorList);
+
+        }
+
+        StudentProfileModel student= studentConveter1.convert(studentProfileEntity,StudentProfileModel.class);
+        return student;
+
+    }
+
     public FeebackModel createFeedback(FeebackModel feebackModel) throws BusinessException {
 
         StudentEntity studentEntity = studentRepository.findByStudentId(feebackModel.getId());
@@ -198,8 +219,8 @@ public class ServiceIMPL implements StudentService {
         return feebackModel;
     }
     @Override
-    public String applyToCompany(Long id, CompanyModal companyModal) {
-        if (id == null || companyModal.getCompanyId() == null) {
+    public String applyToCompany( Long companyId,Long id) {
+        if (id == null || companyId == null) {
             return "id is not found";
         }
 
@@ -208,7 +229,7 @@ public class ServiceIMPL implements StudentService {
         // Example code to create a company and associate it with a student
 
 //        CompanyEntity companyEntity=studentConveter1.convert(companyModal,CompanyEntity.class);
-        CompanyEntity companyEntity = companyRepository.findByCompanyId(companyModal.getCompanyId());
+        CompanyEntity companyEntity = companyRepository.findByCompanyId(companyId);
 
         if(studentEntity.getCompanyEntities()==null) {
             Set<CompanyEntity> companyEntities = new HashSet<>();

@@ -109,9 +109,61 @@ h1.all{background-color: orangered; width="40";
         <label for=""> EnrollementNumber</label>
 		<input type="text" id="enrollementNumber" name="enrollementNumber" placeholder="enrollementNumber" maxlength="16" required="tel"><br>
 			<br>
-			<label for="">Select Image:</label>
-			<input type="file" id="imagePath" name="imagePath" accept="image/*">
+			<input type="file" id="input-file" accept="image/*">
+			<img id="preview-image" src="" width="100" height="100" alt="Preview">
 			<br>
+
+			<script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const fileInput = document.getElementById("input-file");
+            const previewImage = document.getElementById("preview-image");
+            const id = getCookie("id");
+
+            function getCookie(cname) {
+                const name = cname + "=";
+                const decodedCookie = decodeURIComponent(document.cookie);
+                const ca = decodedCookie.split(';');
+                for (let i = 0; i < ca.length; i++) {
+                    let c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+            }
+
+            fileInput.addEventListener("change", () => {
+                const selectedFile = fileInput.files[0];
+                if (selectedFile) {
+                    const formdata = new FormData();
+                    formdata.append("file", selectedFile);
+
+                    fetch(`http://localhost:8080/file/upload/${id}`, {
+                        method: 'POST',
+                        body: formdata,
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                      console.log("image sent");
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                        alert("An error occurred. Please try again.");
+                    });
+
+                    // Display the uploaded image as a preview
+                    const reader = new FileReader();
+                    reader.onload = () => {
+                        previewImage.src = reader.result;
+                    };
+                    reader.readAsDataURL(selectedFile);
+                }
+            });
+        });
+    </script>
          <label for=""> zipcode</label>
 		<input type="text" id="zipcode" name="zipcode" placeholder="zipcode" maxlength="14" ><br>
 
@@ -121,6 +173,7 @@ h1.all{background-color: orangered; width="40";
 </form>
 
 	</fieldset></form></form>
+
 
 
 </body>

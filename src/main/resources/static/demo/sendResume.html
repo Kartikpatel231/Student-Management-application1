@@ -37,12 +37,12 @@
             fileInput.addEventListener("change", () => {
                 const selectedFile = fileInput.files[0];
                 if (selectedFile) {
-                    const formdata = new FormData();
-                    formdata.append("file", selectedFile);
+                    const formData = new FormData();
+                    formData.append("file", selectedFile);
 
                     fetch(`http://localhost:8080/file/upload/${id}`, {
                         method: 'POST',
-                        body: formdata,
+                        body: formData,
                     })
                     .then(response => response.json())
                     .then(data => {

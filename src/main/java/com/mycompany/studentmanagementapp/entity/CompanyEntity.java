@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -19,6 +21,7 @@ public class CompanyEntity {
     private String website;
     private String description;
     private boolean registration;
+
 //    @ManyToOne
 //    @JsonIgnore
 //    @JoinColumn(name = "student_id") // Reference column for the relationship

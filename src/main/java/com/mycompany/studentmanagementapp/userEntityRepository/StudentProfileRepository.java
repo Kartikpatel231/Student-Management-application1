@@ -12,4 +12,5 @@ import java.util.Optional;
 public interface StudentProfileRepository extends CrudRepository<StudentProfileEntity ,Long> {
     StudentProfileEntity findByStudentEntityStudentId(Long studentId);
     StudentProfileEntity findByProfileId(Long studentId);
+    StudentProfileEntity findByEnrollementNumber(String enrollment);
 }

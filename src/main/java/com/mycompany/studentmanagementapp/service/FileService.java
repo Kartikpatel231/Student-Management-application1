@@ -37,7 +37,7 @@ public class FileService {
     private StudentConveter1 studentConveter1;
     @Autowired
     ResumeRepository resumeRepository;
-    private static final String DOCUMENT_BASE_LOCATION = "src/user-docs/";
+    private static final String DOCUMENT_BASE_LOCATION = "D:/svvv placment app admin/placementProAdmin-panel/src/assets/";
 
     public String uploadFile(Long studentId, MultipartFile file, RedirectAttributes redirectAttributes) throws BusinessException {
         if (file == null && file.isEmpty()) {
@@ -71,7 +71,7 @@ public class FileService {
             Files.write(path, bytes);
             if(profileEntity!=null){
                 if (file.getContentType().equals("image/jpeg") || file.getContentType().equals("image/png")) {
-                    studentProfileEntity.setImagePath(path.toString());
+                    studentProfileEntity.setImagePath(file.getOriginalFilename());
                     studentProfileRepository.save(studentProfileEntity);
                 }
             }

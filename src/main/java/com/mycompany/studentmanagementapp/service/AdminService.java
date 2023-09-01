@@ -42,8 +42,10 @@ private StudentRepository studentRepository;
 
             for(StudentEntity studentEntits:studentEntitys){
                 DTO obj=new DTO();
+                obj.setStudentId(studentEntits.getStudentId());
                 obj.setFullName(studentEntits.getFullName());
                 obj.setGender(studentEntits.getGender());
+                obj.setStatus(studentEntits.getStatus());
                 obj.setStudentProfileEntity(studentEntits.getStudentProfileEntity());
                 obj.setCompanyEntities(studentEntits.getCompanyEntities());
                 dto.add(obj);

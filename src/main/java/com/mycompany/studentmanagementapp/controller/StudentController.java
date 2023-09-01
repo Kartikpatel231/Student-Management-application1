@@ -75,10 +75,18 @@ public class StudentController {
         return responseEntity;
     }
 
+    @CrossOrigin(origins="*")
     @GetMapping("/get/profile/{studentId}")
         public ResponseEntity<Boolean> getStudent(@PathVariable Long studentId) throws BusinessException {
         StudentProfileModel result1 = studentService.getProfile(studentId);
         ResponseEntity<Boolean> responseEntity = new ResponseEntity(result1, HttpStatus.OK);
+        return responseEntity;
+    }
+    @CrossOrigin(origins = "*")
+    @GetMapping("/get/profile/enroll/{studentEnrollment}")
+    public ResponseEntity<Boolean> getStudentByEnroll(@PathVariable String studentEnrollment) throws BusinessException{
+        StudentProfileModel result2=studentService.getProfileByEnrol(studentEnrollment);
+        ResponseEntity<Boolean> responseEntity=new ResponseEntity(result2,HttpStatus.OK);
         return responseEntity;
     }
     @CrossOrigin
@@ -89,10 +97,10 @@ public class StudentController {
         return responseEntity;
 
     }
-    @CrossOrigin
-    @PostMapping("/applied/{id}")
-    public ResponseEntity<String> applied(@PathVariable Long id, @RequestBody CompanyModal companyModal){
-        String result=studentService.applyToCompany(id,companyModal);
+    @CrossOrigin(origins = "*")
+    @PostMapping("/applied/{companyId}/by/{id}")
+    public ResponseEntity<String> applied(@PathVariable Long companyId,@PathVariable Long id ){
+        String result=studentService.applyToCompany(companyId,id);
         ResponseEntity<String> responseEntity=new ResponseEntity<>(result,HttpStatus.OK);
         return responseEntity;
     }

@@ -12,10 +12,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 @Api
 @RestController
 @RequestMapping("/file")
+@CrossOrigin(origins = "*")
 public class FileController {
     @Autowired
     FileService fileService;
- @CrossOrigin
     @PostMapping(value = "/upload/{studentId}")
     public Response uploadFile(@PathVariable Long studentId, @RequestParam("file") MultipartFile file,RedirectAttributes redirectAttributes) throws BusinessException {
         return Response.ok("ds", HttpStatus.CREATED).setPayload(fileService.uploadFile(studentId, file,redirectAttributes));

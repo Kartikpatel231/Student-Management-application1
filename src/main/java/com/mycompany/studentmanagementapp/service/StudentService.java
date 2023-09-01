@@ -15,8 +15,9 @@ public interface StudentService {
       StudentProfileModel create(StudentProfileModel studentProfileModel) throws BusinessException;
 
        StudentProfileModel getProfile(Long studentId) throws BusinessException;
+       StudentProfileModel getProfileByEnrol(String studentEnrollment) throws BusinessException;
        FeebackModel createFeedback(FeebackModel feebackModel)throws  BusinessException;
-       String applyToCompany(Long id, CompanyModal companyModal);
+       String applyToCompany(Long companyId,Long id);
        List<DTO> getAll();
        List<StudentEntity> getAllStudentsByCompany(String name);
 

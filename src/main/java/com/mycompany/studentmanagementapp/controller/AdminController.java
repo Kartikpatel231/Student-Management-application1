@@ -20,6 +20,7 @@ import java.util.List;
 @Api
 @RestController
 @RequestMapping("/api/v3")
+@CrossOrigin(origins = "*")
 public class AdminController {
 
     @Autowired
