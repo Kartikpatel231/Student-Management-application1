@@ -60,5 +60,7 @@ public class StudentEntity {
 
 //        }
    }
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private UniversityDetailEntity universityDetailEntity;
 
 }

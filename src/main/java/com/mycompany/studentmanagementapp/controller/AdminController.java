@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.view.RedirectView;
 
 import java.io.IOException;
 import java.util.List;
@@ -32,38 +32,23 @@ public class AdminController {
         ResponseEntity<List<DTO>> responseEntity=new ResponseEntity<>(result,HttpStatus.OK);
         return responseEntity;
     }
-//    @Autowired
-//    private FileStorageService fileStorageService;
-//
-//    @Autowired
-//    private ResumeRepository resumeRepository;
-//
-//    @Autowired
-//    private StudentRepository studentRepository;
+    @GetMapping("/auth/admin/{userName}/{password}")
+    public ResponseEntity<String> auth(@PathVariable String userName,@PathVariable String password){
+        String str=" ";
+
+        if(userName!="kartik@gmail.com" || password!="kartik@123"){
+            if(userName!="kartik@gmail.com"){
+                str="userName is incorrect";
+            }
+            else if(password!="kartik@123"){
+                str="password is incorrect";
+            }
+        }
+        else {
+              str="successfuly login";
+        }
+        ResponseEntity<String> obj=new ResponseEntity<>(str,HttpStatus.OK);
+        return obj;
+
+    }
 }
-//    @PostMapping("/uploadResume/{studentId}")
-//    public ResponseEntity<String> uploadResume(@RequestParam Long studentId, @RequestParam MultipartFile resumeFile) {
-//        try {
-//            StudentEntity student = studentRepository.findByStudentId(studentId);
-//            if (student == null) {
-//                return ResponseEntity.badRequest().body("Student not found.");
-//            }
-//            if (resumeFile.isEmpty() || !resumeFile.getContentType().equals("application/pdf")) {
-//                return ResponseEntity.badRequest().body("Only PDF files are allowed.");
-//            }
-//            // Store the uploaded resume file
-//            String fileUrl = fileStorageService.storeFile(resumeFile);
-//
-//            // Create and save ResumeEntity
-//            ResumeEntity resume = new ResumeEntity();
-//            resume.setResumeName(resumeFile.getOriginalFilename());
-//            resume.setResumeUrl(fileUrl);
-//
-//            resumeRepository.save(resume);
-//
-//            return ResponseEntity.ok("Resume uploaded successfully.");
-//        } catch (IOException e) {
-//            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error uploading resume.");
-//        }
-//    }
-//}

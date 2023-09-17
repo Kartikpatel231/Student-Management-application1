@@ -31,14 +31,16 @@ public class StudentController {
 
     @CrossOrigin
     @PostMapping("/users")
-    public RedirectView login(@RequestBody StudentModal studentModal) throws BusinessException {
+    public ResponseEntity<Long> login(@RequestBody StudentModal studentModal) throws BusinessException {
         logger.debug("Entering method login");
-        boolean result = studentService.login(studentModal);
-        ResponseEntity<Boolean> responseEntity = new ResponseEntity<>(result, HttpStatus.OK);
-        logger.debug("Exiting method login");
+        long result = studentService.login(studentModal);
+        ResponseEntity<Long> responseEntity = new ResponseEntity<>(result, HttpStatus.OK);
+       // logger.debug("Exiting method login");
         RedirectView redirectView = new RedirectView();
-        redirectView.setUrl("/display");
-        return redirectView;
+        //redirectView.setUrl("/display");
+        redirectView.setUrl("http://localhost:8080/home2.html");
+
+        return responseEntity;
     }
 
     @CrossOrigin

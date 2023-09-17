@@ -8,7 +8,7 @@ import com.mycompany.studentmanagementapp.modal.*;
 import java.util.List;
 
 public interface StudentService {
-     boolean login(StudentModal studentModal) throws BusinessException;
+     long login(StudentModal studentModal) throws BusinessException;
       StudentModal register(StudentModal studentModal) throws BusinessException;
       Long updates(StudentModal studentModal) throws  BusinessException;
       String getDeleted(Long id) throws  BusinessException;

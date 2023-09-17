@@ -41,14 +41,14 @@ public class ServiceIMPL implements StudentService {
      @Autowired
     private CompanyRepository companyRepository;
     @Override
-    public boolean login(StudentModal userModal) throws BusinessException {
+    public long login(StudentModal userModal) throws BusinessException {
         logger.debug("Entering method login");
 
         List<ErrorModal> errorModelList = studentValidator.validateRequest(userModal);
         if (!CollectionUtils.isEmpty(errorModelList)) {
             throw new BusinessException(errorModelList);
         }
-        boolean result = false;
+        long result;
         StudentEntity userEntity = studentRepository.findByEmailAndPassword(userModal.getEmail(), userModal.getPassword());
 
         if (userEntity == null) {
@@ -64,7 +64,7 @@ public class ServiceIMPL implements StudentService {
             throw new BusinessException(errorList);
         } else {
             logger.debug("Login was success");
-            result = true;
+            result = userEntity.getStudentId();
         }
         logger.debug("Exiting method login");
         return result;
@@ -268,6 +268,7 @@ public class ServiceIMPL implements StudentService {
              obj.setFullName(studentEntities1.getFullName());
              obj.setGender(studentEntities1.getGender());
              obj.setStatus(studentEntities1.getStatus());
+             obj.setUniversityDetailEntity(studentEntities1.getUniversityDetailEntity());
              obj1.add(obj);
          }
          return obj1;

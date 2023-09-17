@@ -5,10 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.mycompany.studentmanagementapp.constant.Gender;
 import com.mycompany.studentmanagementapp.constant.Status;
-import com.mycompany.studentmanagementapp.entity.CompanyEntity;
-import com.mycompany.studentmanagementapp.entity.FeedbackEntity;
-import com.mycompany.studentmanagementapp.entity.ResumeEntity;
-import com.mycompany.studentmanagementapp.entity.StudentProfileEntity;
+import com.mycompany.studentmanagementapp.entity.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -29,6 +26,6 @@ public class DTO {
     private Set<CompanyEntity> companyEntities;
     private FeedbackEntity feedbackEntity;
     private ResumeEntity resumeEntity;
-
+    private UniversityDetailEntity universityDetailEntity;
 
 }
