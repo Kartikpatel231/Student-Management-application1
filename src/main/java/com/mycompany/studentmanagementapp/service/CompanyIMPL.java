@@ -2,11 +2,14 @@ package com.mycompany.studentmanagementapp.service;
 
 import com.mycompany.studentmanagementapp.converter.StudentConveter1;
 import com.mycompany.studentmanagementapp.entity.CompanyEntity;
+import com.mycompany.studentmanagementapp.entity.StudentEntity;
 import com.mycompany.studentmanagementapp.modal.CompanyModal;
 import com.mycompany.studentmanagementapp.userEntityRepository.CompanyRepository;
+import com.mycompany.studentmanagementapp.userEntityRepository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +20,8 @@ public class CompanyIMPL implements CompanyService {
     @Autowired
     private StudentConveter1 studentConveter1;
 
+    @Autowired
+    private StudentRepository studentRepository;
     @Override
     public String createCompany(CompanyModal companyModal) {
         if(companyModal != null){
@@ -46,6 +51,17 @@ public class CompanyIMPL implements CompanyService {
         List<CompanyEntity> companyEntities=companyRepository.findAll();
         List<CompanyModal> companyModals=studentConveter1.mapList(companyEntities,CompanyModal.class);
         return companyModals;
+    }
+
+    @Override
+    public List<CompanyModal> getCompanyByStudentId(Long id) {
+        List<CompanyModal> model=new ArrayList<>();
+        StudentEntity obj=studentRepository.findByStudentId(id);
+        for(CompanyEntity obj1:obj.getCompanyEntities()){
+            CompanyModal companyModalss=studentConveter1.convert(obj1,CompanyModal.class);
+            model.add(companyModalss);
+        }
+        return model;
     }
 
     @Override

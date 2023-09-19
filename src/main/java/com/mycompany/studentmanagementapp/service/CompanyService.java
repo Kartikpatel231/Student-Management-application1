@@ -8,6 +8,7 @@ public interface CompanyService {
     String createCompany(CompanyModal companyModal);
     CompanyModal getCompany(Long id);
     List<CompanyModal> getAllCompany();
+    List<CompanyModal> getCompanyByStudentId(Long id);
     String deleteCompany(Long id);
     String updateCompany(CompanyModal companyModal);
 }

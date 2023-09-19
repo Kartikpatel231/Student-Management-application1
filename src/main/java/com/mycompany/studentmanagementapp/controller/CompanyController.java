@@ -51,4 +51,10 @@ public class CompanyController {
         ResponseEntity<String> responseEntity=new ResponseEntity<>(result,HttpStatus.OK);
         return responseEntity;
     }
+    @GetMapping("/get/company/by/{id}")
+    public ResponseEntity<List<CompanyModal>> getByStudentId(@PathVariable Long id){
+        List<CompanyModal> result=companyService.getCompanyByStudentId(id);
+        ResponseEntity<List<CompanyModal>> responseEntity=new ResponseEntity<>(result,HttpStatus.OK);
+        return responseEntity;
+    }
 }

@@ -32,15 +32,15 @@ public class AdminController {
         ResponseEntity<List<DTO>> responseEntity=new ResponseEntity<>(result,HttpStatus.OK);
         return responseEntity;
     }
-    @GetMapping("/auth/admin/{userName}/{password}")
+    @PostMapping("/auth/admin/{userName}/{password}")
     public ResponseEntity<String> auth(@PathVariable String userName,@PathVariable String password){
-        String str=" ";
+        String str="";
 
-        if(userName!="kartik@gmail.com" || password!="kartik@123"){
-            if(userName!="kartik@gmail.com"){
+        if(!userName.equals("kartik@gmail.com") || !password.equals("kartik@123")){
+            if(!userName.equals("kartik@gmail.com")){
                 str="userName is incorrect";
             }
-            else if(password!="kartik@123"){
+            else if(!password.equals("kartik@123")){
                 str="password is incorrect";
             }
         }
