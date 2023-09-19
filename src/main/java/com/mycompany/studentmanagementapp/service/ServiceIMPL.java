@@ -1,5 +1,7 @@
 package com.mycompany.studentmanagementapp.service;
 
+import com.mailjet.client.errors.MailjetException;
+import com.mailjet.client.errors.MailjetSocketTimeoutException;
 import com.mycompany.studentmanagementapp.constant.ErrorType;
 import com.mycompany.studentmanagementapp.constant.Status;
 import com.mycompany.studentmanagementapp.converter.StudentConveter1;
@@ -24,7 +26,6 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class ServiceIMPL implements StudentService {
@@ -40,6 +41,8 @@ public class ServiceIMPL implements StudentService {
      private StudentProfileRepository studentProfileRepository;
      @Autowired
     private CompanyRepository companyRepository;
+     @Autowired
+     private MailJetService mailJetService;
     @Override
     public long login(StudentModal userModal) throws BusinessException {
         logger.debug("Entering method login");
@@ -70,7 +73,7 @@ public class ServiceIMPL implements StudentService {
         return result;
     }
 
-    public StudentModal register(StudentModal userModal) throws BusinessException {
+    public StudentModal register(StudentModal userModal) throws BusinessException, MailjetSocketTimeoutException, MailjetException {
 
         List<ErrorModal> errorModelList = studentValidator.validateRequest(userModal);
 
@@ -90,11 +93,12 @@ public class ServiceIMPL implements StudentService {
             throw new BusinessException(errorList);
 
         }
+       String str= mailJetService.sendEmail(userModal.getFullName(),userModal.getEmail());
         StudentEntity userEntity1 = studentRepository.save(userEntity);
         StudentModal studentModal1=new StudentModal();
         studentModal1.setFullName(userEntity1.getFullName());
         studentModal1.setStudentId(userEntity1.getStudentId());
-        studentModal1.setUrl("http://localhost:8080/home.html");
+        studentModal1.setUrl("http://localhost:8080/home2.html");
         return studentModal1;
     }
 

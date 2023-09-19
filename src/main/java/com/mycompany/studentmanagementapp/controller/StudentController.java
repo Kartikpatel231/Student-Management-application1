@@ -1,6 +1,8 @@
 package com.mycompany.studentmanagementapp.controller;
 
 
+import com.mailjet.client.errors.MailjetException;
+import com.mailjet.client.errors.MailjetSocketTimeoutException;
 import com.mycompany.studentmanagementapp.constant.Status;
 import com.mycompany.studentmanagementapp.entity.StudentEntity;
 import com.mycompany.studentmanagementapp.excaption.BusinessException;
@@ -45,7 +47,7 @@ public class StudentController {
 
     @CrossOrigin
     @PostMapping("/users/register")
-    public ResponseEntity<StudentModal> register(@RequestBody StudentModal studentModal) throws BusinessException {
+    public ResponseEntity<StudentModal> register(@RequestBody StudentModal studentModal) throws BusinessException, MailjetSocketTimeoutException, MailjetException {
         StudentModal result = studentService.register(studentModal);
         RedirectView redirectView = new RedirectView();
         ResponseEntity<StudentModal> responseEntity = new ResponseEntity<>(result, HttpStatus.CREATED);
