@@ -36,6 +36,7 @@ private StudentRepository studentRepository;
         List<DTO> dto=new ArrayList<>();
             List<StudentEntity> studentEntitys= studentRepository.findAll().stream()
                     .filter(studentEntity -> studentEntity.getStatus() == status)
+                    .filter(studentEntity -> studentEntity.getCompanyEntities().stream().anyMatch(companyEntity -> Status.APPROVED.equals(companyEntity.getStatus())))
                     .filter(studentEntity -> studentEntity.getCompanyEntities().stream()
                             .anyMatch(companyEntity -> companyName.equals(companyEntity.getName())))
                     .collect(Collectors.toList());

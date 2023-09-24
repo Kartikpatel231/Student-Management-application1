@@ -2,6 +2,7 @@ package com.mycompany.studentmanagementapp.service;
 
 import com.mycompany.studentmanagementapp.constant.Status;
 import com.mycompany.studentmanagementapp.converter.StudentConveter1;
+import com.mycompany.studentmanagementapp.entity.CompanyEntity;
 import com.mycompany.studentmanagementapp.entity.StudentEntity;
 import com.mycompany.studentmanagementapp.entity.UniversityDetailEntity;
 import com.mycompany.studentmanagementapp.modal.DTO;
@@ -82,7 +83,7 @@ public class UniversityImpl implements UniversityService {
     }
 
     @Override
-    public List<DTO> filterByNumber(Double tenthMarks,Double twelfthMarks,Double cgpa,Double sgpa) {
+    public List<DTO> filterByNumber(Double tenthMarks,Double twelfthMarks,Double cgpa,Double sgpa,String name) {
         List<DTO> obj1=new ArrayList<>();
 
 //        List<StudentEntity> studentEntities=studentRepository.findAll().stream().filter(num->(tenthMarks==null || num.getUniversityDetailEntity().getTenthMarks()>=tenthMarks))
@@ -96,11 +97,19 @@ public class UniversityImpl implements UniversityService {
                 .filter(num -> (twelfthMarks == null || (num.getUniversityDetailEntity() != null && num.getUniversityDetailEntity().getTwelfthMarks() >= twelfthMarks)))
                 .filter(num -> (cgpa == null || (num.getUniversityDetailEntity() != null && num.getUniversityDetailEntity().getCgpa() >= cgpa)))
                 .filter(num -> (sgpa == null || (num.getUniversityDetailEntity() != null && num.getUniversityDetailEntity().getSgpa() >= sgpa)))
+                .filter(num -> (name==null)  || (num.getCompanyEntities()!=null && num.getCompanyEntities().stream().anyMatch(companyEntity ->name.equals(companyEntity.getName()))))
                 .collect(Collectors.toList());
 
         for (StudentEntity studentEntities1:studentEntities){
             DTO obj=new DTO();
              studentEntities1.setStatus(Status.APPROVED);
+            if (studentEntities1.getCompanyEntities() != null) {
+                for (CompanyEntity companyEntity : studentEntities1.getCompanyEntities()) {
+                    // Set the companyStatus for each company
+                    if(companyEntity.getName().equals(name))
+                    companyEntity.setStatus(Status.APPROVED); // Replace with the desired company status value
+                }
+            }
              studentRepository.save(studentEntities1);
             obj.setCompanyEntities(studentEntities1.getCompanyEntities());
             obj.setFeedbackEntity(studentEntities1.getFeedbackEntity());

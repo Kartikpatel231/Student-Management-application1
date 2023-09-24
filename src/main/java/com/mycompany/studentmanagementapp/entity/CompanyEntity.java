@@ -1,6 +1,8 @@
 package com.mycompany.studentmanagementapp.entity;
 
 
+import com.mycompany.studentmanagementapp.constant.Placement;
+import com.mycompany.studentmanagementapp.constant.Status;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,6 +22,10 @@ public class CompanyEntity {
     private String name;
     private String website;
     private String description;
+    @Enumerated(EnumType.STRING)
+    private Status status;
+    @Enumerated(EnumType.STRING)
+    private Placement placementStatus;
     private boolean registration;
 
 //    @ManyToOne

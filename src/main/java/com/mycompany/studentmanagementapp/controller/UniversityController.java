@@ -55,8 +55,9 @@ public class UniversityController {
     public ResponseEntity<List<DTO>> fileterByNumber(@RequestParam(name = "tenthMarks",required = false) Double tenthMarks
                                                       ,@RequestParam(name = "twelfthMarks",required = false) Double twelfthMarks,
                                                        @RequestParam(name = "cgpa",required = false) Double cgpa,
-                                                       @RequestParam(name = "sgpa",required = false)Double sgpa){
-        List<DTO> result=universityService.filterByNumber(tenthMarks,twelfthMarks,cgpa,sgpa);
+                                                       @RequestParam(name = "sgpa",required = false)Double sgpa,
+                                                        @RequestParam(name="name",required = false)String name){
+        List<DTO> result=universityService.filterByNumber(tenthMarks,twelfthMarks,cgpa,sgpa,name);
         ResponseEntity<List<DTO>> obj=new ResponseEntity<>(result,HttpStatus.OK);
         return obj;
     }

@@ -11,5 +11,5 @@ public interface UniversityService{
     String updateUniversity(UniversityModel universityModel,Long id);
     UniversityModel getUniversity(Long id);
     List<UniversityModel> getAllUniversity();
-    List<DTO> filterByNumber(Double tenthMarks,Double twelfthMarks,Double cgpa,Double sgpa);
+    List<DTO> filterByNumber(Double tenthMarks,Double twelfthMarks,Double cgpa,Double sgpa,String name);
 }

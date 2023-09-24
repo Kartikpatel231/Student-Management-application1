@@ -23,21 +23,26 @@ console.log('check1');
   console.log('check2');
   console.log(response)
   let rsp=response.url
-  if(response.redirected){
-    window.location = rsp;
-  }
-  else{
-  alert("Bad Credits")
-  }
- // const content = await response.json();
-  //const data = await content;
-console.log('check3');
 
-  if (!response.ok) {
-    throw new Error(data.message);
-    return;
+    if (!response.ok) {
+      throw new Error('Login failed');
+    }
+ const responseData = await response.json();
+    const id = responseData; // Replace 'responseData' with the actual field name containing the value you want to store
+
+    // Set the received value as a cookie
+    document.cookie = `id=${id}; max-age=86400`;
+    // Set the received value (150) as a cookie
+
+
+    // Redirect to localhost://8080/home2.html
+    window.location.href = 'http://localhost:8080/home2.html';
+
+  } catch (error) {
+    console.error('Error:', error);
+    alert('Login failed');
   }
+
 }
-catch(e){}
-}
+
 )

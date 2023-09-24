@@ -3,6 +3,7 @@ package com.mycompany.studentmanagementapp.service;
 import com.mailjet.client.errors.MailjetException;
 import com.mailjet.client.errors.MailjetSocketTimeoutException;
 import com.mycompany.studentmanagementapp.constant.ErrorType;
+import com.mycompany.studentmanagementapp.constant.Placement;
 import com.mycompany.studentmanagementapp.constant.Status;
 import com.mycompany.studentmanagementapp.converter.StudentConveter1;
 import com.mycompany.studentmanagementapp.entity.CompanyEntity;
@@ -233,8 +234,9 @@ public class ServiceIMPL implements StudentService {
         // Example code to create a company and associate it with a student
 
 //        CompanyEntity companyEntity=studentConveter1.convert(companyModal,CompanyEntity.class);
-        CompanyEntity companyEntity = companyRepository.findByCompanyId(companyId);
-
+         CompanyEntity companyEntity = companyRepository.findByCompanyId(companyId);
+         companyEntity.setPlacementStatus(Placement.In_Process);
+         companyEntity.setStatus(Status.PENDING);
         if(studentEntity.getCompanyEntities()==null) {
             Set<CompanyEntity> companyEntities = new HashSet<>();
             companyEntities.add(companyEntity);

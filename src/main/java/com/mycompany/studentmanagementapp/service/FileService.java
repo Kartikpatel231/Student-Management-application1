@@ -37,6 +37,8 @@ public class FileService {
     private StudentConveter1 studentConveter1;
     @Autowired
     ResumeRepository resumeRepository;
+    @Autowired
+    BlobStorageService blobStorageService;
     private static final String DOCUMENT_BASE_LOCATION = "D:/svvv placment app admin/placementProAdmin-panel/src/assets/";
 
     public String uploadFile(Long studentId, MultipartFile file, RedirectAttributes redirectAttributes) throws BusinessException {
@@ -62,7 +64,7 @@ public class FileService {
 
         StudentProfileModel profileEntity = serviceIMPL.getProfile(studentId);
         StudentProfileEntity studentProfileEntity=studentProfileRepository.findByProfileId(profileEntity.getId());
-
+        blobStorageService.uploadFile(file);
         try {
 
             // Get the file and save it somewhere
