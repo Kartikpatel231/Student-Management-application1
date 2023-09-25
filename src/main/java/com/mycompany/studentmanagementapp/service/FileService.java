@@ -39,7 +39,9 @@ public class FileService {
     ResumeRepository resumeRepository;
     @Autowired
     BlobStorageService blobStorageService;
-    private static final String DOCUMENT_BASE_LOCATION = "D:/svvv placment app admin/placementProAdmin-panel/src/assets/";
+//    private static final String DOCUMENT_BASE_LOCATION = "D:/svvv placment app admin/placementProAdmin-panel/src/assets/";
+    private static final String DOCUMENT_BASE_LOCATION = "https://svvvplacementdata.blob.core.windows.net/images/";
+
 
     public String uploadFile(Long studentId, MultipartFile file, RedirectAttributes redirectAttributes) throws BusinessException {
         if (file == null && file.isEmpty()) {
@@ -64,22 +66,23 @@ public class FileService {
 
         StudentProfileModel profileEntity = serviceIMPL.getProfile(studentId);
         StudentProfileEntity studentProfileEntity=studentProfileRepository.findByProfileId(profileEntity.getId());
-        blobStorageService.uploadFile(file);
+        String url=blobStorageService.uploadFile(file);
         try {
 
             // Get the file and save it somewhere
-            byte[] bytes = file.getBytes();
-            Path path = Paths.get( DOCUMENT_BASE_LOCATION + file.getOriginalFilename());
-            Files.write(path, bytes);
+         //   byte[] bytes = file.getBytes();
+          //  Path path = Paths.get( DOCUMENT_BASE_LOCATION + file.getOriginalFilename());
+           // Files.write(path, bytes);
+
             if(profileEntity!=null){
                 if (file.getContentType().equals("image/jpeg") || file.getContentType().equals("image/png")) {
-                    studentProfileEntity.setImagePath(file.getOriginalFilename());
+                    studentProfileEntity.setImagePath(DOCUMENT_BASE_LOCATION+url);
                     studentProfileRepository.save(studentProfileEntity);
                 }
             }
             if (file.getContentType().equals("application/pdf")) {
                 ResumeEntity resumeEntity=new ResumeEntity();
-                resumeEntity.setResumeUrl(path.toString());
+              //  resumeEntity.setResumeUrl(path.toString());
                 resumeRepository.save(resumeEntity);
                 studentEntity.setResumeEntity(resumeEntity);
                 studentRepository.save(studentEntity);
@@ -88,7 +91,7 @@ public class FileService {
             redirectAttributes.addFlashAttribute("message",
                     "You successfully uploaded '" + file.getOriginalFilename() + "'");
 
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
 

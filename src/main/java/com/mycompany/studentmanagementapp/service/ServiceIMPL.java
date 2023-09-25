@@ -94,7 +94,14 @@ public class ServiceIMPL implements StudentService {
             throw new BusinessException(errorList);
 
         }
-       String str= mailJetService.sendEmail(userModal.getFullName(),userModal.getEmail());
+   //    String str= mailJetService.sendEmail(userModal.getFullName(),userModal.getEmail());
+        try {
+            String str = mailJetService.sendEmail(userModal.getFullName(), userModal.getEmail());
+        } catch (MailjetException | MailjetSocketTimeoutException e) {
+            // Log the exception and an error message
+            logger.error("Error sending email:", e);
+            // You can choose to return a specific error message or take other actions.
+        }
         StudentEntity userEntity1 = studentRepository.save(userEntity);
         StudentModal studentModal1=new StudentModal();
         studentModal1.setFullName(userEntity1.getFullName());
