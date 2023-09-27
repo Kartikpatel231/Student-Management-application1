@@ -4,8 +4,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    
-    <link rel="stylesheet" type="text/css" href="./commoncss/button.css">
+
+    <link rel="stylesheet" type="text/css" href="../commoncss/button.css">
      <link
             href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@400;500;600;700;800&family=Josefin+Slab:ital,wght@0,400;0,600;1,300;1,400;1,600&family=Muli:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap"
             rel="stylesheet"
@@ -50,7 +50,7 @@
 
     <title>placementManagmentPro</title>
 </head>
-<body style="background-image: url('./images/Constellation.jpg'); background-repeat: repeat-x; background-attachment: fixed; background-size: 100% 100%; margin: 0">
+<body style="background-image: url('../images/Constellation.jpg'); background-repeat: repeat-x; background-attachment: fixed; background-size: 100% 100%; margin: 0">
     <header>
         <!-- Bootstrap Navbar -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -62,7 +62,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="../home.html">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="https://www.brainspace.tech/notes">PlacmentNotes</a>
@@ -80,9 +80,46 @@
             </div>
         </nav>
     </header>
-       <div align="center">
-        <img src="./images/logo.png" width="180" height="100">
-    </div>
+     <h1>University Detail</h1>
+    <form id="universityDetailForm" class="transparent-form">
+        <label for="universityName">University/College Name</label>
+        <input type="text" id="universityName" name="universityName" required>
+
+        <label for="tenthMarks">Tenth Marks</label>
+        <input type="text" id="tenthMarks" name="tenthMarks" required>
+
+        <label for="twelfthMarks">Twelfth Marks</label>
+        <input type="text" id="twelfthMarks" name="twelfthMarks" required>
+
+        <label for="cgpa">CGPA</label>
+        <input type="text" id="cgpa" name="cgpa" required>
+
+        <label for="sgpa">SGPA</label>
+        <input type="text" id="sgpa" name="sgpa" required>
+
+        <label for="currentYear">Current Year</label>
+        <input type="text" id="currentYear" name="currentYear" placeholder="3" required>
+
+        <label for="currentSemester">Current Semester</label>
+        <input type="text" id="currentSemester" name="currentSemester" placeholder="4" required>
+
+        <label for="numberOfBacklogs">Number of Backlogs</label>
+        <input type="text" id="numberOfBacklogs" name="numberOfBacklogs" placeholder="0" required>
+
+        <label for="course">Major/Course</label>
+        <input type="text" id="course" name="course" required>
+
+        <label for="section">Section</label>
+        <input type="text" id="section" name="section" placeholder="b" required>
+
+        <label for="batches">Batch</label>
+        <input type="text" id="batches" name="batches" placeholder="2020-2024" required>
+
+        <label for="passingYear">Passing Year</label>
+        <input type="text" id="passingYear" name="passingYear" placeholder="2024" required>
+
+        <button type="button" onclick="submitForm()">Submit</button>
+    </form>
  <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -154,118 +191,18 @@
             background-color: #0056b3;
         }
     </style>
-    <h1 class="all">Student Profile</h1>
-
-    <div class="container">
-        <form action="#" id="myProfile">
-            <fieldset>
-                <legend>Fill All Details</legend>
-                    
-        <input type="number" hidden name="studentId" id="id" required="studentId" ><br>
-        <label for="">studentName</label>
-        <input type="text" name="Name " id="studentName" placeholder=" studentName" required="Name"> <br>
-        <label for="">fatherName</label>
-        <input type="text" name="Name" id="fatherName" placeholder=" fatherName" required="fatherName"><br>
-        <label for="">motherName</label>
-        <input type="text" name="motherName" id="motherName" placeholder=" motherName" required="motherName"><br>
-
-        <label for=""> Phone no.   </label>
-        <input type="tel" id="mobileNumber" name="phone" placeholder="91+xxxxxxxx" maxlength="14" required="tel"><br>
-
-        <label for="">bloodGroup</label>
-        <input type="text" id="bloodGroup" name="bloodGroup" placeholder="bloodGroup"> <br>
-
-        
-        <label for=""> category   </label>
-        <input type="text" id="category"
-        name="category" ><br>
-
-
-
-
-        <label for="">DateOfBirth</label>
-        <input type="date" id="dateOfBirth" name="date of birth" placeholder="dd/mm/nnnn" required="date"><br>
-
-        <label for="">address     </label>
-        <input type="text" name="address" id="address1" required="address1" ><br>
-
-        <label for=""> EnrollementNumber</label>
-        <input type="text" id="enrollementNumber" name="enrollementNumber" placeholder="enrollementNumber" maxlength="16" required="tel"><br>
-            <br>
-            <input type="file" id="input-file" accept="image/*">
-            <img id="preview-image" src="" width="100" height="100" alt="Preview">
-            <br>
-
-            <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const fileInput = document.getElementById("input-file");
-            const previewImage = document.getElementById("preview-image");
-            const id = getCookie("id");
-
-            function getCookie(cname) {
-                const name = cname + "=";
-                const decodedCookie = decodeURIComponent(document.cookie);
-                const ca = decodedCookie.split(';');
-                for (let i = 0; i < ca.length; i++) {
-                    let c = ca[i];
-                    while (c.charAt(0) == ' ') {
-                        c = c.substring(1);
-                    }
-                    if (c.indexOf(name) == 0) {
-                        return c.substring(name.length, c.length);
-                    }
-                }
-                return "";
-            }
-
-            fileInput.addEventListener("change", () => {
-                const selectedFile = fileInput.files[0];
-                if (selectedFile) {
-                    const formdata = new FormData();
-                    formdata.append("file", selectedFile);
-
-                    fetch(`http://localhost:8080/file/upload/${id}`, {
-                        method: 'POST',
-                        body: formdata,
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                      console.log("image sent");
-                    })
-                    .catch(error => {
-                        console.error("Error:", error);
-                        alert("An error occurred. Please try again.");
-                    });
-
-                    // Display the uploaded image as a preview
-                    const reader = new FileReader();
-                    reader.onload = () => {
-                        previewImage.src = reader.result;
-                    };
-                    reader.readAsDataURL(selectedFile);
-                }
-            });
-        });
-    </script>
-         <label for=""> zipcode</label>
-        <input type="text" id="zipcode" name="zipcode" placeholder="zipcode" maxlength="14" ><br>
-
-        <input type="submit" class='btn btn-primary' value="createProfile">
-            <input type="reset" value="clear"><br>
-            </fieldset>
-        </form>
-    </div>
-
+</body>
    
     <footer>
         <p>&copy; 2023 Your Company. All rights reserved.</p>
     </footer>
 
     <!-- Include Bootstrap JS (jQuery and Popper.js are required) -->
-
-<script src="./JavaScript/getcookies.js"></script>
+  <script src="university.js"></script>
+    <script src="../JavaScript/getcookies.js"></script>
+<script src="../JavaScript/main.js"></script>
 <!-- <script src="../JavaScript/script.js"></script> -->
-<script src="./JavaScript/studentProfile.js"></script>
+<script src="../JavaScript/studentProfile.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

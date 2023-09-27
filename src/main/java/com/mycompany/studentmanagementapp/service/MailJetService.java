@@ -6,6 +6,7 @@ import com.mailjet.client.MailjetRequest;
 import com.mailjet.client.MailjetResponse;
 import com.mailjet.client.ClientOptions;
 import com.mailjet.client.resource.Emailv31;
+import lombok.SneakyThrows;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,7 @@ import org.springframework.stereotype.Service;
 public class MailJetService {
 
     //public static void main(String[] args) throws MailjetException, MailjetSocketTimeoutException {
-
+    @SneakyThrows
           public  String sendEmail(String name,String email) throws  MailjetException,MailjetSocketTimeoutException {
           MailjetClient client;
           MailjetRequest request;

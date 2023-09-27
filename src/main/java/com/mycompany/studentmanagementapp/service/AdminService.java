@@ -29,31 +29,62 @@ import java.util.stream.Collectors;
 //
 @Service
 public class AdminService {
-@Autowired
-private StudentRepository studentRepository;
+    @Autowired
+    private StudentRepository studentRepository;
 
-    public List<DTO> getStudentsByStatus(Status status,String companyName){
-        List<DTO> dto=new ArrayList<>();
-            List<StudentEntity> studentEntitys= studentRepository.findAll().stream()
-                    .filter(studentEntity -> studentEntity.getStatus() == status)
-                    .filter(studentEntity -> studentEntity.getCompanyEntities().stream().anyMatch(companyEntity -> Status.APPROVED.equals(companyEntity.getStatus())))
-                    .filter(studentEntity -> studentEntity.getCompanyEntities().stream()
-                            .anyMatch(companyEntity -> companyName.equals(companyEntity.getName())))
-                    .collect(Collectors.toList());
+    public List<DTO> getStudentsByStatus(Status status, String companyName) {
+        List<DTO> dto = new ArrayList<>();
 
-            for(StudentEntity studentEntits:studentEntitys){
-                DTO obj=new DTO();
-                obj.setStudentId(studentEntits.getStudentId());
-                obj.setFullName(studentEntits.getFullName());
-                obj.setGender(studentEntits.getGender());
-                obj.setStatus(studentEntits.getStatus());
-                obj.setStudentProfileEntity(studentEntits.getStudentProfileEntity());
-                obj.setCompanyEntities(studentEntits.getCompanyEntities());
-                dto.add(obj);
-            }
-            return dto;
+        List<StudentEntity> studentEntities = studentRepository.findAll().stream()
+                .filter(studentEntity -> {
+                    if ("none".equals(companyName)) {
+                        // If the company name is "none," only filter by status
+                        return studentEntity.getStatus() == status;
+                    } else {
+                        // Otherwise, apply the additional company name filters
+                        return studentEntity.getStatus() == status
+                                && studentEntity.getCompanyEntities().stream()
+                                .anyMatch(companyEntity -> Status.APPROVED.equals(companyEntity.getStatus()))
+                                && studentEntity.getCompanyEntities().stream()
+                                .anyMatch(companyEntity -> companyName.equals(companyEntity.getName()));
+                    }
+                })
+                .collect(Collectors.toList());
+
+        for (StudentEntity studentEntity : studentEntities) {
+            DTO obj = new DTO();
+            obj.setStudentId(studentEntity.getStudentId());
+            obj.setFullName(studentEntity.getFullName());
+            obj.setGender(studentEntity.getGender());
+            obj.setStatus(studentEntity.getStatus());
+            obj.setStudentProfileEntity(studentEntity.getStudentProfileEntity());
+            obj.setCompanyEntities(studentEntity.getCompanyEntities());
+            dto.add(obj);
         }
+
+        return dto;
     }
+}
+//            List<StudentEntity> studentEntitys= studentRepository.findAll().stream()
+//                    .filter(studentEntity -> studentEntity.getStatus() == status)
+//                    .filter(studentEntity -> studentEntity.getCompanyEntities().stream().anyMatch(companyEntity -> Status.APPROVED.equals(companyEntity.getStatus())))
+//                    .filter(studentEntity -> studentEntity.getCompanyEntities().stream()
+//                            .anyMatch(companyEntity -> companyName.equals(companyEntity.getName())))
+//                    .collect(Collectors.toList());
+//
+//            for(StudentEntity studentEntits:studentEntitys){
+//                DTO obj=new DTO();
+//                obj.setStudentId(studentEntits.getStudentId());
+//                obj.setFullName(studentEntits.getFullName());
+//                obj.setGender(studentEntits.getGender());
+//                obj.setStatus(studentEntits.getStatus());
+//                obj.setStudentProfileEntity(studentEntits.getStudentProfileEntity());
+//                obj.setCompanyEntities(studentEntits.getCompanyEntities());
+//                dto.add(obj);
+//            }
+//            return dto;
+//        }
+//    }
 
 
 

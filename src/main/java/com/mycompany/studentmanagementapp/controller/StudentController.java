@@ -9,6 +9,7 @@ import com.mycompany.studentmanagementapp.excaption.BusinessException;
 import com.mycompany.studentmanagementapp.modal.*;
 import com.mycompany.studentmanagementapp.service.StudentService;
 import io.swagger.annotations.Api;
+import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,18 +41,19 @@ public class StudentController {
        // logger.debug("Exiting method login");
         RedirectView redirectView = new RedirectView();
         //redirectView.setUrl("/display");
-        redirectView.setUrl("http://localhost:8080/home2.html");
+        redirectView.setUrl("http://localhost:8080/home.html");
 
         return responseEntity;
     }
 
     @CrossOrigin
+    @SneakyThrows
     @PostMapping("/users/register")
     public ResponseEntity<StudentModal> register(@RequestBody StudentModal studentModal) throws BusinessException, MailjetSocketTimeoutException, MailjetException {
         StudentModal result = studentService.register(studentModal);
         RedirectView redirectView = new RedirectView();
         ResponseEntity<StudentModal> responseEntity = new ResponseEntity<>(result, HttpStatus.CREATED);
-        redirectView.setUrl("http://localhost:8080/home2.html");
+        redirectView.setUrl("http://localhost:8080/home.html");
 
         return responseEntity;
     }

@@ -17,6 +17,7 @@ import com.mycompany.studentmanagementapp.userEntityRepository.CompanyRepository
 import com.mycompany.studentmanagementapp.userEntityRepository.StudentProfileRepository;
 import com.mycompany.studentmanagementapp.userEntityRepository.StudentRepository;
 import com.mycompany.studentmanagementapp.validation.StudentValidator;
+import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,7 +74,7 @@ public class ServiceIMPL implements StudentService {
         logger.debug("Exiting method login");
         return result;
     }
-
+    @SneakyThrows
     public StudentModal register(StudentModal userModal) throws BusinessException, MailjetSocketTimeoutException, MailjetException {
 
         List<ErrorModal> errorModelList = studentValidator.validateRequest(userModal);
@@ -96,12 +97,14 @@ public class ServiceIMPL implements StudentService {
         }
    //    String str= mailJetService.sendEmail(userModal.getFullName(),userModal.getEmail());
         try {
+
             String str = mailJetService.sendEmail(userModal.getFullName(), userModal.getEmail());
         } catch (MailjetException | MailjetSocketTimeoutException e) {
             // Log the exception and an error message
             logger.error("Error sending email:", e);
             // You can choose to return a specific error message or take other actions.
         }
+        userEntity.setStatus(Status.PENDING);
         StudentEntity userEntity1 = studentRepository.save(userEntity);
         StudentModal studentModal1=new StudentModal();
         studentModal1.setFullName(userEntity1.getFullName());

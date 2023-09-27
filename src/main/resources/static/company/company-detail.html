@@ -5,7 +5,7 @@
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" type="text/css" href="../commoncss/button.css">
+    <link rel="stylesheet" type="text/css" href="commoncss/button.css">
      <link
             href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@400;500;600;700;800&family=Josefin+Slab:ital,wght@0,400;0,600;1,300;1,400;1,600&family=Muli:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap"
             rel="stylesheet"
@@ -47,10 +47,42 @@
         /* Other styles you may want to apply */
     }
 </style>
+ <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
 
+        header {
+            background-color: #333;
+            color: white;
+            padding: 10px 0;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        /* Add your custom styles for company details here */
+        #companyDetail {
+            text-align: center;
+        }
+    </style>
     <title>placementManagmentPro</title>
 </head>
-<body style="background-image: url('Constellation.jpg'); background-repeat: repeat-x; background-attachment: fixed; background-size: 100% 100%; margin: 0"  onload="getUserData(); getRegisterData();">
+<body style="background-image: url('Constellation.jpg'); background-repeat: repeat-x; background-attachment: fixed; background-size: 100% 100%; margin: 0">
     <header>
         <!-- Bootstrap Navbar -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -62,16 +94,16 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="../home.html">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="https://www.brainspace.tech/notes">PlacmentNotes</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="https://www.brainspace.tech/todo">Todo_Work_Managment</a>
+                        <a class="nav-link" href="https://www.brainspace.tech/contactUs/todo">Todo_Work_Managment</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="feedback/aboutUs.html">About Us</a>
+                        <a class="nav-link" href="../feedback/aboutUs.html">About Us</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="https://www.brainspace.tech/contactUs">Contact</a>
@@ -81,86 +113,13 @@
         </nav>
     </header>
     
-    <main>
-        <section class="hero">
-            <h1 style="color:blue">Welcome to Placment-Management</h1>
-        
-        </section>
-        
-      
-    <section class="buttons">
-        <a  class="btn btn-primary" href="home.html" role="button" target="abc">Home</a>
-        <a class="btn btn-primary" href="studentprofile.html" role="button" target="abc">Profile</a>
-        <a class="btn btn-primary" href="university/universityDetail.html" role="button" target="abc">University-Detail</a>
-        <a class="btn btn-primary" href="resume/myResume.html" role="button" target="abc">Send_Resume</a>
-        <a class="btn btn-primary" href="company/ListOfCompany.html" role="button" target="abc">AppliedToCompany</a>
-        <a class="btn btn-primary" href="blogs/myblogs.html" role="button" target="abc">Blog</a>
-        <a class="btn btn-primary" href="studentFeedback.html" role="button" target="abc">Feedback</a>
-        <a class="btn btn-primary" href="company/studentDatass.html" role="button" target="abc">Student-detail</a>
-        <a class="btn btn-primary" href="company/appliedCompanyDetails.html" role="button" target="abc">Companyies_Applied_Details</a>
-        <a class="btn btn-primary" href="status/status.html" role="button" target="abc">Status</a>
-    </section>
-    </main>
-<section>
-  <marquee
-            direction="up"
-            width="250"
-            height="320"
-            style="border:transparent;"
-
-    >
-
-        <img src="images/download.png" width="250" height="225">
-        <font color="white">
-    <div>
-        <h2>Welcome To Svvv Placment-App</h2>
-        <p>All Listed Companies Are Here</p>
-        <p>Student, must  fill out all<br>
-         the details carefully </p><p>as your information will be sent <br>directly from this app to your <br>applied companies after admin approval. 
-            <p>You can check your status in the 'Applied Company' section.</p>
-            <p> Also, don't forget to visit the</p>
-            <p> 'Placement Preparation Notes'.</p>
-        <p>Student Must Give Feedback</p>
+   <div class="container">
+    <h1>Company Detail</h1>
+    <div id="companyDetail">
+        <!-- Company details will be displayed here -->
     </div>
-
-
-</font>
-
-        <div>
-        </div>
-    </marquee>
-</section>
-<script>
-window.onload = () => {
-  setTimeout(() => {
-    document.querySelector("body").classList.add("display");
-  }, 1000);
-};
-
-
-document.querySelector(".scroll-btn").addEventListener("click", () => {
-  document.querySelector("html").style.scrollBehavior = "smooth";
-  setTimeout(() => {
-    document.querySelector("html").style.scrollBehavior = "unset";
-  }, 1000);
-});
-</script>
-    <div class="spinner-container">
-
-
-        <div class="spinner-container">
-            <div class="circles">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-            </div>
-        </div>
-    </div>
+</div>
+<script src="company-detail.js"></script>
     <footer>
         <p>&copy; 2023 Your Company. All rights reserved.</p>
     </footer>

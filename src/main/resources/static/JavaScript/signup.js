@@ -23,6 +23,10 @@ fetch(
 ).then(resp => resp.json())
 .then((data) => {
  document.cookie = `id=${data.studentId}; max-age=86400`;
+ // Set the received value as a session variable
+ const sesionId=data.studentId;
+sessionStorage.setItem('id',sesionId);
+
   window.open(data.url, "_self");
 console.log("our data", data);
 })

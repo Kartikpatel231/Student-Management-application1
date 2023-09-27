@@ -32,11 +32,14 @@ console.log('check1');
 
     // Set the received value as a cookie
     document.cookie = `id=${id}; max-age=86400`;
+    // Set the received value as a session variable
+    sessionStorage.setItem('id', id);
+
     // Set the received value (150) as a cookie
 
 
     // Redirect to localhost://8080/home2.html
-    window.location.href = 'http://localhost:8080/home2.html';
+    window.location.href = 'http://localhost:8080/home.html';
 
   } catch (error) {
     console.error('Error:', error);

@@ -1,5 +1,7 @@
 package com.mycompany.studentmanagementapp.service;
 
+import com.mycompany.studentmanagementapp.constant.Placement;
+import com.mycompany.studentmanagementapp.constant.Status;
 import com.mycompany.studentmanagementapp.converter.StudentConveter1;
 import com.mycompany.studentmanagementapp.entity.CompanyEntity;
 import com.mycompany.studentmanagementapp.entity.StudentEntity;
@@ -26,6 +28,8 @@ public class CompanyIMPL implements CompanyService {
     public String createCompany(CompanyModal companyModal) {
         if(companyModal != null){
             CompanyEntity companyEntity=studentConveter1.convert(companyModal,CompanyEntity.class);
+            companyEntity.setStatus(Status.PENDING);
+            companyEntity.setPlacementStatus(Placement.In_Process);
             companyRepository.save(companyEntity);
             return "Succesfully Created";
         }

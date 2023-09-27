@@ -19,7 +19,7 @@ public class HomeController {
     @GetMapping("/display")
     public RedirectView display() {
         RedirectView redirectView = new RedirectView();
-        redirectView.setUrl("http://localhost:8080/home2.html");
+        redirectView.setUrl("http://localhost:8080/home.html");
         return redirectView;
     }
 
