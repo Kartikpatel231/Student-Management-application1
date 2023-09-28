@@ -11,6 +11,7 @@ import com.mycompany.studentmanagementapp.userEntityRepository.StudentRepository
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -30,6 +31,7 @@ public class CompanyIMPL implements CompanyService {
             CompanyEntity companyEntity=studentConveter1.convert(companyModal,CompanyEntity.class);
             companyEntity.setStatus(Status.PENDING);
             companyEntity.setPlacementStatus(Placement.In_Process);
+            companyEntity.setCreatedOn(LocalDateTime.now());
             companyRepository.save(companyEntity);
             return "Succesfully Created";
         }

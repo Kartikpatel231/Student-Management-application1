@@ -50,9 +50,10 @@
   <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 0;
+          /*background-color: #f5f5f5;*/
+           background-color:aqua;
+            margin: 1;
+            padding: 1;
         }
 
         h1 {
@@ -77,6 +78,9 @@
             flex-direction: row;
             align-items: center;
             margin-bottom: 20px;
+            font-family: sans-serif;
+            font-weight:bold;
+            font-color:white;
         }
 
         .student-image img {
@@ -95,16 +99,38 @@
         p {
             margin: 0;
             padding: 5px 0;
+            color:white;
         }
 
         strong {
             font-weight: bold;
         }
     </style>
+    <style>
+        /* Add a style for the card container */
+        .card-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color:black;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        /* Style the student image */
+        .student-image img {
+            max-width: 150px;
+            height: auto;
+            border: 2px solid #333;
+            border-radius: 50%;
+        }
+    </style>
     <title>placementManagmentPro</title>
 </head>
 <body style="background-image: url('../images/Constellation.jpg'); background-repeat: repeat-x; background-attachment: fixed; background-size: 100% 100%; margin: 0">
     <header>
+
         <!-- Bootstrap Navbar -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
             <a class="navbar-brand glowing-txt" href="#"><span class='glowing-txt'>SVVV-<span class='faulty-letter'>INDORE</a>
@@ -133,38 +159,40 @@
             </div>
         </nav>
     </header>
-      <h1>Student Detail</h1>
-      <div id="studentDetails" style="display: none;">
-    <div class="container">
-        <div class="student-details">
-            <div class="student-image">
-                <img id="studentImage" alt="Student Image">
+    <div>
+        <section>
+            <div class="card-container">
+            <h1>Student Detail</h1>
+            <div id="studentDetails" style="display: none;">
+                <div class="student-details">
+                    <div class="student-image">
+                        <img id="studentImage" alt="Student Image">
+                    </div>
+                    <div class="student-info">
+                        <p><strong>Student Name:</strong><span id="studentName"></span></p>
+                        <p><strong>Enrollment Number:</strong><span id="enrollementNumber"></span></p>
+                        <p><strong>Father's Name:</strong><span id="fatherName"></span></p>
+                        <p><strong>Mother's Name:</strong><span id="motherName"></span></p>
+                        <!-- Add other student details here -->
+                    </div>
+                </div>
             </div>
-            <div class="student-info">
-                <p><strong>Student Name:</strong> <span id="studentName"></span></p>
-                <p><strong>Enrollment Number:</strong> <span id="enrollmentNumber"></span></p>
-                <p><strong>Father's Name:</strong> <span id="fatherName"></span></p>
-                <p><strong>Mother's Name:</strong> <span id="motherName"></span></p>
-                <!-- Add other student details here -->
-            </div>
-        </div>
-    </div>
-</div>
-        <h1>University Detail</h1>
-    <div id="universityDetails" style="display: none;">
-        <div class="university-details">
-            <div class="university-info">
-                <p><strong>University Name:</strong> <span id="universityName"></span></p>
-                <p><strong>Tenth Marks:</strong> <span id="tenthMarks"></span></p>
-                <p><strong>Twelfth Marks:</strong> <span id="twelfthMarks"></span></p>
-                <p><strong>CGPA:</strong> <span id="cgpa"></span></p>
-                <p><strong>SGPA:</strong> <span id="sgpa"></span></p>
-                <!-- Add other university details here -->
-            </div>
-        </div>
-    </div>
 
-<script>
+            <h1>University Detail</h1>
+            <div id="universityDetails" style="display: none;">
+                <div class="university-details">
+                    <div class="university-info">
+                        <p><strong>University Name:</strong><span id="universityName"></span></p>
+                        <p><strong>Tenth Marks:</strong><span id="tenthMarks"></span></p>
+                        <p><strong>Twelfth Marks:</strong><span id="twelfthMarks"></span></p>
+                        <p><strong>CGPA:</strong><span id="cgpa"></span></p>
+                        <p><strong>SGPA:</strong><span id="sgpa"></span></p>
+                        <!-- Add other university details here -->
+                    </div>
+                </div>
+            </div>
+            </div>
+            <script>
     const rootPath=window.location.href;
     async function fetchStudentDetailsById(id) {
       try {
@@ -235,8 +263,12 @@
       if (parts.length === 2) return parts.pop().split(';').shift();
     }
 </script>
-   
-    <footer>
+
+        </section>
+    </div>
+    <footer style="
+            padding-bottom: 70px; /* Adjust the height of your footer */
+        " class="fixed-bottom bg-dark text-white text-center p-3">
         <p>&copy; 2023 Your Company. All rights reserved.</p>
     </footer>
 

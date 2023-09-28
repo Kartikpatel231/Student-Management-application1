@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -22,6 +23,10 @@ public class StudentEntity {
     private String mobileNumber;
     private String email;
     private String password;
+    private String imagePath;
+    @Column(name = "created_on")
+    private LocalDateTime createdOn;
+
     @Enumerated(EnumType.STRING)
     private Gender gender;
     @Enumerated(EnumType.STRING)

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Detail</title>
+</head>
+<body>
+<h1>Student Detail</h1>
+<div id="studentDetails" style="display: none;">
+    <div class="student-details">
+        <div class="student-image">
+            <img id="studentImage" alt="Student Image">
+        </div>
+        <div class="student-info">
+            <p><strong>Student Name:</strong><span id="studentName"></span></p>
+            <p><strong>Enrollment Number:</strong><span id="enrollementNumber"></span></p>
+            <p><strong>Father's Name:</strong><span id="fatherName"></span></p>
+            <p><strong>Mother's Name:</strong><span id="motherName"></span></p>
+            <!-- Add other student details here -->
+        </div>
+    </div>
+</div>
+
+<h1>University Detail</h1>
+<div id="universityDetails" style="display: none;">
+    <div class="university-details">
+        <div class="university-info">
+            <p><strong>University Name:</strong><span id="universityName"></span></p>
+            <p><strong>Tenth Marks:</strong><span id="tenthMarks"></span></p>
+            <p><strong>Twelfth Marks:</strong><span id="twelfthMarks"></span></p>
+            <p><strong>CGPA:</strong><span id="cgpa"></span></p>
+            <p><strong>SGPA:</strong><span id="sgpa"></span></p>
+            <!-- Add other university details here -->
+        </div>
+    </div>
+</div>
+
+<script>
+    const rootPath=window.location.href;
+    async function fetchStudentDetailsById(id) {
+      try {
+        const response = await fetch(`http://localhost:8080/api/v1/get/profile/${id}`);
+        const response2 = await fetch(`http://localhost:8080/api/v4/get/${id}`);
+
+        if (response.ok) {
+          const studentProfile = await response.json();
+          displayStudentDetails(studentProfile);
+        } else {
+          console.log('Error fetching student details');
+        }
+
+        if (response2.ok) {
+          const universityProfile = await response2.json();
+          displayUniversityDetails(universityProfile);
+        } else {
+          console.log('Error fetching university details');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+
+    function displayStudentDetails(studentProfile) {
+      const studentDetails = document.getElementById('studentDetails');
+      const studentImage = document.getElementById('studentImage');
+      const studentName = document.getElementById('studentName');
+      const enrollementNumber = document.getElementById('enrollementNumber');
+      const fatherName = document.getElementById('fatherName');
+      const motherName = document.getElementById('motherName');
+      const imagePath= document.getElementById('imagePath');
+
+      studentImage.src = `${studentProfile.imagePath}`; // Assuming image is in assets folder
+      studentName.textContent = studentProfile.studentName;
+      enrollementNumber.textContent = studentProfile.enrollementNumber;
+      fatherName.textContent = studentProfile.fatherName;
+      motherName.textContent = studentProfile.motherName;
+
+      studentDetails.style.display = 'block'; // Show the student details
+    }
+
+    function displayUniversityDetails(universityProfile) {
+      const universityDetails = document.getElementById('universityDetails');
+      const universityName = document.getElementById('universityName');
+      const tenthMarks = document.getElementById('tenthMarks');
+      const twelfthMarks = document.getElementById('twelfthMarks');
+      const cgpa = document.getElementById('cgpa');
+      const sgpa = document.getElementById('sgpa');
+
+      universityName.textContent = universityProfile.universityName;
+      tenthMarks.textContent = universityProfile.tenthMarks;
+      twelfthMarks.textContent = universityProfile.twelfthMarks;
+      cgpa.textContent = universityProfile.cgpa;
+      sgpa.textContent = universityProfile.sgpa;
+
+      universityDetails.style.display = 'block'; // Show the university details
+    }
+
+    // Retrieve student ID from cookies
+    const studentIdFromCookie = getCookie('id');
+    fetchStudentDetailsById(studentIdFromCookie);
+
+    // Function to retrieve cookie value by name
+    function getCookie(name) {
+      const value = `; ${document.cookie}`;
+      const parts = value.split(`; ${name}=`);
+      if (parts.length === 2) return parts.pop().split(';').shift();
+    }
+</script>
+</body>
+</html>

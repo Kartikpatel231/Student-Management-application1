@@ -7,8 +7,8 @@ function getCompanyIdFromURL() {
 }
 
 // Function to fetch and display company details
-function fetchCompanyDetails(id) {
-  fetch(`http://localhost:8080/api/v1/get/${id}`)
+function fetchCompanyDetails(companyId) {
+  fetch(`http://localhost:8080/api/v1/get/${companyId}`)
     .then(response => response.json())
     .then(company => {
       if (company) {
@@ -30,9 +30,9 @@ function fetchCompanyDetails(id) {
 }
 
 // Get the company ID from the URL parameter and fetch details
-const id = getCompanyIdFromURL();
-if (id) {
-  fetchCompanyDetails(id);
+const companyId = getCompanyIdFromURL();
+if (companyId) {
+  fetchCompanyDetails(companyId);
 } else {
   companyDetailElement.innerHTML = '<p>Company ID not provided in the URL.</p>';
 }

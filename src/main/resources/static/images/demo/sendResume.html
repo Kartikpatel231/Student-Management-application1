@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+<input type="file" id="input-file" accept="image/*">
+<img id="preview-image" src="" width="100" height="100" alt="Preview">
+
+<script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const fileInput = document.getElementById("input-file");
+            const previewImage = document.getElementById("preview-image");
+            const id = getCookie("id");
+
+            function getCookie(cname) {
+                const name = cname + "=";
+                const decodedCookie = decodeURIComponent(document.cookie);
+                const ca = decodedCookie.split(';');
+                for (let i = 0; i < ca.length; i++) {
+                    let c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+            }
+
+            fileInput.addEventListener("change", () => {
+                const selectedFile = fileInput.files[0];
+                if (selectedFile) {
+                    const formData = new FormData();
+                    formData.append("file", selectedFile);
+
+                    fetch(`http://localhost:8080/file/upload/${id}`, {
+                        method: 'POST',
+                        body: formData,
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert("Image Uploaded Successfully");
+                        } else {
+                            alert("Image Upload Failed");
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                        alert("An error occurred. Please try again.");
+                    });
+
+                    // Display the uploaded image as a preview
+                    const reader = new FileReader();
+                    reader.onload = () => {
+                        previewImage.src = reader.result;
+                    };
+                    reader.readAsDataURL(selectedFile);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

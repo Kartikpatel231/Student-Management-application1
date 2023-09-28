@@ -32,6 +32,8 @@ public class StudentProfileEntity {
     private String address1;
 
     private String bloodGroup;
+    @Column(name = "created_on")
+    private LocalDateTime createdOn;
 
     @Column(name = "EnrollementNumber")
     private String enrollementNumber;

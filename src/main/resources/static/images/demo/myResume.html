@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<header>
+    <div align="left">
+        <a class="btn btn-primary" href="../home2.html" role="button" target="abc">Home</a>
+        <a class="btn btn-primary" href="../studentProfile.html" role="button" target="abc">Profile</a>
+        <a class="btn btn-primary" href="../aboutUs.html" role="button" target="abc">AboutUs</a>
+        <a class="btn btn-primary" href="www.brainspace.tech" role="button" target="abc">Blogs</a>
+        <a class="btn btn-primary" href="../studentFeedback.html" role="button"target="abc">Feedback</a>
+
+    </div>
+</header>
+<body>
+<input type="file" id="input-file" accept=".pdf"> <!-- Only accept PDF files -->
+<embed id="pdf-preview" width="100%" height="500" type="application/pdf"></embed>
+
+<script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const fileInput = document.getElementById("input-file");
+            const pdfPreview = document.getElementById("pdf-preview");
+            const id = getCookie("id");
+
+            function getCookie(cname) {
+                const name = cname + "=";
+                const decodedCookie = decodeURIComponent(document.cookie);
+                const ca = decodedCookie.split(';');
+                for (let i = 0; i < ca.length; i++) {
+                    let c = ca[i];
+                    while (c.charAt(0) == ' ') {
+                        c = c.substring(1);
+                    }
+                    if (c.indexOf(name) == 0) {
+                        return c.substring(name.length, c.length);
+                    }
+                }
+                return "";
+            }
+
+            fileInput.addEventListener("change", () => {
+                const selectedFile = fileInput.files[0];
+                if (selectedFile) {
+                    const formData = new FormData();
+                    formData.append("file", selectedFile);
+
+                    fetch(`http://localhost:8080/file/upload/${id}`, {
+                        method: 'POST',
+                        body: formData,
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert("PDF Uploaded Successfully");
+                             setTimeout(() => {
+            window.location.href = 'home2.html';
+        }, 3000);
+                        } else {
+                            alert("PDF Upload Failed");
+                        }
+                    })
+                    .catch(error => {
+                        console.error("Error:", error);
+                        alert("An error occurred. Please try again.");
+                    });
+
+                    // Display the uploaded PDF
+                    const objectURL = URL.createObjectURL(selectedFile);
+                    pdfPreview.setAttribute("src", objectURL);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

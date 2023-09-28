@@ -14,6 +14,7 @@ import org.modelmapper.convention.MatchingStrategies;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -38,6 +39,7 @@ public class UniversityImpl implements UniversityService {
     public String createUniversity(UniversityModel universityModel,Long id) {
         StudentEntity studentEntity=studentRepository.findByStudentId(id);
         UniversityDetailEntity universityDetailEntity=studentConveter1.convert(universityModel,UniversityDetailEntity.class);
+        universityDetailEntity.setCreatedOn(LocalDateTime.now());
         studentEntity.setUniversityDetailEntity(universityDetailEntity);
         studentRepository.save(studentEntity);
         return "Created Successfully";

@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -24,6 +25,9 @@ public class CompanyEntity {
     private String description;
     @Enumerated(EnumType.STRING)
     private Status status;
+    @Column(name = "created_on")
+    private LocalDateTime createdOn;
+
     @Enumerated(EnumType.STRING)
     private Placement placementStatus;
     private boolean registration;

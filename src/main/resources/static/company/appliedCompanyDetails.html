@@ -67,7 +67,7 @@
         }
 
         h1 {
-            color: #333;
+            color: blue;
         }
 
         #companyDetail {
@@ -94,6 +94,10 @@
 
         .company-card p {
             margin: 10px 0;
+            color:white;
+              font-family: sans-serif;
+              font-weight:bold;
+
         }
 
         .btn {
@@ -144,22 +148,50 @@
             </div>
         </nav>
     </header>
-    
-   
-<div class="container">
-    <h1>Applied Company Detail</h1>
-    <div id="companyDetail">
-        <div class="company-card">
-            <p id="name"></p>
-            <p id="website"> <a href="#"></a></p>
-            <p id="applied">Status: Applied</p>
-        </div>
-        <!-- Add more company cards as needed -->
+    <style>
+        /* Add a style for the card container */
+        .card-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color:black;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+
+        /* Style the student image */
+        .student-image img {
+            max-width: 150px;
+            height: auto;
+            border: 2px solid #333;
+            border-radius: 50%;
+        }
+    </style>
+
+    <div class="card-container">
+        <h1>Applied Company Detail</h1>
+        <ul id="companyList" class="list-group">
+            <!-- Each company will be added here as a list item -->
+        </ul>
     </div>
-</div>
-    <footer>
-        <p>&copy; 2023 Your Company. All rights reserved.</p>
-    </footer>
+
+    <!--<div class="card-container">-->
+        <!--<h1>Applied Company Detail</h1>-->
+
+        <!--<div style="color:white" id="companyDetail">-->
+            <!--&lt;!&ndash; Company details will be displayed here &ndash;&gt;-->
+            <!--<div class="company-card">-->
+                <!--<p id="name"></p>-->
+                <!--<p id="website"></p>-->
+                <!--<p id="status"></p>-->
+                <!--<p id="registration"></p>-->
+                <!--<p id="applied">applied</p>-->
+            <!--</div>-->
+            <!--&lt;!&ndash; Add more elements as needed &ndash;&gt;-->
+        <!--</div>-->
+    <!--</div>-->
+
 
     <!-- Include Bootstrap JS (jQuery and Popper.js are required) -->
  <script src="appliedDetail.js"></script>
@@ -169,5 +201,9 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
+</body><footer style="
+            padding-bottom: 70px; /* Adjust the height of your footer */
+        " class="fixed-bottom bg-dark text-white text-center p-3">
+    <p>&copy; 2023 Your Company. All rights reserved.</p>
+</footer>
 </html>

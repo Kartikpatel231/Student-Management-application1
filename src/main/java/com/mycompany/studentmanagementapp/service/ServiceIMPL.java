@@ -24,6 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -105,11 +106,12 @@ public class ServiceIMPL implements StudentService {
             // You can choose to return a specific error message or take other actions.
         }
         userEntity.setStatus(Status.PENDING);
+        userEntity.setCreatedOn(LocalDateTime.now());
         StudentEntity userEntity1 = studentRepository.save(userEntity);
         StudentModal studentModal1=new StudentModal();
         studentModal1.setFullName(userEntity1.getFullName());
         studentModal1.setStudentId(userEntity1.getStudentId());
-        studentModal1.setUrl("http://localhost:8080/home2.html");
+        studentModal1.setUrl("http://localhost:8080/home.html");
         return studentModal1;
     }
 
@@ -164,7 +166,10 @@ public class ServiceIMPL implements StudentService {
 
         }
         StudentProfileEntity studentProfileEntity=studentConveter1.convert(studentProfileModel,StudentProfileEntity.class);
-         studentEntity.setStudentProfileEntity(studentProfileEntity);
+         studentProfileEntity.setCreatedOn(LocalDateTime.now());
+         studentProfileEntity.setImagePath(studentEntity.getImagePath());
+        studentEntity.setStudentProfileEntity(studentProfileEntity);
+
          studentRepository.save(studentEntity);
        //  studentProfileRepository.save(studentProfileEntity);
         return studentProfileModel;
@@ -229,7 +234,9 @@ public class ServiceIMPL implements StudentService {
 
         }
         FeedbackEntity feedbackEntity=studentConveter1.convert(feebackModel,FeedbackEntity.class);
+        feedbackEntity.setCreatedOn(LocalDateTime.now());
         studentEntity.setFeedbackEntity(feedbackEntity);
+
         studentRepository.save(studentEntity);
         return feebackModel;
     }

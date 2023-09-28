@@ -16,7 +16,7 @@ const applyToCompany = (companyId, studentId) => {
     .then(result => {
       alert('Applied successfully');
       setTimeout(() => {
-        window.location.href = 'demo/status.html';
+        window.location.href = './status/status.html';
       }, 3000);
       console.log('Application result:', result);
       // Now you can handle the application result, e.g., show a success message
@@ -29,7 +29,8 @@ const applyToCompany = (companyId, studentId) => {
 // Function to view full company details
 const viewCompanyDetails = (companyId) => {
   // Redirect to the details page with the company ID as a query parameter
-  window.location.href = `demo/details.html?companyId=${companyId}`;
+  window.location.href = `company-detail.html?id=${companyId}`;
+
 };
 
 // Retrieve student ID from cookie named "id"
@@ -42,28 +43,44 @@ fetch('http://localhost:8080/api/v1')
     companies.forEach(company => {
       const listItem = document.createElement('li');
       listItem.classList.add('company-item');
-
+ listItem.style.marginBottom = '30px';
       const companyDetails = document.createElement('div');
       companyDetails.classList.add('company-details');
       companyDetails.innerHTML = `
-        <p><strong>Name:</strong> ${company.name}</p>
-        <p><strong>Description:</strong> ${company.description}</p>
-        <p><strong>Registration:</strong> ${company.registration}</p>
-        <p><strong>Website:</strong> <a href="${company.website}" target="_blank">${company.website}</a></p>
+
+        <p style="color:white"><strong style="font-weight: bold";>Name:</strong> ${company.name}</p>
+        <p style="color:white"><strong>Description:</strong> ${company.description}</p>
+        <p style="color:white"><strong>Registration:</strong> ${company.registration}</p>
+        <p style="color:white"><strong>Website:</strong> <a href="${company.website}" target="_blank">${company.website}</a></p>
+
+
       `;
       listItem.appendChild(companyDetails);
 
       const applyButton = document.createElement('button');
       applyButton.textContent = 'Apply';
       applyButton.classList.add('apply-button');
+      applyButton.style.backgroundColor = 'green'; // Change the background color
+      applyButton.style.color = 'white'; // Change the text color
+      applyButton.style.border = 'none'; // Remove the border
+      applyButton.style.padding = '5px 10px'; // Add padding
+      applyButton.classList.add('apply-button');
       applyButton.addEventListener('click', () => {
         applyToCompany(company.companyId, studentIdFromCookie);
+       alert("applied successfully");
+                    window.location.href="../status/status.html";
+
+
       });
       listItem.appendChild(applyButton);
 
       // Create a button for viewing full company details
       const viewDetailsButton = document.createElement('button');
       viewDetailsButton.textContent = 'View Full Details';
+      viewDetailsButton.style.backgroundColor = 'blue'; // Change the background color
+      viewDetailsButton.style.color = 'white'; // Change the text color
+      viewDetailsButton.style.border = 'none'; // Remove the border
+      viewDetailsButton.style.padding = '5px 10px'; // Add padding
       viewDetailsButton.classList.add('view-details-button');
       viewDetailsButton.addEventListener('click', () => {
         viewCompanyDetails(company.companyId);
@@ -71,6 +88,7 @@ fetch('http://localhost:8080/api/v1')
       listItem.appendChild(viewDetailsButton);
 
       companyListElement.appendChild(listItem);
+
     });
   })
   .catch(error => {

@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.*;
 @Service
 @Slf4j
@@ -65,7 +66,7 @@ public class FileService {
         }
 
         StudentProfileModel profileEntity = serviceIMPL.getProfile(studentId);
-        StudentProfileEntity studentProfileEntity=studentProfileRepository.findByProfileId(profileEntity.getId());
+       // StudentProfileEntity studentProfileEntity=studentProfileRepository.findByProfileId(profileEntity.getId());
         String url=blobStorageService.uploadFile(file);
         try {
 
@@ -74,15 +75,18 @@ public class FileService {
           //  Path path = Paths.get( DOCUMENT_BASE_LOCATION + file.getOriginalFilename());
            // Files.write(path, bytes);
 
-            if(profileEntity!=null){
+            if(studentEntity!=null){
                 if (file.getContentType().equals("image/jpeg") || file.getContentType().equals("image/png")) {
-                    studentProfileEntity.setImagePath(DOCUMENT_BASE_LOCATION+url);
-                    studentProfileRepository.save(studentProfileEntity);
+                    //studentProfileEntity.setImagePath(DOCUMENT_BASE_LOCATION+url);
+                    studentEntity.setImagePath(DOCUMENT_BASE_LOCATION+"images/"+url);
+                    studentRepository.save(studentEntity);
+                   // studentProfileRepository.save(studentProfileEntity);
                 }
             }
             if (file.getContentType().equals("application/pdf")) {
                 ResumeEntity resumeEntity=new ResumeEntity();
-              //  resumeEntity.setResumeUrl(path.toString());
+                resumeEntity.setResumeUrl(DOCUMENT_BASE_LOCATION+"pdf/"+url);
+                 resumeEntity.setCreatedOn(LocalDateTime.now());
                 resumeRepository.save(resumeEntity);
                 studentEntity.setResumeEntity(resumeEntity);
                 studentRepository.save(studentEntity);

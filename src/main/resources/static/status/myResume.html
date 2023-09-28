@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<header>
+    <div align="left">
+        <a class="btn btn-primary" href="../home2.html" role="button" target="abc">Home</a>
+        <a class="btn btn-primary" href="../studentProfile.html" role="button" target="abc">Profile</a>
+        <a class="btn btn-primary" href="../aboutUs.html" role="button" target="abc">AboutUs</a>
+        <a class="btn btn-primary" href="www.brainspace.tech" role="button" target="abc">Blogs</a>
+        <a class="btn btn-primary" href="../studentFeedback.html" role="button"target="abc">Feedback</a>
+
+    </div>
+</header>
+<body>
+<input type="file" id="input-file" accept="application/pdf"> <!-- Updated accept attribute for PDF files -->
+<embed id="preview-pdf" src="" width="400" height="300" type="application/pdf"> <!-- Embed to display the PDF -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+const fileInput = document.getElementById("input-file");
+const previewPDF = document.getElementById("preview-pdf");
+const id = getCookie("id");
+
+function getCookie(cname) {
+const name = cname + "=";
+const decodedCookie = decodeURIComponent(document.cookie);
+const ca = decodedCookie.split(';');
+for (let i = 0; i < ca.length; i++) {
+let c = ca[i];
+while (c.charAt(0) == ' ') {
+c = c.substring(1);
+}
+if (c.indexOf(name) == 0) {
+return c.substring(name.length, c.length);
+}
+}
+return "";
+}
+
+fileInput.addEventListener("change", () => {
+const selectedFile = fileInput.files[0];
+if (selectedFile) {
+const fileName = selectedFile.name.toLowerCase();
+if (fileName.endsWith(".pdf")) { // Check if the selected file is a PDF
+const formdata = new FormData();
+formdata.append("file", selectedFile);
+
+fetch(`http://localhost:8080/file/upload/${id}`, {
+method: 'POST',
+body: formdata,
+})
+.then(response => response.json())
+.then(data => {
+console.log("PDF sent");
+})
+.catch(error => {
+console.error("Error:", error);
+alert("An error occurred. Please try again.");
+});
+
+// Display the embedded PDF preview
+previewPDF.src = URL.createObjectURL(selectedFile);
+} else {
+alert("Please select a PDF file.");
+fileInput.value = ''; // Clear the input field if a non-PDF file is selected
+}
+}
+});
+});
+<script>
+</body>
+
+</html>

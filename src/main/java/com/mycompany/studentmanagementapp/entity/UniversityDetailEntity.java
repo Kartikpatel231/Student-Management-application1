@@ -4,6 +4,7 @@ import com.mycompany.studentmanagementapp.constant.Placement;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Getter
@@ -25,6 +26,8 @@ public class UniversityDetailEntity {
     private String course;
     private String section;
     private String batches;
+    @Column(name = "created_on")
+    private LocalDateTime createdOn;
 
     private int passingYear; // Change to integer
     @Enumerated(EnumType.STRING)
