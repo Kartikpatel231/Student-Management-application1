@@ -191,16 +191,22 @@
 
         <label for=""> EnrollementNumber</label>
         <input type="text" id="enrollementNumber" name="enrollementNumber" placeholder="enrollementNumber" maxlength="16" required="tel"><br>
-                <br>
-                <input type="file" id="input-file" accept="image/*">
-                <img id="preview-image" src="" width="100" height="100" alt="Preview">
-                <br>
+                <!--<br>-->
+                <!--<input type="file" id="input-file" accept="image/*">-->
+                <!--<img id="preview-image" src="" width="100" height="100" alt="Preview">-->
+                <!--<br>-->
+                    <label for="input-file">Choose a image</label>
+                    <input type="file" id="input-file" accept=".jpeg, .jpg, .png, image/jpeg, image/png">
+                    <!-- Only accept PDF files -->
+                <img id="pdf-preview" src="" width="100" height="100" alt="Preview">
+                 <br>
+                <!--<iframe id="pdf-preview" width="100" height="100"></iframe>-->
 
                 <script>
         document.addEventListener("DOMContentLoaded", () => {
             const fileInput = document.getElementById("input-file");
-            const previewImage = document.getElementById("preview-image");
-            const id = getCookie("id");
+          const pdfPreview = document.getElementById("pdf-preview");
+    const id = getCookie("id");
 
             function getCookie(cname) {
                 const name = cname + "=";
@@ -219,34 +225,32 @@
             }
 
             fileInput.addEventListener("change", () => {
-                const selectedFile = fileInput.files[0];
-                if (selectedFile) {
-                    const formdata = new FormData();
-                    formdata.append("file", selectedFile);
+        const selectedFile = fileInput.files[0];
+        if (selectedFile) {
+            const formData = new FormData();
+            formData.append("file", selectedFile);
 
-                    fetch(`http://localhost:8080/file/upload/${id}`, {
-                        method: 'POST',
-                        body: formdata,
-                    })
-                    .then(response => response.json())
-                    .then(data => {
-                      console.log("image sent");
-                    })
-                    .catch(error => {
-                        console.error("Error:", error);
-                        alert("An error occurred. Please try again.");
-                    });
+            // Don't send the file immediately, wait for the user to click the "Upload PDF" button
+                fetch(`http://localhost:8080/file/upload/${id}`, {
+                    method: 'POST',
+                    body: formData,
+                })
+                .then(response => response.json())
 
-                    // Display the uploaded image as a preview
-                    const reader = new FileReader();
-                    reader.onload = () => {
-                        previewImage.src = reader.result;
-                    };
-                    reader.readAsDataURL(selectedFile);
-                }
-            });
-        });
+                .catch(error => {
+                    console.error("Error:", error);
+                    alert("An error occurred. Please try again.");
+                });
+
+
+            // Display the uploaded PDF
+            const objectURL = URL.createObjectURL(selectedFile);
+            pdfPreview.setAttribute("src", objectURL);
+        }
+    });
+});
     </script>
+
          <label for=""> zipcode</label>
         <input type="text" id="zipcode" name="zipcode" placeholder="zipcode" maxlength="14" ><br>
 

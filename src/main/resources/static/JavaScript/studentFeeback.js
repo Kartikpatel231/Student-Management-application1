@@ -21,13 +21,16 @@ try{
     }
   );
   console.log('check2');
-    console.log(response)
+    console.log(response);
 //    let rsp=response.url
   //  if(response.redirected){
     //  window.location = rsp;
     //}
     //else{
-    alert("FeedBack Submited Successfully")
+    alert("FeedBack Submited Successfully");
+       setTimeout(() => {
+                        window.location.href="../home.html";
+                 }, 2000);
     //}
    // const content = await response.json();
     //const data = await content;

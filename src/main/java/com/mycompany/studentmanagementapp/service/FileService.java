@@ -41,7 +41,7 @@ public class FileService {
     @Autowired
     BlobStorageService blobStorageService;
 //    private static final String DOCUMENT_BASE_LOCATION = "D:/svvv placment app admin/placementProAdmin-panel/src/assets/";
-    private static final String DOCUMENT_BASE_LOCATION = "https://svvvplacementdata.blob.core.windows.net/images/";
+    private static final String DOCUMENT_BASE_LOCATION = "https://svvvplacementdata.blob.core.windows.net/";
 
 
     public String uploadFile(Long studentId, MultipartFile file, RedirectAttributes redirectAttributes) throws BusinessException {
@@ -65,7 +65,7 @@ public class FileService {
             return "redirect:uploadStatus";
         }
 
-        StudentProfileModel profileEntity = serviceIMPL.getProfile(studentId);
+        //StudentProfileModel profileEntity = serviceIMPL.getProfile(studentId);
        // StudentProfileEntity studentProfileEntity=studentProfileRepository.findByProfileId(profileEntity.getId());
         String url=blobStorageService.uploadFile(file);
         try {

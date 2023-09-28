@@ -31,7 +31,10 @@ fetch(
 .then((data) => {
 
     alert("ProfileCreated Successfully")
-
+             // Simulate a delay and then redirect to another page
+             setTimeout(() => {
+                    window.location.href="../company/studentDatass.html";
+             }, 2000); // Redirect after 3 seconds (adjust the delay as needed)
     console.log("our data", data);
     document.getElementById("studentName1").textContent=data.studentName;
     document.getElementById("mobileNumber1").innerHTML=data.mobileNumber;

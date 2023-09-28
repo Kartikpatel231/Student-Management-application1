@@ -83,48 +83,98 @@
     
     <main>
         <section class="hero">
-            <h1 style="color:blue">Welcome to Placment-Management</h1>
+            <h1 style="color:blue; text-align:center">Welcome to Placment-Management</h1>
         
         </section>
-        
-      
-    <section class="buttons">
-        <a  class="btn btn-primary" href="home.html" role="button" target="abc">Home</a>
-        <a class="btn btn-primary" href="studentprofile.html" role="button" target="abc">Profile</a>
-        <a class="btn btn-primary" href="university/universityDetail.html" role="button" target="abc">University-Detail</a>
-        <a class="btn btn-primary" href="resume/myResume.html" role="button" target="abc">Send_Resume</a>
-        <a class="btn btn-primary" href="company/ListOfCompany.html" role="button" target="abc">AppliedToCompany</a>
-        <a class="btn btn-primary" href="blogs/myblogs.html" role="button" target="abc">Blog</a>
-        <a class="btn btn-primary" href="studentFeedback.html" role="button" target="abc">Feedback</a>
-        <a class="btn btn-primary" href="company/studentDatass.html" role="button" target="abc">Student-detail</a>
-        <a class="btn btn-primary" href="company/appliedCompanyDetails.html" role="button" target="abc">Companyies_Applied_Details</a>
-        <a class="btn btn-primary" href="status/status.html" role="button" target="abc">Status</a>
-    </section>
+
+<style>
+    .buttonss {
+    text-align: center;
+    padding: 40px 0;
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    background-color: #333;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    margin: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+</style>
+        <section class="buttons">
+            <a class="btn btn-primary" href="home.html" role="button" target="abc">Home</a>
+            <a class="btn btn-primary" href="studentprofile.html" role="button" target="abc">Profile</a>
+            <a class="btn btn-primary" href="university/universityDetail.html" role="button" target="abc">University Details</a>
+            <a class="btn btn-primary" href="resume/myResume.html" role="button" target="abc">Send Resume</a>
+            <a class="btn btn-primary" href="company/ListOfCompany.html" role="button" target="abc">Applied to Companies</a>
+            <a class="btn btn-primary" href="blogs/myblogs.html" role="button" target="abc">Blog</a>
+            <a class="btn btn-primary" href="studentFeedback.html" role="button" target="abc">Feedback</a>
+            <a class="btn btn-primary" href="company/studentDatass.html" role="button" target="abc">Student Details</a>
+            <a class="btn btn-primary" href="company/appliedCompanyDetails.html" role="button" target="abc">Applied Company Details</a>
+            <a class="btn btn-primary" href="status/status.html" role="button" target="abc">Status</a>
+        </section>
+
     </main>
+    <script>
+        let isPaused = false;
+
+        function pauseMarquee() {
+            isPaused = true;
+            document.getElementById('marquee').style.animationPlayState = 'paused';
+        }
+
+        function resumeMarquee() {
+            isPaused = false;
+            document.getElementById('marquee').style.animationPlayState = 'running';
+        }
+    </script>
 <section>
-  <marquee
-            direction="up"
-            width="250"
-            height="320"
-            style="border:transparent;"
+    <style>
+        #marquee-container {
+            width: 250px;
+            height: 420px;
+            overflow: hidden;
+            position: relative;
+        }
+        #marquee {
+            position: absolute;
+            animation: marqueeScroll 10s linear infinite;
+        }
 
-    >
+        @keyframes marqueeScroll {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-100%); }
+        }
+    </style>
+      <div id="marquee-container">
+          <div id="marquee" onmouseover="pauseMarquee()" onmouseout="resumeMarquee()">
 
-        <img src="images/download.png" width="250" height="225">
-        <font color="white">
-    <div>
-        <h2>Welcome To Svvv Placment-App</h2>
-        <p>All Listed Companies Are Here</p>
-        <p>Student, must  fill out all<br>
-         the details carefully </p><p>as your information will be sent <br>directly from this app to your <br>applied companies after admin approval. 
-            <p>You can check your status in the 'Applied Company' section.</p>
-            <p> Also, don't forget to visit the</p>
-            <p> 'Placement Preparation Notes'.</p>
-        <p>Student Must Give Feedback</p>
-    </div>
+          <img src="images/download.png" width="150" height="225">
+      <div style="background-color: #333; color: white; padding: 20px;">
+          <h2>Welcome To Svvv Placement-App</h2>
+          <p>Welcome to Svvv Placement-App! Here, you can:</p>
+          <ul>
+              <li>Update your profile information</li>
+              <li>Enhance your university details</li>
+              <li>Apply to companies after creating your profile</li>
+              <li>Upload and update your resume</li>
+              <li>Ensure all your information is accurate</li>
+              <li>Stay updated with daily campus recruitment postings</li>
+              <li>Provide valuable feedback</li>
+          </ul>
+          <p>Remember, your information will be sent to applied companies after admin approval.</p>
+          <p>You can check your application status in the 'Applied Company' section.</p>
+          <p>Don't forget to visit the 'Placement Preparation Notes' for valuable resources.</p>
+      </div>
+          </div>
+      </div>
 
 
-</font>
+
 
         <div>
         </div>
@@ -161,7 +211,9 @@ document.querySelector(".scroll-btn").addEventListener("click", () => {
             </div>
         </div>
     </div>
-    <footer>
+    <footer style="
+            padding-bottom: 10px; /* Adjust the height of your footer */
+        " class=" bg-dark text-white text-center p-3">
         <p>&copy; 2023 Your Company. All rights reserved.</p>
     </footer>
 

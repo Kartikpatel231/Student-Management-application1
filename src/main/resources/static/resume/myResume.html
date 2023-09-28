@@ -134,10 +134,13 @@
                     if (data.success) {
                         alert("PDF Uploaded Successfully");
                         setTimeout(() => {
-                            window.location.href = './home.html';
+                            window.location.href = '../home.html';
                         }, 3000);
                     } else {
                         alert("PDF Upload Successfully");
+                           setTimeout(() => {
+                    window.location.href="../home.html";
+             }, 2000);
                     }
                 })
                 .catch(error => {

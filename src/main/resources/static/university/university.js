@@ -25,6 +25,9 @@ function submitForm() {
     .then(response => {
         if (response.ok) {
             alert('Data submitted successfully');
+               setTimeout(() => {
+                                window.location.href="../company/studentDatass.html";
+                         }, 2000);
         } else {
             alert('Failed to submit data');
         }
