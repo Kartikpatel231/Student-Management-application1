@@ -8,6 +8,7 @@ import org.springframework.web.servlet.view.RedirectView;
 
 @RestController
 @RequestMapping
+@CrossOrigin(origins = "*")
 public class HomeController {
 
     @GetMapping("/")
@@ -15,7 +16,7 @@ public class HomeController {
         return "redirect:/swagger-ui.html";
     }
 
-    @CrossOrigin
+
     @GetMapping("/display")
     public RedirectView display() {
         RedirectView redirectView = new RedirectView();

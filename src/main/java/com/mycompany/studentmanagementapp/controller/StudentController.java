@@ -24,6 +24,7 @@ import java.util.List;
 @Api
 @Controller
 @RequestMapping("/api/v1")
+@CrossOrigin(origins = "*")
 public class StudentController {
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -32,7 +33,7 @@ public class StudentController {
     @Autowired
     private StudentService studentService;
 
-    @CrossOrigin
+
     @PostMapping("/users")
     public ResponseEntity<Long> login(@RequestBody StudentModal studentModal) throws BusinessException {
         logger.debug("Entering method login");
@@ -46,7 +47,7 @@ public class StudentController {
         return responseEntity;
     }
 
-    @CrossOrigin
+
     @SneakyThrows
     @PostMapping("/users/register")
     public ResponseEntity<StudentModal> register(@RequestBody StudentModal studentModal) throws BusinessException, MailjetSocketTimeoutException, MailjetException {
@@ -73,7 +74,6 @@ public class StudentController {
 
     }
 
-    @CrossOrigin
     @PostMapping("/create/profile")
     public ResponseEntity<StudentProfileModel> create(@RequestBody StudentProfileModel studentProfileModel) throws BusinessException {
        StudentProfileModel studentProfileModel1= studentService.create(studentProfileModel);
@@ -81,21 +81,21 @@ public class StudentController {
         return responseEntity;
     }
 
-    @CrossOrigin(origins="*")
+
     @GetMapping("/get/profile/{studentId}")
         public ResponseEntity<Boolean> getStudent(@PathVariable Long studentId) throws BusinessException {
         StudentProfileModel result1 = studentService.getProfile(studentId);
         ResponseEntity<Boolean> responseEntity = new ResponseEntity(result1, HttpStatus.OK);
         return responseEntity;
     }
-    @CrossOrigin(origins = "*")
+
     @GetMapping("/get/profile/enroll/{studentEnrollment}")
     public ResponseEntity<Boolean> getStudentByEnroll(@PathVariable String studentEnrollment) throws BusinessException{
         StudentProfileModel result2=studentService.getProfileByEnrol(studentEnrollment);
         ResponseEntity<Boolean> responseEntity=new ResponseEntity(result2,HttpStatus.OK);
         return responseEntity;
     }
-    @CrossOrigin
+
     @PostMapping("/create/feedback")
     public ResponseEntity<Boolean> createFeedback(@RequestBody FeebackModel feebackModel) throws BusinessException {
         FeebackModel feebackModel1 = studentService.createFeedback(feebackModel);
@@ -103,14 +103,14 @@ public class StudentController {
         return responseEntity;
 
     }
-    @CrossOrigin(origins = "*")
+
     @PostMapping("/applied/{companyId}/by/{id}")
     public ResponseEntity<String> applied(@PathVariable Long companyId,@PathVariable Long id ){
         String result=studentService.applyToCompany(companyId,id);
         ResponseEntity<String> responseEntity=new ResponseEntity<>(result,HttpStatus.OK);
         return responseEntity;
     }
-    @CrossOrigin
+
     @GetMapping("/getAll/student")
     public ResponseEntity<List<DTO>> getAllStudent(){
         List<DTO> studentEntities=studentService.getAll();

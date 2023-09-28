@@ -14,17 +14,18 @@ import java.util.List;
 @Api
 @RestController
 @RequestMapping("/api/v4")
+@CrossOrigin(origins = "*")
 public class UniversityController {
     @Autowired
     private UniversityService universityService;
-    @CrossOrigin
+
     @PostMapping("/create/{id}/uni")
     public ResponseEntity<String> create(@PathVariable Long id,@RequestBody UniversityModel universityModel){
         String result=universityService.createUniversity(universityModel,id);
         ResponseEntity<String> obj=new ResponseEntity<>(result,HttpStatus.CREATED);
         return obj;
     }
-    @CrossOrigin
+
     @GetMapping("/get/{id}")
     public ResponseEntity<UniversityModel> get(@PathVariable Long id){
         UniversityModel universityModel=universityService.getUniversity(id);
@@ -50,7 +51,7 @@ public class UniversityController {
         return obj;
     }
 
-    @CrossOrigin
+
     @GetMapping(name = "/filter/data")
     public ResponseEntity<List<DTO>> fileterByNumber(@RequestParam(name = "tenthMarks",required = false) Double tenthMarks
                                                       ,@RequestParam(name = "twelfthMarks",required = false) Double twelfthMarks,
