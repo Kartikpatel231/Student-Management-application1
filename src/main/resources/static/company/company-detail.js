@@ -8,16 +8,29 @@ function getCompanyIdFromURL() {
 
 // Function to fetch and display company details
 function fetchCompanyDetails(id) {
-  fetch(`http://localhost:8080/api/v1/get/${id}`)
+  fetch(`http://www.campusplacehub.com/api/v1/get/${id}`)
     .then(response => response.json())
     .then(company => {
       if (company) {
         // Populate the company details on the page
+
+ const createdOnDate = new Date(company.createdOn);
+ const formattedCreatedOn = createdOnDate.toLocaleString('en-US', {
+   year: 'numeric',
+   month: 'long',
+   day: 'numeric',
+   hour: '2-digit',
+   minute: '2-digit',
+   second: '2-digit'
+ });
+
+
         companyDetailElement.innerHTML = `
           <h1>${company.name}</h1>
           <p><strong>Description:</strong> ${company.description}</p>
           <p><strong>Registration:</strong> ${company.registration}</p>
           <p><strong>Website:</strong> <a href="${company.website}" target="_blank">${company.website}</a></p>
+                  <p style="color:white"><strong>Created On:</strong> ${formattedCreatedOn}</p> <!-- Formatted createdOn field -->
         `;
       } else {
         companyDetailElement.innerHTML = '<p>Company not found.</p>';

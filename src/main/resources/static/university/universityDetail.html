@@ -62,7 +62,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="../home.html">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="../home">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="https://www.brainspace.tech/notes">PlacmentNotes</a>
@@ -71,10 +71,13 @@
                         <a class="nav-link" href="https://www.brainspace.tech/todo">Todo_Work_Managment</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../feedback/aboutUs.html">About Us</a>
+                        <a class="nav-link" href="../feedback/aboutUs">About Us</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="https://www.brainspace.tech/contactUs">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../mylogin">Logout</a>
                     </li>
                 </ul>
             </div>
@@ -83,40 +86,40 @@
      <h1>University Detail</h1>
     <form id="universityDetailForm" class="transparent-form">
         <label for="universityName">University/College Name</label>
-        <input type="text" id="universityName" name="universityName" required>
+        <input type="text" id="universityName" name="universityName"  maxlength="50" required placeholder="svvv-indore">
 
         <label for="tenthMarks">Tenth Marks</label>
-        <input type="text" id="tenthMarks" name="tenthMarks" required>
+        <input type="text" id="tenthMarks" name="tenthMarks"  maxlength="4" required placeholder="do not use % use only 84.4">
 
         <label for="twelfthMarks">Twelfth Marks</label>
-        <input type="text" id="twelfthMarks" name="twelfthMarks" required>
+        <input type="text" id="twelfthMarks" name="twelfthMarks"  maxlength="4" required placeholder="do not use % 84.0">
 
         <label for="cgpa">CGPA</label>
-        <input type="text" id="cgpa" name="cgpa" required>
+        <input type="text" id="cgpa" name="cgpa"  maxlength="4" required placeholder="7.9">
 
         <label for="sgpa">SGPA</label>
-        <input type="text" id="sgpa" name="sgpa" required>
+        <input type="text" id="sgpa" name="sgpa"  maxlength="4" required placeholder="9.4">
 
         <label for="currentYear">Current Year</label>
-        <input type="text" id="currentYear" name="currentYear" placeholder="3" required>
+        <input type="text" id="currentYear" name="currentYear" placeholder="3"  maxlength="4" required >
 
         <label for="currentSemester">Current Semester</label>
-        <input type="text" id="currentSemester" name="currentSemester" placeholder="4" required>
+        <input type="text" id="currentSemester" name="currentSemester" placeholder="4"  maxlength="4" required>
 
         <label for="numberOfBacklogs">Number of Backlogs</label>
-        <input type="text" id="numberOfBacklogs" name="numberOfBacklogs" placeholder="0" required>
+        <input type="text" id="numberOfBacklogs" name="numberOfBacklogs" placeholder="0"  maxlength="4" required>
 
         <label for="course">Major/Course</label>
-        <input type="text" id="course" name="course" required>
+        <input type="text" id="course" name="course"  maxlength="50" required placeholder="computer-science/bba/mba">
 
         <label for="section">Section</label>
-        <input type="text" id="section" name="section" placeholder="b" required>
+        <input type="text" id="section" name="section" placeholder="b"  maxlength="50" required>
 
         <label for="batches">Batch</label>
-        <input type="text" id="batches" name="batches" placeholder="2020-2024" required>
+        <input type="text" id="batches" name="batches" placeholder="2020-2024"  maxlength="50" required>
 
         <label for="passingYear">Passing Year</label>
-        <input type="text" id="passingYear" name="passingYear" placeholder="2024" required>
+        <input type="text" id="passingYear" name="passingYear" placeholder="2024"  maxlength="50" required>
 
         <button type="button" onclick="submitForm()">Submit</button>
     </form>
@@ -171,9 +174,10 @@
             width: 100%;
             padding: 10px;
             margin: 5px 0;
-            border: 1px solid #ccc;
+            border: 1px solid gray;
             border-radius: 4px;
             box-sizing: border-box;
+
         }
 
         input[type="submit"],
@@ -192,17 +196,25 @@
         }
     </style>
 </body>
-   
-    <footer>
-        <p>&copy; 2023 Your Company. All rights reserved.</p>
-    </footer>
 
+<footer style="
+            padding-bottom: 70px; /* Adjust the height of your footer */
+        " class="bg-dark text-white text-center p-3">
+    <p>&copy; 2023 svvv-indore. All rights reserved.</p>
+</footer>
+<script>
+  // Check if the session ID is not present in sessionStorage
+  if (!sessionStorage.getItem('id')) {
+    // Redirect to the login page (mylogin.html)
+    window.location.href = '../mylogin';
+  }
+  </script>
     <!-- Include Bootstrap JS (jQuery and Popper.js are required) -->
   <script src="university.js"></script>
     <script src="../JavaScript/getcookies.js"></script>
-<script src="../JavaScript/main.js"></script>
+<!--<script src="../JavaScript/main.js"></script>-->
 <!-- <script src="../JavaScript/script.js"></script> -->
-<script src="../JavaScript/studentProfile.js"></script>
+<!--<script src="../JavaScript/studentProfile.js"></script>-->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

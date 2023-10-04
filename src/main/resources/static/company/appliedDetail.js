@@ -1,7 +1,7 @@
 // Function to fetch a list of companies by student ID
 async function fetchCompaniesByStudentId(studentId) {
   try {
-    const response = await fetch(`http://localhost:8080/api/v1/get/company/by/${studentId}`);
+    const response = await fetch(`http://www.campusplacehub.com/api/v1/get/company/by/${studentId}`);
 
     if (response.ok) {
       const companyList = await response.json();

@@ -5,7 +5,7 @@
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     
-    <link rel="stylesheet" type="text/css" href="./commoncss/button.css">
+    <link rel="stylesheet" type="text/css" href="../commoncss/button.css">
      <link
             href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@400;500;600;700;800&family=Josefin+Slab:ital,wght@0,400;0,600;1,300;1,400;1,600&family=Muli:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap"
             rel="stylesheet"
@@ -50,7 +50,7 @@
 
     <title>placementManagmentPro</title>
 </head>
-<body style="background-image: url('./images/Constellation.jpg'); background-repeat: repeat-x; background-attachment: fixed; background-size: 100% 100%; margin: 0">
+<body style="background-image: url('../images/Constellation.jpg'); background-repeat: repeat-x; background-attachment: fixed; background-size: 100% 100%; margin: 0">
     <header>
         <!-- Bootstrap Navbar -->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -62,7 +62,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="../home">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="https://www.brainspace.tech/notes">PlacmentNotes</a>
@@ -71,18 +71,21 @@
                         <a class="nav-link" href="https://www.brainspace.tech/todo">Todo_Work_Managment</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="../feedback/aboutUs.html">About Us</a>
+                        <a class="nav-link" href="../feedback/aboutUs">About Us</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="https://www.brainspace.tech/contactUs">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="../mylogin">Logout</a>
                     </li>
                 </ul>
             </div>
         </nav>
     </header>
-       <div align="center">
-        <img src="./images/logo.png" width="180" height="100">
-    </div>
+       <!--<div align="center">-->
+        <!--<img src="../images/logo.png" width="180" height="100">-->
+    <!--</div>-->
  <style>
         body {
             font-family: 'Arial', sans-serif;
@@ -91,9 +94,8 @@
             color: white;
             padding: 20px;
         }
-
         h1.all {
-            background-color: orangered;
+            background-color: transparent;
             max-height: 45px;
             border-radius: 30% 30% 0% 0%;
             border-bottom: 5px solid white;
@@ -163,22 +165,20 @@
                     
         <input type="number" hidden name="studentId" id="id" required="studentId" ><br>
         <label for="">studentName</label>
-        <input type="text" name="Name " id="studentName" placeholder=" studentName" required="Name"> <br>
+        <input type="text" name="Name" id="studentName"  maxlength="30" placeholder=" studentName" required="Name"> <br>
         <label for="">fatherName</label>
-        <input type="text" name="Name" id="fatherName" placeholder=" fatherName" required="fatherName"><br>
+        <input type="text" name="Name" id="fatherName"  maxlength="30"  placeholder=" fatherName" required="fatherName"><br>
         <label for="">motherName</label>
-        <input type="text" name="motherName" id="motherName" placeholder=" motherName" required="motherName"><br>
+        <input type="text" name="motherName" id="motherName"  maxlength="30"  placeholder=" motherName" required="motherName"><br>
 
-        <label for=""> Phone no.   </label>
-        <input type="tel" id="mobileNumber" name="phone" placeholder="91+xxxxxxxx" maxlength="14" required="tel"><br>
 
         <label for="">bloodGroup</label>
-        <input type="text" id="bloodGroup" name="bloodGroup" placeholder="bloodGroup"> <br>
+        <input type="text" id="bloodGroup" name="bloodGroup"  maxlength="10"  placeholder="bloodGroup"> <br>
 
         
         <label for=""> category   </label>
-        <input type="text" id="category"
-        name="category" ><br>
+        <input type="text" id="category"  maxlength="20"
+               name="category" ><br>
 
 
 
@@ -186,19 +186,19 @@
         <label for="">DateOfBirth</label>
         <input type="date" id="dateOfBirth" name="date of birth" placeholder="dd/mm/nnnn" required="date"><br>
 
-        <label for="">address     </label>
-        <input type="text" name="address" id="address1" required="address1" ><br>
+        <label for="">address</label>
+        <input type="text" name="address" id="address1"  maxlength="40"  required="address1" ><br>
 
         <label for=""> EnrollementNumber</label>
-        <input type="text" id="enrollementNumber" name="enrollementNumber" placeholder="enrollementNumber" maxlength="16" required="tel"><br>
+        <input type="text" id="enrollementNumber" name="enrollementNumber"  maxlength="25"  placeholder="enrollementNumber" maxlength="16" required="tel"><br>
                 <!--<br>-->
                 <!--<input type="file" id="input-file" accept="image/*">-->
                 <!--<img id="preview-image" src="" width="100" height="100" alt="Preview">-->
                 <!--<br>-->
                     <label for="input-file">Choose a image</label>
-                    <input type="file" id="input-file" accept=".jpeg, .jpg, .png, image/jpeg, image/png">
+                    <input type="file" id="input-file" required accept=".jpeg, .jpg, .png, image/jpeg, image/png">
                     <!-- Only accept PDF files -->
-                <img id="pdf-preview" src="" width="100" height="100" alt="Preview">
+                <img id="pdf-preview" src="" width="100" height="100" alt="Preview" >
                  <br>
                 <!--<iframe id="pdf-preview" width="100" height="100"></iframe>-->
 
@@ -227,11 +227,19 @@
             fileInput.addEventListener("change", () => {
         const selectedFile = fileInput.files[0];
         if (selectedFile) {
+
+                const maxSizeBytes = 5 * 1024 * 1024; // 5 MB in bytes
+
+                // Check if the file size exceeds the specified limit
+                if (selectedFile.size > maxSizeBytes) {
+                    alert("File size exceeds the limit of 5 MB. Please choose a smaller file.");
+                    fileInput.value = null; // Clear the file input
+              }
             const formData = new FormData();
             formData.append("file", selectedFile);
 
             // Don't send the file immediately, wait for the user to click the "Upload PDF" button
-                fetch(`http://localhost:8080/file/upload/${id}`, {
+                fetch(`http://www.campusplacehub.com/file/upload/${id}`, {
                     method: 'POST',
                     body: formData,
                 })
@@ -251,8 +259,11 @@
 });
     </script>
 
-         <label for=""> zipcode</label>
-        <input type="text" id="zipcode" name="zipcode" placeholder="zipcode" maxlength="14" ><br>
+                <label for=""> Phone no.   </label>
+                <input type="tel" id="mobileNumber" name="phone"  maxlength="13"  placeholder="91+xxxxxxxx" maxlength="14" required="tel"><br>
+
+                <label for=""> zipcode</label>
+        <input type="text" id="zipcode" name="zipcode" placeholder="zipcode/area-pincode" maxlength="14" ><br>
 
         <input type="submit" class='btn btn-primary' value="createProfile">
             <input type="reset" value="clear"><br>
@@ -260,16 +271,22 @@
         </form>
     </div>
 
-   
-    <footer>
-        <p>&copy; 2023 Your Company. All rights reserved.</p>
+    <footer style="
+            padding-bottom: 70px; /* Adjust the height of your footer */
+        " class="bg-dark text-white text-center p-3">
+        <p>&copy; 2023 svvv-indore. All rights reserved.</p>
     </footer>
-
     <!-- Include Bootstrap JS (jQuery and Popper.js are required) -->
-
-<script src="./JavaScript/getcookies.js"></script>
+    <script>
+  <!--// Check if the session ID is not present in sessionStorage-->
+  if (!sessionStorage.getItem('id')) {
+    // Redirect to the login page (mylogin.html)
+    window.location.href = '../mylogin';
+  }
+  </script>
+<script src="../JavaScript/getcookies.js"></script>
 <!-- <script src="../JavaScript/script.js"></script> -->
-<script src="./JavaScript/studentProfile.js"></script>
+<script src="studentProfile.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

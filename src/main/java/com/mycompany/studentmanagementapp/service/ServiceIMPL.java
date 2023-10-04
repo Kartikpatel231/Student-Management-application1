@@ -111,7 +111,7 @@ public class ServiceIMPL implements StudentService {
         StudentModal studentModal1=new StudentModal();
         studentModal1.setFullName(userEntity1.getFullName());
         studentModal1.setStudentId(userEntity1.getStudentId());
-        studentModal1.setUrl("http://localhost:8080/home.html");
+        studentModal1.setUrl("http://www.campusplacehub.com/home");
         return studentModal1;
     }
 

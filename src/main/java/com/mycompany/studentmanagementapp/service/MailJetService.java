@@ -35,9 +35,12 @@ public class MailJetService {
                           .put(new JSONObject()
                                   .put("Email", email)
                                   .put("Name", name)))
-                  .put("Subject", "Greetings from SVVV Placment-Managment-App")
-                  .put("TextPart", "You got this email because You Registered With SVVV-PlacementProApp")
-                  .put("HTMLPart", "<h3> welcome to <a href='https://www.brainspace.tech/'>SVVV-Blog Page</a>!</h3><br />You Can Visit Our Website For more Information!")
+                  .put("Subject", "Welcome to SVVV Campus  Place Hub")
+                  .put("TextPart", "You are receiving this email because you have successfully registered with Campus Place Hub.")
+                  .put("HTMLPart", "<h3>Welcome to <a href='https://www.campusplacehub.com/'>Campus Place Hub</a>!</h3><br />" +
+                          "We are excited to have you on board. You can now complete your profile, provide your university details, and start applying to various companies on our platform." +
+                          "Your application will be reviewed by our admin team once you have filled in all the necessary details." +
+                          "<p>Thank you for joining Campus Place Hub!</p>")
                   .put("CustomID", "AppGettingStartedTest");
 
           // Create the Mailjet request

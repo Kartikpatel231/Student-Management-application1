@@ -17,7 +17,7 @@ let payload = { id: id.value, studentName:studentName.value,fatherName:fatherNam
 bloodGroup:bloodGroup.value,dateOfBirth:dateOfBirth.value,category:category.value,enrollementNumber:enrollementNumber.value,zipcode:zipcode.value,address1:address1.value}
 console.log("one")
 fetch(
-    'http://localhost:8080/api/v1/create/profile',
+    'http://www.campusplacehub.com/api/v1/create/profile',
  {
   method: "POST",
   headers: {
@@ -33,8 +33,8 @@ fetch(
     alert("ProfileCreated Successfully")
              // Simulate a delay and then redirect to another page
              setTimeout(() => {
-                    window.location.href="../company/studentDatass.html";
-             }, 2000); // Redirect after 3 seconds (adjust the delay as needed)
+                    window.location.href="../company/studentDatass";
+             }, 1000); // Redirect after 3 seconds (adjust the delay as needed)
     console.log("our data", data);
     document.getElementById("studentName1").textContent=data.studentName;
     document.getElementById("mobileNumber1").innerHTML=data.mobileNumber;

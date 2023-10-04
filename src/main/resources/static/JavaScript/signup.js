@@ -10,7 +10,7 @@ const gender = document.querySelector('input[name="gender"]:checked');
 let payload = { fullName: userName.value, email: email.value, mobileNumber: mobile.value, password: password.value, gender: gender.value }
 console.log('voooon');
 fetch(
-'http://localhost:8080/api/v1/users/register',
+'http://www.campusplacehub.com/api/v1/users/register',
 {
   method: "POST",
   headers: {
@@ -26,8 +26,8 @@ fetch(
  // Set the received value as a session variable
  const sesionId=data.studentId;
 sessionStorage.setItem('id',sesionId);
-
-  window.open(data.url, "_self");
+ window.location.href = 'http://www.campusplacehub.com/home';
+//  window.open(data.url, "_self");
 console.log("our data", data);
 })
 .catch(e => {

@@ -2,7 +2,7 @@ const companyListElement = document.getElementById('companyList');
 
 // Function to handle applying to a company
 const applyToCompany = (companyId, studentId) => {
-  const apiUrl = `http://localhost:8080/api/v1/applied/${companyId}/by/${studentId}`;
+  const apiUrl = `http://www.campusplacehub.com/api/v1/applied/${companyId}/by/${studentId}`;
 
   // Make a POST request to the apply endpoint
   fetch(apiUrl, {
@@ -16,8 +16,8 @@ const applyToCompany = (companyId, studentId) => {
     .then(result => {
       alert('Applied successfully');
       setTimeout(() => {
-        window.location.href = './status/status.html';
-      }, 3000);
+        window.location.href = './status/status';
+      }, 2000);
       console.log('Application result:', result);
       // Now you can handle the application result, e.g., show a success message
     })
@@ -29,7 +29,7 @@ const applyToCompany = (companyId, studentId) => {
 // Function to view full company details
 const viewCompanyDetails = (companyId) => {
   // Redirect to the details page with the company ID as a query parameter
-  window.location.href = `company-detail.html?id=${companyId}`;
+  window.location.href = `company-detail?id=${companyId}`;
 
 };
 
@@ -37,22 +37,35 @@ const viewCompanyDetails = (companyId) => {
 const studentIdFromCookie = getCookie('id');
 
 // Fetch a list of companies
-fetch('http://localhost:8080/api/v1')
+fetch('http://www.campusplacehub.com/api/v1')
   .then(response => response.json())
   .then(companies => {
     companies.forEach(company => {
       const listItem = document.createElement('li');
       listItem.classList.add('company-item');
+
+
  listItem.style.marginBottom = '30px';
       const companyDetails = document.createElement('div');
       companyDetails.classList.add('company-details');
+
+
+ const createdOnDate = new Date(company.createdOn);
+ const formattedCreatedOn = createdOnDate.toLocaleString('en-US', {
+   year: 'numeric',
+   month: 'long',
+   day: 'numeric',
+   hour: '2-digit',
+   minute: '2-digit',
+   second: '2-digit'
+ });
+
       companyDetails.innerHTML = `
 
         <p style="color:white"><strong style="font-weight: bold";>Name:</strong> ${company.name}</p>
-        <p style="color:white"><strong>Description:</strong> ${company.description}</p>
         <p style="color:white"><strong>Registration:</strong> ${company.registration}</p>
         <p style="color:white"><strong>Website:</strong> <a href="${company.website}" target="_blank">${company.website}</a></p>
-
+        <p style="color:white"><strong>Created On:</strong> ${formattedCreatedOn}</p> <!-- Formatted createdOn field -->
 
       `;
       listItem.appendChild(companyDetails);
@@ -68,7 +81,7 @@ fetch('http://localhost:8080/api/v1')
       applyButton.addEventListener('click', () => {
         applyToCompany(company.companyId, studentIdFromCookie);
        alert("applied successfully");
-                    window.location.href="../status/status.html";
+                    window.location.href="../status/status";
 
 
       });

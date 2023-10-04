@@ -10,7 +10,7 @@ try{
 console.log('check1');
 
  const response = await fetch(
-    'http://localhost:8080/api/v1/users',
+    'http://www.campusplacehub.com/api/v1/users',
     {
       method: "POST",
       headers: {
@@ -38,8 +38,8 @@ console.log('check1');
     // Set the received value (150) as a cookie
 
 
-    // Redirect to localhost://8080/home2.html
-    window.location.href = 'http://localhost:8080/home.html';
+    // Redirect to 172.172.233.120://8080/home2.html
+    window.location.href = 'http://www.campusplacehub.com/home';
 
   } catch (error) {
     console.error('Error:', error);

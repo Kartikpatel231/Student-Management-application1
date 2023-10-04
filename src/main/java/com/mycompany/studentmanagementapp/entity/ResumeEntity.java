@@ -15,7 +15,7 @@ public class ResumeEntity {
     String resumeName="resume";
     @Column(name = "created_on")
     private LocalDateTime createdOn;
-
+    private int count;
     String resumeUrl;
 
 }

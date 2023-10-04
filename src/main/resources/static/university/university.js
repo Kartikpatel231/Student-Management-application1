@@ -12,7 +12,7 @@ function submitForm() {
     const specificCookieValue = getCookieValue('id'); // Replace 'yourCookieName' with the actual cookie name you want to use
 
     // Construct the URL with the correct protocol and port
-    const url = `http://localhost:8080/api/v4/create/${specificCookieValue}/uni`;
+    const url = `http:// www.campusplacehub.com/api/v4/create/${specificCookieValue}/uni`;
 
     // Send the JSON data to the server using fetch
     fetch(url, {
@@ -26,7 +26,7 @@ function submitForm() {
         if (response.ok) {
             alert('Data submitted successfully');
                setTimeout(() => {
-                                window.location.href="../company/studentDatass.html";
+                                window.location.href="../company/studentDatass";
                          }, 2000);
         } else {
             alert('Failed to submit data');

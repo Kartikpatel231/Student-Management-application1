@@ -8,18 +8,19 @@ import org.springframework.web.servlet.view.RedirectView;
 
 @RestController
 @RequestMapping
+@CrossOrigin(origins = "*")
 public class HomeController {
 
-    @GetMapping("/")
+    @GetMapping("/swagger")
     public String openSwaggerUI() {
         return "redirect:/swagger-ui.html";
     }
 
-    @CrossOrigin
-    @GetMapping("/display")
+
+    @GetMapping("/")
     public RedirectView display() {
         RedirectView redirectView = new RedirectView();
-        redirectView.setUrl("http://localhost:8080/home.html");
+        redirectView.setUrl("http://www.campusplacehub.com/home");
         return redirectView;
     }
 

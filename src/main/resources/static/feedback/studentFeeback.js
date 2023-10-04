@@ -10,7 +10,7 @@ console.log(payload);
 try{
 
  const response = await fetch(
-    'http://localhost:8080/api/v1/create/feedback',
+    'http://www.campusplacehub.com/api/v1/create/feedback',
     {
       method: "POST",
       headers: {
@@ -29,8 +29,8 @@ try{
     //else{
     alert("FeedBack Submited Successfully");
        setTimeout(() => {
-                        window.location.href="../home.html";
-                 }, 2000);
+                        window.location.href="../home";
+                 }, 1000);
     //}
    // const content = await response.json();
     //const data = await content;

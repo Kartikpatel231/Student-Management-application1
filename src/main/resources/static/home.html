@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="styles.css">
+    <!--<link rel="stylesheet" href="styles.css">-->
     <link rel="stylesheet" type="text/css" href="../commoncss/button.css">
      <link
             href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@400;500;600;700;800&family=Josefin+Slab:ital,wght@0,400;0,600;1,300;1,400;1,600&family=Muli:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap"
@@ -62,7 +62,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item active">
-                        <a class="nav-link" href="home.html">Home <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="home">Home <span class="sr-only">(current)</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="https://www.brainspace.tech/notes">PlacmentNotes</a>
@@ -71,10 +71,13 @@
                         <a class="nav-link" href="https://www.brainspace.tech/todo">Todo_Work_Managment</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="feedback/aboutUs.html">About Us</a>
+                        <a class="nav-link" href="feedback/aboutUs">About Us</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="https://www.brainspace.tech/contactUs">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="mylogin">Logout</a>
                     </li>
                 </ul>
             </div>
@@ -106,17 +109,18 @@
 }
 </style>
         <section class="buttons">
-            <a class="btn btn-primary" href="home.html" role="button" target="abc">Home</a>
-            <a class="btn btn-primary" href="studentprofile.html" role="button" target="abc">Profile</a>
-            <a class="btn btn-primary" href="university/universityDetail.html" role="button" target="abc">University Details</a>
-            <a class="btn btn-primary" href="resume/myResume.html" role="button" target="abc">Send Resume</a>
-            <a class="btn btn-primary" href="company/ListOfCompany.html" role="button" target="abc">Applied to Companies</a>
-            <a class="btn btn-primary" href="blogs/myblogs.html" role="button" target="abc">Blog</a>
-            <a class="btn btn-primary" href="studentFeedback.html" role="button" target="abc">Feedback</a>
-            <a class="btn btn-primary" href="company/studentDatass.html" role="button" target="abc">Student Details</a>
-            <a class="btn btn-primary" href="company/appliedCompanyDetails.html" role="button" target="abc">Applied Company Details</a>
-            <a class="btn btn-primary" href="status/status.html" role="button" target="abc">Status</a>
+            <a class="btn btn-primary" href="home" role="button" target="abc">Home</a>
+            <a class="btn btn-primary" href="studentprofile" role="button" target="abc">Profile</a>
+            <a class="btn btn-primary" href="university/universityDetail" role="button" target="abc">University Details</a>
+            <a class="btn btn-primary" href="resume/myResume" role="button" target="abc">Send Resume</a>
+            <a class="btn btn-primary" href="company/ListOfCompany" role="button" target="abc">Applied to Companies</a>
+            <a class="btn btn-primary" href="blogs/myblogs" role="button" target="abc">Blog</a>
+            <a class="btn btn-primary" href="studentFeedback" role="button" target="abc">Feedback</a>
+            <a class="btn btn-primary" href="company/studentDatass" role="button" target="abc">Student Details</a>
+            <a class="btn btn-primary" href="company/appliedCompanyDetails" role="button" target="abc">Applied Company Details</a>
+            <a class="btn btn-primary" href="status/status" role="button" target="abc">Status</a>
         </section>
+
 
     </main>
     <script>
@@ -195,6 +199,13 @@ document.querySelector(".scroll-btn").addEventListener("click", () => {
   }, 1000);
 });
 </script>
+    <!--<script>-->
+  <!--// Check if the session ID is not present in sessionStorage-->
+  <!--if (!sessionStorage.getItem('id')) {-->
+    <!--// Redirect to the login page (mylogin.html)-->
+    <!--window.location.href = 'mylogin.html';-->
+  <!--}-->
+  <!--</script>-->
     <div class="spinner-container">
 
 
@@ -212,18 +223,25 @@ document.querySelector(".scroll-btn").addEventListener("click", () => {
         </div>
     </div>
     <footer style="
-            padding-bottom: 10px; /* Adjust the height of your footer */
-        " class=" bg-dark text-white text-center p-3">
-        <p>&copy; 2023 Your Company. All rights reserved.</p>
+            padding-bottom: 70px; /* Adjust the height of your footer */
+        " class="bg-dark text-white text-center p-3">
+        <p>&copy; 2023 svvv-indore. All rights reserved.</p>
     </footer>
-
     <!-- Include Bootstrap JS (jQuery and Popper.js are required) -->
 
-<script src="./JavaScript/main.js"></script>
+<script src="../JavaScript/main.js"></script>
+    <script>
+  // Check if the session ID is not present in sessionStorage
+  if (!sessionStorage.getItem('id')) {
+    // Redirect to the login page (mylogin.html)
+    window.location.href = 'mylogin';
+  }
+  </script>
 <!-- <script src="./JavaScript/script.js"></script> -->
-<script src="./JavaScript/studentProfile.js"></script>
+<!--<script src="./JavaScript/studentProfile.js"></script>-->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
+
 </html>

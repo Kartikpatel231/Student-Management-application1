@@ -1,16 +1,28 @@
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../commoncss/button.css">
-     <link
-            href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@400;500;600;700;800&family=Josefin+Slab:ital,wght@0,400;0,600;1,300;1,400;1,600&family=Muli:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap"
-            rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@400;500;600;700;800&family=Josefin+Slab:ital,wght@0,400;0,600;1,300;1,400;1,600&family=Muli:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap" rel="stylesheet">
     <style>
-        /* Apply the glowing effect to the logo */
+        #upload-progress-container {
+            display: none;
+            margin-top: 20px;
+        }
+
+        #upload-progress {
+            width: 0;
+            height: 30px;
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            line-height: 30px;
+            transition: width 0.3s;
+        }
+
         .glowing-logo {
             font-family: sans-serif;
             font-size: 36px;
@@ -22,11 +34,10 @@
             animation: glow 1s ease-in-out infinite alternate;
         }
 
-        /* Responsive button size adjustments */
         @media only screen and (max-width: 600px) {
             .glowing-logo {
-                font-size: 24px; /* Adjust font size for smaller screens */
-                letter-spacing: 2px; /* Adjust letter spacing for smaller screens */
+                font-size: 24px;
+                letter-spacing: 2px;
             }
         }
 
@@ -38,137 +49,353 @@
                 text-shadow: 0 0 20px rgba(255, 255, 255, 0.9), 0 0 30px rgba(255, 255, 255, 0.9), 0 0 40px rgba(255, 255, 255, 0.9);
             }
         }
-    </style>
-    <style>
-    .navbar-brand {
-        font-size: 2em; /* Adjust the size as needed */
-        font-weight: bold; /* Optional: You can make it bold like a heading */
-        /* Other styles you may want to apply */
-    }
-</style>
 
+        .navbar-brand {
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        body {
+            color: white;
+            font-family: sans-serif arial;
+        }
+    </style>
+    <script>
+        if (!sessionStorage.getItem('id')) {
+            window.location.href = '../mylogin.html';
+        }
+    </script>
     <title>placementManagmentPro</title>
 </head>
-<style>
-    body{
-    color:white;
-    font-family:sans-serif arial;
-    }
-</style>
 <body style="background-image: url('../images/Constellation.jpg'); background-repeat: repeat-x; background-attachment: fixed; background-size: 100% 100%; margin: 0">
-    <header>
-        <!-- Bootstrap Navbar -->
-        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-            <a class="navbar-brand glowing-txt" href="#"><span class='glowing-txt'>SVVV-<span class='faulty-letter'>INDORE</a>
-            
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                        <a class="nav-link" href="../home.html">Home <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://www.brainspace.tech/notes">PlacmentNotes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://www.brainspace.tech/contactUs/todo">Todo_Work_Managment</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="../feedback/aboutUs.html">About Us</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="https://www.brainspace.tech/contactUs">Contact</a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </header>
+<header>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand glowing-logo" href="#"><span class='glowing-txt'>SVVV-<span class='faulty-letter'>INDORE</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="../home">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.brainspace.tech/notes">PlacmentNotes</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.brainspace.tech/contactUs/todo">Todo_Work_Managment</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../feedback/aboutUs">About Us</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="https://www.brainspace.tech/contactUs">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../mylogin">Logout</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</header>
 
-    <div class="container">
-        <h1>Upload a PDF</h1>
-        <label for="input-file">Choose a PDF</label>
-        <input type="file" id="input-file" accept=".pdf"> <!-- Only accept PDF files -->
-        <iframe id="pdf-preview" frameborder="0"></iframe>
-        <button id="upload-pdf-button">Upload PDF</button> <!-- Add an upload button -->
+<div class="container">
+    <h1>Upload a PDF</h1>
+    <label for="input-file">Choose a PDF</label>
+    <input type="file" id="input-file" accept=".pdf">
+    <iframe id="pdf-preview" frameborder="0"></iframe>
+
+    <button id="upload-pdf-button">Upload PDF</button>
+
+    <div id="upload-animation" style="display: none;">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+        Uploading...
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const fileInput = document.getElementById("input-file");
+    <div id="upload-progress-container">
+        <div id="upload-progress">0%</div>
+    </div>
+</div>
+
+<script>
+ document.addEventListener("DOMContentLoaded", () => {
+    const fileInput = document.getElementById("input-file");
     const pdfPreview = document.getElementById("pdf-preview");
     const uploadButton = document.getElementById("upload-pdf-button");
+    const uploadProgressContainer = document.getElementById("upload-progress-container");
+    const uploadProgress = document.getElementById("upload-progress");
+    const uploadAnimation = document.getElementById("upload-animation");
     const id = getCookie("id");
 
-            function getCookie(cname) {
-                const name = cname + "=";
-                const decodedCookie = decodeURIComponent(document.cookie);
-                const ca = decodedCookie.split(';');
-                for (let i = 0; i < ca.length; i++) {
-                    let c = ca[i];
-                    while (c.charAt(0) == ' ') {
-                        c = c.substring(1);
-                    }
-                    if (c.indexOf(name) == 0) {
-                        return c.substring(name.length, c.length);
-                    }
-                }
-                return "";
+    function getCookie(cname) {
+        const name = cname + "=";
+        const decodedCookie = decodeURIComponent(document.cookie);
+        const ca = decodedCookie.split(';');
+        for (let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
             }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
 
-            fileInput.addEventListener("change", () => {
+    fileInput.addEventListener("change", () => {
         const selectedFile = fileInput.files[0];
         if (selectedFile) {
+            if (selectedFile.size > 5 * 1024 * 1024) {
+                alert("File size exceeds the limit of 5 MB. Please choose a smaller file.");
+                fileInput.value = null;
+                return;
+            }
             const formData = new FormData();
             formData.append("file", selectedFile);
 
-            // Don't send the file immediately, wait for the user to click the "Upload PDF" button
-            uploadButton.addEventListener("click", () => {
-                fetch(`http://localhost:8080/file/upload/${id}`, {
-                    method: 'POST',
-                    body: formData,
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        alert("PDF Uploaded Successfully");
-                        setTimeout(() => {
-                            window.location.href = '../home.html';
-                        }, 3000);
-                    } else {
-                        alert("PDF Upload Successfully");
-                           setTimeout(() => {
-                    window.location.href="../home.html";
-             }, 2000);
-                    }
-                })
-                .catch(error => {
-                    console.error("Error:", error);
-                    alert("An error occurred. Please try again.");
-                });
-            });
+            uploadButton.style.display = "none";
+            uploadAnimation.style.display = "block";
 
-            // Display the uploaded PDF
-            const objectURL = URL.createObjectURL(selectedFile);
-            pdfPreview.setAttribute("src", objectURL);
+            fetch(`http://www.campusplacehub.com/file/upload/${id}`, {
+                method: 'POST',
+                body: formData,
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('File upload failed');
+                }
+                return response.json();
+            })
+            .then(data => {
+                uploadButton.style.display = "block";
+                uploadAnimation.style.display = "none";
+
+                if (data.success) {
+                    alert("PDF Uploaded Successfully");
+                    setTimeout(() => {
+                        window.location.href = '../home';
+                    }, 1000);
+                } else {
+                    alert("PDF Upload Failed");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                 alert("PDF Uploaded Successfully");
+                 uploadButton.style.display = "block";
+
+                    setTimeout(() => {
+                        window.location.href = '../home';
+                    }, 3000);
+                uploadAnimation.style.display = "none";
+            });
         }
     });
 });
-    </script>
-    <footer style="
-            padding-bottom: 70px; /* Adjust the height of your footer */
-        " class="fixed-bottom bg-dark text-white text-center p-3">
-        <p>&copy; 2023 Your Company. All rights reserved.</p>
-    </footer>
 
-    <!-- Include Bootstrap JS (jQuery and Popper.js are required) -->
+</script>
 
-<script src="../JavaScript/main.js"></script>
-<!-- <script src="../JavaScript/script.js"></script> -->
-<script src="../JavaScript/studentProfile.js"></script>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<footer style="padding-bottom: 70px;" class="bg-dark  text-white text-center p-3">
+    <p>&copy; 2023 svvv-indore. All rights reserved.</p>
+</footer>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+
+<!--<html lang="en">-->
+<!--<head>-->
+    <!--<meta charset="UTF-8">-->
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+    <!--&lt;!&ndash; Include Bootstrap CSS &ndash;&gt;-->
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">-->
+    <!--<link rel="stylesheet" type="text/css" href="../commoncss/button.css">-->
+     <!--<link-->
+            <!--href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@400;500;600;700;800&family=Josefin+Slab:ital,wght@0,400;0,600;1,300;1,400;1,600&family=Muli:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap"-->
+            <!--rel="stylesheet"-->
+    <!--/>-->
+    <!--<style>-->
+        <!--/* Apply the glowing effect to the logo */-->
+        <!--.glowing-logo {-->
+            <!--font-family: sans-serif;-->
+            <!--font-size: 36px;-->
+            <!--font-weight: bold;-->
+            <!--color: #fff;-->
+            <!--text-align: center;-->
+            <!--text-transform: uppercase;-->
+            <!--letter-spacing: 4px;-->
+            <!--animation: glow 1s ease-in-out infinite alternate;-->
+        <!--}-->
+
+        <!--/* Responsive button size adjustments */-->
+        <!--@media only screen and (max-width: 600px) {-->
+            <!--.glowing-logo {-->
+                <!--font-size: 24px; /* Adjust font size for smaller screens */-->
+                <!--letter-spacing: 2px; /* Adjust letter spacing for smaller screens */-->
+            <!--}-->
+        <!--}-->
+
+        <!--@keyframes glow {-->
+            <!--from {-->
+                <!--text-shadow: 0 0 10px rgba(255, 255, 255, 0.8), 0 0 20px rgba(255, 255, 255, 0.8), 0 0 30px rgba(255, 255, 255, 0.8);-->
+            <!--}-->
+            <!--to {-->
+                <!--text-shadow: 0 0 20px rgba(255, 255, 255, 0.9), 0 0 30px rgba(255, 255, 255, 0.9), 0 0 40px rgba(255, 255, 255, 0.9);-->
+            <!--}-->
+        <!--}-->
+    <!--</style>-->
+    <!--<style>-->
+    <!--.navbar-brand {-->
+        <!--font-size: 2em; /* Adjust the size as needed */-->
+        <!--font-weight: bold; /* Optional: You can make it bold like a heading */-->
+        <!--/* Other styles you may want to apply */-->
+    <!--}-->
+<!--</style>-->
+
+    <!--<title>placementManagmentPro</title>-->
+<!--</head>-->
+<!--<style>-->
+    <!--body{-->
+    <!--color:white;-->
+    <!--font-family:sans-serif arial;-->
+    <!--}-->
+<!--</style>-->
+<!--<script>-->
+  <!--// Check if the session ID is not present in sessionStorage-->
+  <!--if (!sessionStorage.getItem('id')) {-->
+    <!--// Redirect to the login page (mylogin.html)-->
+    <!--window.location.href = '../mylogin.html';-->
+  <!--}-->
+  <!--</script>-->
+<!--<body style="background-image: url('../images/Constellation.jpg'); background-repeat: repeat-x; background-attachment: fixed; background-size: 100% 100%; margin: 0">-->
+    <!--<header>-->
+        <!--&lt;!&ndash; Bootstrap Navbar &ndash;&gt;-->
+        <!--<nav class="navbar navbar-expand-lg navbar-dark bg-dark">-->
+            <!--<a class="navbar-brand glowing-txt" href="#"><span class='glowing-txt'>SVVV-<span class='faulty-letter'>INDORE</a>-->
+            <!---->
+            <!--<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">-->
+                <!--<span class="navbar-toggler-icon"></span>-->
+            <!--</button>-->
+            <!--<div class="collapse navbar-collapse" id="navbarNav">-->
+                <!--<ul class="navbar-nav ml-auto">-->
+                    <!--<li class="nav-item active">-->
+                        <!--<a class="nav-link" href="../home.html">Home <span class="sr-only">(current)</span></a>-->
+                    <!--</li>-->
+                    <!--<li class="nav-item">-->
+                        <!--<a class="nav-link" href="https://www.brainspace.tech/notes">PlacmentNotes</a>-->
+                    <!--</li>-->
+                    <!--<li class="nav-item">-->
+                        <!--<a class="nav-link" href="https://www.brainspace.tech/contactUs/todo">Todo_Work_Managment</a>-->
+                    <!--</li>-->
+                    <!--<li class="nav-item">-->
+                        <!--<a class="nav-link" href="../feedback/aboutUs.html">About Us</a>-->
+                    <!--</li>-->
+                    <!--<li class="nav-item">-->
+                        <!--<a class="nav-link" href="https://www.brainspace.tech/contactUs">Contact</a>-->
+                    <!--</li>-->
+                    <!--<li class="nav-item">-->
+                        <!--<a class="nav-link" href="../mylogin.html">Logout</a>-->
+                    <!--</li>-->
+                <!--</ul>-->
+            <!--</div>-->
+        <!--</nav>-->
+    <!--</header>-->
+
+    <!--<div class="container">-->
+        <!--<h1>Upload a PDF</h1>-->
+        <!--<label for="input-file">Choose a PDF</label>-->
+        <!--<input type="file" id="input-file" accept=".pdf"> &lt;!&ndash; Only accept PDF files &ndash;&gt;-->
+        <!--<iframe id="pdf-preview" frameborder="0"></iframe>-->
+        <!--<button id="upload-pdf-button">Upload PDF</button> &lt;!&ndash; Add an upload button &ndash;&gt;-->
+    <!--</div>-->
+
+    <!--<script>-->
+        <!--document.addEventListener("DOMContentLoaded", () => {-->
+            <!--const fileInput = document.getElementById("input-file");-->
+    <!--const pdfPreview = document.getElementById("pdf-preview");-->
+    <!--const uploadButton = document.getElementById("upload-pdf-button");-->
+    <!--const id = getCookie("id");-->
+
+            <!--function getCookie(cname) {-->
+                <!--const name = cname + "=";-->
+                <!--const decodedCookie = decodeURIComponent(document.cookie);-->
+                <!--const ca = decodedCookie.split(';');-->
+                <!--for (let i = 0; i < ca.length; i++) {-->
+                    <!--let c = ca[i];-->
+                    <!--while (c.charAt(0) == ' ') {-->
+                        <!--c = c.substring(1);-->
+                    <!--}-->
+                    <!--if (c.indexOf(name) == 0) {-->
+                        <!--return c.substring(name.length, c.length);-->
+                    <!--}-->
+                <!--}-->
+                <!--return "";-->
+            <!--}-->
+
+            <!--fileInput.addEventListener("change", () => {-->
+        <!--const selectedFile = fileInput.files[0];-->
+        <!--if (selectedFile) {-->
+         <!--// Check if the file size is greater than 5 MB (5 * 1024 * 1024 bytes)-->
+                <!--if (selectedFile.size > 5 * 1024 * 1024) {-->
+                    <!--alert("File size exceeds the limit of 5 MB. Please choose a smaller file.");-->
+                    <!--fileInput.value = null; // Clear the file input-->
+                    <!--return;-->
+                <!--}-->
+            <!--const formData = new FormData();-->
+            <!--formData.append("file", selectedFile);-->
+
+            <!--// Don't send the file immediately, wait for the user to click the "Upload PDF" button-->
+            <!--uploadButton.addEventListener("click", () => {-->
+                <!--fetch(`http://172.172.233.120:8080/file/upload/${id}`, {-->
+                    <!--method: 'POST',-->
+                    <!--body: formData,-->
+                <!--})-->
+                <!--.then(response => response.json())-->
+                <!--.then(data => {-->
+                    <!--if (data.success) {-->
+                        <!--alert("PDF Uploaded Successfully");-->
+                        <!--setTimeout(() => {-->
+                            <!--window.location.href = '../home.html';-->
+                        <!--}, 3000);-->
+                    <!--} else {-->
+                        <!--alert("PDF Upload Successfully");-->
+                           <!--setTimeout(() => {-->
+                    <!--window.location.href="../home.html";-->
+             <!--}, 2000);-->
+                    <!--}-->
+                <!--})-->
+                <!--.catch(error => {-->
+                    <!--console.error("Error:", error);-->
+                    <!--alert("An error occurred. Please try again.");-->
+                <!--});-->
+            <!--});-->
+
+            <!--// Display the uploaded PDF-->
+            <!--const objectURL = URL.createObjectURL(selectedFile);-->
+            <!--pdfPreview.setAttribute("src", objectURL);-->
+        <!--}-->
+    <!--});-->
+<!--});-->
+    <!--</script>-->
+    <!--<footer style="-->
+            <!--padding-bottom: 70px; /* Adjust the height of your footer */-->
+        <!--" class="bg-dark text-white text-center p-3">-->
+        <!--<p>&copy; 2023 svvv-indore. All rights reserved.</p>-->
+    <!--</footer>-->
+    <!--&lt;!&ndash; Include Bootstrap JS (jQuery and Popper.js are required) &ndash;&gt;-->
+
+<!--&lt;!&ndash;<script src="../JavaScript/main.js"></script>&ndash;&gt;-->
+<!--&lt;!&ndash; <script src="../JavaScript/script.js"></script> &ndash;&gt;-->
+<!--&lt;!&ndash;<script src="../JavaScript/studentProfile.js"></script>&ndash;&gt;-->
+    <!--<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>-->
+    <!--<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>-->
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>-->
+<!--</body>-->
+<!--</html>-->

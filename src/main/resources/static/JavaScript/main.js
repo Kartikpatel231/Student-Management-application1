@@ -1,7 +1,7 @@
 
 function getUserData(){
 	//fetch('http://localhost:63342/api/v1/current-user-principal')           //api for the get request
-	fetch('http://localhost:8080/display')
+	fetch('http://www.campusplacehub.com/')
    .then(response => response.json())
    .then(data => console.log(data)
   //document.getElementById("profile-pic").src=data.picture;
@@ -17,7 +17,7 @@ function getUserData(){
 
 }
 function getRegisterData(){
-fetch('http://localhost:8080/api/v1/users/register')
+fetch('http://www.campusplacehub.com/api/v1/users/register')
 .then(response=>response.json())
 .then(data=>console.log(data));
 document.getElementById("studentId").innerHTML=data.studentId;
@@ -26,7 +26,7 @@ document.getElementById("url").innerHTML=data.url;
 }
 function getStudentData(){
 console.log("myprofiledata");
-fetch('http://localhost:8080/api/v1/create/profile')
+fetch('http://www.campusplacehub.com/api/v1/create/profile')
 .then(response=>response.json())
 .then(data=>{console.log(data);
 document.getElementById("studentName1").innerHTML=data.fullName;

@@ -45,6 +45,7 @@ public class FileService {
 
 
     public String uploadFile(Long studentId, MultipartFile file, RedirectAttributes redirectAttributes) throws BusinessException {
+        final int countNumber=3;
         if (file == null && file.isEmpty()) {
             throw new RuntimeException("File can't be empty.");
         }
@@ -64,10 +65,14 @@ public class FileService {
             redirectAttributes.addFlashAttribute("message", "Please select a file to upload");
             return "redirect:uploadStatus";
         }
+        String url="";
+         if(studentEntity.getResumeEntity().getCount()<countNumber) {
+             //StudentProfileModel profileEntity = serviceIMPL.getProfile(studentId);
+             // StudentProfileEntity studentProfileEntity=studentProfileRepository.findByProfileId(profileEntity.getId());
+              url = blobStorageService.uploadFile(file);
+         }
 
-        //StudentProfileModel profileEntity = serviceIMPL.getProfile(studentId);
-       // StudentProfileEntity studentProfileEntity=studentProfileRepository.findByProfileId(profileEntity.getId());
-        String url=blobStorageService.uploadFile(file);
+
         try {
 
             // Get the file and save it somewhere
@@ -75,23 +80,27 @@ public class FileService {
           //  Path path = Paths.get( DOCUMENT_BASE_LOCATION + file.getOriginalFilename());
            // Files.write(path, bytes);
 
-            if(studentEntity!=null){
+            if(studentEntity!=null || url!="") {
                 if (file.getContentType().equals("image/jpeg") || file.getContentType().equals("image/png")) {
                     //studentProfileEntity.setImagePath(DOCUMENT_BASE_LOCATION+url);
-                    studentEntity.setImagePath(DOCUMENT_BASE_LOCATION+"images/"+url);
+                    studentEntity.setImagePath(DOCUMENT_BASE_LOCATION + "images/" + url);
+
                     studentRepository.save(studentEntity);
-                   // studentProfileRepository.save(studentProfileEntity);
+
+                    // studentProfileRepository.save(studentProfileEntity);
+                }
+
+                if (file.getContentType().equals("application/pdf")) {
+                    ResumeEntity resumeEntity = new ResumeEntity();
+                    resumeEntity.setResumeUrl(DOCUMENT_BASE_LOCATION + "pdf/" + url);
+                    resumeEntity.setCreatedOn(LocalDateTime.now());
+                    resumeRepository.save(resumeEntity);
+                     int count=studentEntity.getResumeEntity().getCount();
+                    studentEntity.getResumeEntity().setCount(++count);
+                    studentEntity.setResumeEntity(resumeEntity);
+                    studentRepository.save(studentEntity);
                 }
             }
-            if (file.getContentType().equals("application/pdf")) {
-                ResumeEntity resumeEntity=new ResumeEntity();
-                resumeEntity.setResumeUrl(DOCUMENT_BASE_LOCATION+"pdf/"+url);
-                 resumeEntity.setCreatedOn(LocalDateTime.now());
-                resumeRepository.save(resumeEntity);
-                studentEntity.setResumeEntity(resumeEntity);
-                studentRepository.save(studentEntity);
-            }
-
             redirectAttributes.addFlashAttribute("message",
                     "You successfully uploaded '" + file.getOriginalFilename() + "'");
 

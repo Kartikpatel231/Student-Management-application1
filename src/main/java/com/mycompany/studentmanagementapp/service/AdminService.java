@@ -59,6 +59,7 @@ public class AdminService {
             obj.setStatus(studentEntity.getStatus());
             obj.setStudentProfileEntity(studentEntity.getStudentProfileEntity());
             obj.setCompanyEntities(studentEntity.getCompanyEntities());
+            obj.setUniversityDetailEntity(studentEntity.getUniversityDetailEntity());
             dto.add(obj);
         }
 

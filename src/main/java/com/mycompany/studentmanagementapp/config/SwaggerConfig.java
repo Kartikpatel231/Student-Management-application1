@@ -11,11 +11,13 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 import static springfox.documentation.builders.RequestHandlerSelectors.withClassAnnotation;
 
 @EnableSwagger2
+
 @Configuration
 public class SwaggerConfig  {
 
     @Bean
     public Docket api(){
-        return new Docket(DocumentationType.SWAGGER_2).select().apis(withClassAnnotation(Api.class)).paths(PathSelectors.any()).build();
+        return new Docket(DocumentationType.SWAGGER_2).select().apis(withClassAnnotation(Api.class))
+                .paths(PathSelectors.any()).build();
     }
 }
